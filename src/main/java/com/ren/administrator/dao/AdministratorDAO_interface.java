@@ -1,6 +1,6 @@
 package com.ren.administrator.dao;
 
-import com.Entity.ServicePicture;
+import com.Entity.Administrator;
 
 import java.util.List;
 

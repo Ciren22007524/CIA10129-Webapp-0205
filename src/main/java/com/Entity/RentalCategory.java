@@ -1,7 +1,7 @@
 package com.Entity;
 
 import java.util.Set;
-import jakarta.persistence.*;
+import javax.persistence.*;
 import java.math.BigDecimal;
 
 @Entity  //標示類別為"永續類別"

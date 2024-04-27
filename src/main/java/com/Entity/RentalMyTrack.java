@@ -1,6 +1,6 @@
 package com.Entity;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.sql.*;
 import java.util.Objects;

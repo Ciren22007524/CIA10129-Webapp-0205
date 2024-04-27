@@ -1,6 +1,6 @@
 package com.ren.admauthority.service;
 
-import com.Entity.AdmAuthority;
+import com.Entity.*;
 import com.Entity.News;
 import com.ren.admauthority.dao.AdmAuthorityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,29 +19,22 @@ public class AdmAuthorityServiceImpl implements AdmAuthorityService_interface {
 
     @Override
     public AdmAuthority getOneAdmAuthority(Integer titleNo) {
-        return admAuthorityRepository.findById(titleNo);
+        return admAuthorityRepository.findById(titleNo).orElse(null);
     }
 
     @Override
     public List<AdmAuthority> getAll() {
-        return dao.getAll();
+        return admAuthorityRepository.findAll();
     }
 
     @Override
-    public AdmAuthority updateAdmAuthority(Integer titleNo, Integer authFuncNo) {
-        AdmAuthority admAuthorityVO = new AdmAuthority();
-        // 將傳入參數放入VO
-        admAuthorityVO.setTitleNo(titleNo);
-        admAuthorityVO.setAuthFuncNo(authFuncNo);
-        // 將VO放入dao定義的方法內，使其執行資料庫操作
-        dao.update(admAuthorityVO);
-        // 返回值作為呈現在View上使用
-        return admAuthorityVO;
+    public AdmAuthority updateAdmAuthority(AdmAuthority admAuthority) {
+        return admAuthorityRepository.save(admAuthority);
     }
 
     @Override
     public void deleteAdmAuthority(Integer titleNo) {
-        dao.delete(titleNo);
+        admAuthorityRepository.deleteById(titleNo);
     }
 
 }

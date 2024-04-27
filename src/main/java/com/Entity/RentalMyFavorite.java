@@ -1,6 +1,6 @@
 package com.Entity;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
 import java.sql.Timestamp;
 
 @Entity  //標示類別為"永續類別"

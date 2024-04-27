@@ -1,6 +1,6 @@
 package com.Entity;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
 
     @Entity  //標示類別為"永續類別"
     @Table(name = "RentalPic")  //此"永續類別"對應到的表格

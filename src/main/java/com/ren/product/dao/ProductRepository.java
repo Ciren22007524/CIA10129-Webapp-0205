@@ -1,6 +1,6 @@
 package com.ren.product.dao;
 
-import com.Entity.ServiceRobot;
+import com.Entity.Product;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

@@ -2,6 +2,8 @@ package com.ren.title.dao;
 
 import com.Entity.ServicePicture;
 import com.Entity.ServiceRobot;
+import com.Entity.Title;
+import com.Entity.TitleAdmVO;
 
 import java.util.List;
 
@@ -17,19 +19,19 @@ public interface TitleDAO_interface {
     // 4. 可以刪除職位(後台管理員參照)
 
     // 新增
-    public void insert(ServicePicture.TitleVO titleVO);
+    public void insert(Title title);
     // 以職位編號查詢(職位編號, 職位名稱)
-    public ServicePicture.TitleVO findByPrimaryKey(Integer titleNo);
+    public Title findByPrimaryKey(Integer titleNo);
     // 查詢全部(職位編號, 職位名稱)
-    public List<ServicePicture.TitleVO> getAll();
+    public List<Title> getAll();
     // 以職位編號查詢(職位編號, 職位名稱, 管理員名稱)
-    public List<ServiceRobot.TitleAdmVO> getAdms(Integer titleNo);
+    public List<TitleAdmVO> getAdms(Integer titleNo);
     // 以職稱查詢(職位編號, 職位名稱, 管理員名稱)
-    public List<ServiceRobot.TitleAdmVO> getAdms(String titleName);
+    public List<TitleAdmVO> getAdms(String titleName);
     // 查詢全部(職位編號, 職位名稱, 管理員名稱)並以職位編號排序
-    public List<ServiceRobot.TitleAdmVO> getAdmsAll();
+    public List<TitleAdmVO> getAdmsAll();
     // 修改
-    public void update(ServicePicture.TitleVO titleVO);
+    public void update(Title title);
     // 刪除
     public void delete(Integer titleNo);
 

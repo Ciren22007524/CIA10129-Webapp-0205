@@ -1,5 +1,6 @@
 package com.ren.product.dao;
 
+import com.Entity.Product;
 import com.Entity.ServiceRobot;
 
 import java.util.*;

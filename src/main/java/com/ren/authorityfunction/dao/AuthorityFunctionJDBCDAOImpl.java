@@ -1,6 +1,6 @@
 package com.ren.authorityfunction.dao;
 
-import com.Entity.ServiceRobot;
+import com.Entity.AuthorityFunction;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -30,14 +30,14 @@ public class AuthorityFunctionJDBCDAOImpl implements AuthorityFunctionDAO_interf
             "DELETE FROM AuthorityFunction WHERE authFuncNo = ?";
 
     @Override
-    public void insert(ServiceRobot.AuthorityFunctionVO authorityFunctionVO) {
+    public void insert(AuthorityFunction authorityFunction) {
 
         try (Connection con = DriverManager.getConnection(url, userid, passwd);
              PreparedStatement ps = con.prepareStatement(INSERT_STMT)) {
             // 載入Driver介面的實作類別.class檔來註冊JDBC
             Class.forName(driver);
             // 從request的VO取值放入PreparedStatement
-            ps.setString(1, authorityFunctionVO.getAuthFuncInfo());
+            ps.setString(1, authorityFunction.getAuthFuncInfo());
             // 執行SQL指令將VO資料新增進資料庫
             ps.executeUpdate();
             // Handle any driver errors
@@ -50,9 +50,9 @@ public class AuthorityFunctionJDBCDAOImpl implements AuthorityFunctionDAO_interf
     }
 
     @Override
-    public ServiceRobot.AuthorityFunctionVO findByPrimaryKey(Integer authFuncNo) {
+    public AuthorityFunction findByPrimaryKey(Integer authFuncNo) {
         // 宣告VO並指定空值，若查詢無結果會出現空值，後續於Controller作錯誤處理
-        ServiceRobot.AuthorityFunctionVO authorityFunctionVO = null;
+        AuthorityFunction authorityFunction = null;
         // ResultSet在相關的Statement關閉時會自動關閉，因此不用另外寫在Auto-closable
         try (Connection con = DriverManager.getConnection(url, userid, passwd);
              PreparedStatement ps = con.prepareStatement(GET_ONE_STMT)) {
@@ -64,9 +64,9 @@ public class AuthorityFunctionJDBCDAOImpl implements AuthorityFunctionDAO_interf
             ResultSet rs = ps.executeQuery();
             // 取出ResultSet內資料放入VO
             while (rs.next()) {
-                authorityFunctionVO = new ServiceRobot.AuthorityFunctionVO();
-                authorityFunctionVO.setAuthFuncNo(rs.getInt("authFuncNo"));
-                authorityFunctionVO.setAuthFuncInfo(rs.getString("authFuncInfo"));
+                authorityFunction = new AuthorityFunction();
+                authorityFunction.setAuthFuncNo(rs.getInt("authFuncNo"));
+                authorityFunction.setAuthFuncInfo(rs.getString("authFuncInfo"));
             }
             // Handle any driver errors
         } catch (ClassNotFoundException e) {
@@ -76,15 +76,15 @@ public class AuthorityFunctionJDBCDAOImpl implements AuthorityFunctionDAO_interf
             throw new RuntimeException("A database error occured. " + se.getMessage());
         }
         // 回傳VO，待後續Controller導至View呈現
-        return authorityFunctionVO;
+        return authorityFunction;
     }
 
     @Override
-    public List<ServiceRobot.AuthorityFunctionVO> getAll() {
+    public List<AuthorityFunction> getAll() {
         // 宣告ArrayList作為放入搜尋結果的列表
-        List<ServiceRobot.AuthorityFunctionVO> list = new ArrayList<>();
+        List<AuthorityFunction> list = new ArrayList<>();
         // 宣告VO並指定空值，若查詢無結果會出現空值，後續於Controller作錯誤處理
-        ServiceRobot.AuthorityFunctionVO authorityFunctionVO = null;
+        AuthorityFunction authorityFunction = null;
         try (Connection con = DriverManager.getConnection(url, userid, passwd);
              PreparedStatement ps = con.prepareStatement(GET_ALL_STMT)) {
             // 載入Driver介面的實作類別.class檔來註冊JDBC
@@ -93,10 +93,10 @@ public class AuthorityFunctionJDBCDAOImpl implements AuthorityFunctionDAO_interf
             ResultSet rs = ps.executeQuery();
             // 新增VO物件，取出ResultSet內資料放入VO
             while (rs.next()) {
-                authorityFunctionVO = new ServiceRobot.AuthorityFunctionVO();
-                authorityFunctionVO.setAuthFuncNo(rs.getInt("authFuncNo"));
-                authorityFunctionVO.setAuthFuncInfo(rs.getString("authFuncInfo"));
-                list.add(authorityFunctionVO); // 將資料新增至列表內之後作為搜尋結果返回給View
+                authorityFunction = new AuthorityFunction();
+                authorityFunction.setAuthFuncNo(rs.getInt("authFuncNo"));
+                authorityFunction.setAuthFuncInfo(rs.getString("authFuncInfo"));
+                list.add(authorityFunction); // 將資料新增至列表內之後作為搜尋結果返回給View
             }
             // Handle any driver errors
         } catch (ClassNotFoundException e) {
@@ -109,15 +109,15 @@ public class AuthorityFunctionJDBCDAOImpl implements AuthorityFunctionDAO_interf
     }
 
     @Override
-    public void update(ServiceRobot.AuthorityFunctionVO authorityFunctionVO) {
+    public void update(AuthorityFunction authorityFunction) {
 
         try (Connection con = DriverManager.getConnection(url, userid, passwd);
              PreparedStatement ps = con.prepareStatement(UPDATE_STMT)) {
             // 載入Driver介面的實作類別.class檔來註冊JDBC
             Class.forName(driver);
             // 從request的VO取值放入PreparedStatement
-            ps.setInt(1, authorityFunctionVO.getAuthFuncNo());
-            ps.setString(2, authorityFunctionVO.getAuthFuncInfo());
+            ps.setInt(1, authorityFunction.getAuthFuncNo());
+            ps.setString(2, authorityFunction.getAuthFuncInfo());
             // 執行SQL指令將資料庫內對應的資料修改成VO的值
             ps.executeUpdate();
             // Handle any driver errors

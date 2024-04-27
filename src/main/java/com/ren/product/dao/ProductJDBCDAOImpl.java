@@ -1,5 +1,7 @@
 package com.ren.product.dao;
 
+import com.Entity.Product;
+import com.Entity.ProductCategory;
 import com.Entity.ServicePicture;
 import com.Entity.ServiceRobot;
 
@@ -49,24 +51,24 @@ public class ProductJDBCDAOImpl implements ProductDAO_interface {
             "DELETE FROM product WHERE pNo = ?";
 
     @Override
-    public int insert(Product productVO) {
+    public int insert(Product product) {
         int result = Integer.parseInt(null);
-        ServicePicture.ProductCategoryVO productCategoryVO = productVO.getProductCategory();
+        ProductCategory productCategory = product.getProductCategory();
         try (Connection con = DriverManager.getConnection(url, userid, passwd);
              PreparedStatement ps = con.prepareStatement(INSERT_STMT)) {
             // 載入Driver介面的實作類別.class檔來註冊JDBC
             Class.forName(driver);
             // 從request的VO取值放入PreparedStatement
-            ps.setInt(1, productCategoryVO.getpCatNo());
-            ps.setString(2, productVO.getpName());
-            ps.setString(3, productVO.getpInfo());
-            ps.setInt(4, productVO.getpSize());
-            ps.setString(5, productVO.getpColor());
-            ps.setBigDecimal(6, productVO.getpPrice());
-            ps.setByte(7, productVO.getpStat());
-            ps.setInt(8, productVO.getpSalQty());
-            ps.setInt(9, productVO.getpComPeople());
-            ps.setInt(10, productVO.getpComScore());
+            ps.setInt(1, productCategory.getpCatNo());
+            ps.setString(2, product.getpName());
+            ps.setString(3, product.getpInfo());
+            ps.setInt(4, product.getpSize());
+            ps.setString(5, product.getpColor());
+            ps.setBigDecimal(6, product.getpPrice());
+            ps.setByte(7, product.getpStat());
+            ps.setInt(8, product.getpSalQty());
+            ps.setInt(9, product.getpComPeople());
+            ps.setInt(10, product.getpComScore());
             // 執行SQL指令將VO資料新增進資料庫
             result =  ps.executeUpdate();
             // Handle any driver errors
@@ -82,8 +84,8 @@ public class ProductJDBCDAOImpl implements ProductDAO_interface {
     @Override
     public Product getById(Integer pNo) {
         // 宣告VO並指定空值，若查詢無結果會出現空值，後續於Controller作錯誤處理
-        Product productVO = null;
-        ServicePicture.ProductCategoryVO productCategoryVO = productVO.getProductCategory();
+        Product product = null;
+        ProductCategory productCategory = product.getProductCategory();
         // ResultSet在相關的Statement關閉時會自動關閉，因此不用另外寫在Auto-closable
         try (Connection con = DriverManager.getConnection(url, userid, passwd);
              PreparedStatement ps = con.prepareStatement(GET_ONE_STMT)) {
@@ -95,18 +97,18 @@ public class ProductJDBCDAOImpl implements ProductDAO_interface {
             ResultSet rs = ps.executeQuery();
             // 取出ResultSet內資料放入VO
             while (rs.next()) {
-                productVO = new Product();
-                productVO.setpNo(rs.getInt("pNo"));
-                productCategoryVO.setpCatNo(rs.getInt("pCatNo"));
-                productVO.setpName(rs.getString("pName"));
-                productVO.setpInfo(rs.getString("pInfo"));
-                productVO.setpSize(rs.getInt("pSize"));
-                productVO.setpColor(rs.getString("pColor"));
-                productVO.setpPrice(rs.getBigDecimal("pPrice"));
-                productVO.setpStat(rs.getByte("pStat"));
-                productVO.setpSalQty(rs.getInt("pSalQty"));
-                productVO.setpComPeople(rs.getInt("pComPeople"));
-                productVO.setpComScore(rs.getInt("pComScore"));
+                product = new Product();
+                product.setpNo(rs.getInt("pNo"));
+                productCategory.setpCatNo(rs.getInt("pCatNo"));
+                product.setpName(rs.getString("pName"));
+                product.setpInfo(rs.getString("pInfo"));
+                product.setpSize(rs.getInt("pSize"));
+                product.setpColor(rs.getString("pColor"));
+                product.setpPrice(rs.getBigDecimal("pPrice"));
+                product.setpStat(rs.getByte("pStat"));
+                product.setpSalQty(rs.getInt("pSalQty"));
+                product.setpComPeople(rs.getInt("pComPeople"));
+                product.setpComScore(rs.getInt("pComScore"));
             }
             // Handle any driver errors
         } catch (ClassNotFoundException e) {
@@ -116,7 +118,7 @@ public class ProductJDBCDAOImpl implements ProductDAO_interface {
             throw new RuntimeException("A database error occured. " + se.getMessage());
         }
         // 回傳VO，待後續Controller導至View呈現
-        return productVO;
+        return product;
     }
 
     @Override
@@ -124,8 +126,8 @@ public class ProductJDBCDAOImpl implements ProductDAO_interface {
         // 宣告ArrayList作為放入搜尋結果的列表
         List<Product> list = new ArrayList<>();
         // 宣告VO並指定空值，若查詢無結果會出現空值，後續於Controller作錯誤處理
-        Product productVO = null;
-        ServicePicture.ProductCategoryVO productCategoryVO = productVO.getProductCategory();
+        Product product = null;
+        ProductCategory productCategory = product.getProductCategory();
         try (Connection con = DriverManager.getConnection(url, userid, passwd);
              PreparedStatement ps = con.prepareStatement(GET_ALL_STMT)) {
             // 載入Driver介面的實作類別.class檔來註冊JDBC
@@ -134,19 +136,19 @@ public class ProductJDBCDAOImpl implements ProductDAO_interface {
             ResultSet rs = ps.executeQuery();
             // 新增VO物件，取出ResultSet內資料放入VO
             while (rs.next()) {
-                productVO = new Product();
-                productVO.setpNo(rs.getInt("pNo"));
-                productCategoryVO.setpCatNo(rs.getInt("pCatNo"));
-                productVO.setpName(rs.getString("pName"));
-                productVO.setpInfo(rs.getString("pInfo"));
-                productVO.setpSize(rs.getInt("pSize"));
-                productVO.setpColor(rs.getString("pColor"));
-                productVO.setpPrice(rs.getBigDecimal("pPrice"));
-                productVO.setpStat(rs.getByte("pStat"));
-                productVO.setpSalQty(rs.getInt("pSalQty"));
-                productVO.setpComPeople(rs.getInt("pComPeople"));
-                productVO.setpComScore(rs.getInt("pComScore"));
-                list.add(productVO); // 將資料新增至列表內之後作為搜尋結果返回給View
+                product = new Product();
+                product.setpNo(rs.getInt("pNo"));
+                productCategory.setpCatNo(rs.getInt("pCatNo"));
+                product.setpName(rs.getString("pName"));
+                product.setpInfo(rs.getString("pInfo"));
+                product.setpSize(rs.getInt("pSize"));
+                product.setpColor(rs.getString("pColor"));
+                product.setpPrice(rs.getBigDecimal("pPrice"));
+                product.setpStat(rs.getByte("pStat"));
+                product.setpSalQty(rs.getInt("pSalQty"));
+                product.setpComPeople(rs.getInt("pComPeople"));
+                product.setpComScore(rs.getInt("pComScore"));
+                list.add(product); // 將資料新增至列表內之後作為搜尋結果返回給View
             }
             // Handle any driver errors
         } catch (ClassNotFoundException e) {
@@ -169,25 +171,25 @@ public class ProductJDBCDAOImpl implements ProductDAO_interface {
     }
 
     @Override
-    public int update(Product productVO) {
+    public int update(Product product) {
         int result = Integer.parseInt(null);
-        ServicePicture.ProductCategoryVO productCategoryVO = productVO.getProductCategory();
+        ProductCategory productCategory = product.getProductCategory();
         try (Connection con = DriverManager.getConnection(url, userid, passwd);
              PreparedStatement ps = con.prepareStatement(UPDATE_STMT)) {
             // 載入Driver介面的實作類別.class檔來註冊JDBC
             Class.forName(driver);
             // 從request的VO取值放入PreparedStatement
-            ps.setInt(1, productCategoryVO.getpCatNo());
-            ps.setString(2, productVO.getpName());
-            ps.setString(3, productVO.getpInfo());
-            ps.setInt(4, productVO.getpSize());
-            ps.setString(5, productVO.getpColor());
-            ps.setBigDecimal(6, productVO.getpPrice());
-            ps.setByte(7, productVO.getpStat());
-            ps.setInt(8, productVO.getpSalQty());
-            ps.setInt(9, productVO.getpComPeople());
-            ps.setInt(10, productVO.getpComScore());
-            ps.setInt(11, productVO.getpNo());
+            ps.setInt(1, productCategory.getpCatNo());
+            ps.setString(2, product.getpName());
+            ps.setString(3, product.getpInfo());
+            ps.setInt(4, product.getpSize());
+            ps.setString(5, product.getpColor());
+            ps.setBigDecimal(6, product.getpPrice());
+            ps.setByte(7, product.getpStat());
+            ps.setInt(8, product.getpSalQty());
+            ps.setInt(9, product.getpComPeople());
+            ps.setInt(10, product.getpComScore());
+            ps.setInt(11, product.getpNo());
             // 執行SQL指令將資料庫內對應的資料修改成VO的值
             result  = ps.executeUpdate();
             // Handle any driver errors

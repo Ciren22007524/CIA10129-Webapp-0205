@@ -1,6 +1,6 @@
 package com.ren.admauthority.dao;
 
-import com.Entity.News;
+import com.Entity.*;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -30,15 +30,17 @@ public class AdmAuthorityJDBCDAOImpl implements AdmAuthorityDAO_interface {
             "DELETE FROM AdmAuthority WHERE titleNo = ?";
 
     @Override
-    public void insert(AdmAuthority admAuthorityVO) {
+    public void insert(AdmAuthority admAuthority) {
+        Title title = admAuthority.getTitle();
+        AuthorityFunction authorityFunction = admAuthority.getAuthorityFunction();
 
         try (Connection con = DriverManager.getConnection(url, userid, passwd);
              PreparedStatement ps = con.prepareStatement(INSERT_STMT)) {
             // 載入Driver介面的實作類別.class檔來註冊JDBC
             Class.forName(driver);
             // 從request的VO取值放入PreparedStatement
-            ps.setInt(1, admAuthorityVO.getTitleNo());
-            ps.setInt(2, admAuthorityVO.getAuthFuncNo());
+            ps.setInt(1, title.getTitleNo());
+            ps.setInt(2, authorityFunction.getAuthFuncNo());
             // 執行SQL指令將VO資料新增進資料庫
             ps.executeUpdate();
             // Handle any driver errors
@@ -53,7 +55,9 @@ public class AdmAuthorityJDBCDAOImpl implements AdmAuthorityDAO_interface {
     @Override
     public AdmAuthority findByPrimaryKey(Integer titleNo) {
         // 宣告VO並指定空值，若查詢無結果會出現空值，後續於Controller作錯誤處理
-        AdmAuthority admAuthorityVO = null;
+        AdmAuthority admAuthority = null;
+        Title title = admAuthority.getTitle();
+        AuthorityFunction authorityFunction = admAuthority.getAuthorityFunction();
         // ResultSet在相關的Statement關閉時會自動關閉，因此不用另外寫在Auto-closable
         try (Connection con = DriverManager.getConnection(url, userid, passwd);
              PreparedStatement ps = con.prepareStatement(GET_ONE_STMT)) {
@@ -65,9 +69,9 @@ public class AdmAuthorityJDBCDAOImpl implements AdmAuthorityDAO_interface {
             ResultSet rs = ps.executeQuery();
             // 取出ResultSet內資料放入VO
             while (rs.next()) {
-                admAuthorityVO = new AdmAuthority();
-                admAuthorityVO.setTitleNo(rs.getInt("titleNo"));
-                admAuthorityVO.setAuthFuncNo(rs.getInt("authFuncNo"));
+                admAuthority = new AdmAuthority();
+                title.setTitleNo(rs.getInt("titleNo"));
+                authorityFunction.setAuthFuncNo(rs.getInt("authFuncNo"));
             }
             // Handle any driver errors
         } catch (ClassNotFoundException e) {
@@ -77,7 +81,7 @@ public class AdmAuthorityJDBCDAOImpl implements AdmAuthorityDAO_interface {
             throw new RuntimeException("A database error occured. " + se.getMessage());
         }
         // 回傳VO，待後續Controller導至View呈現
-        return admAuthorityVO;
+        return admAuthority;
     }
 
     @Override
@@ -85,7 +89,9 @@ public class AdmAuthorityJDBCDAOImpl implements AdmAuthorityDAO_interface {
         // 宣告ArrayList作為放入搜尋結果的列表
         List<AdmAuthority> list = new ArrayList<>();
         // 宣告VO並指定空值，若查詢無結果會出現空值，後續於Controller作錯誤處理
-        AdmAuthority admAuthorityVO = null;
+        AdmAuthority admAuthority = null;
+        Title title = admAuthority.getTitle();
+        AuthorityFunction authorityFunction = admAuthority.getAuthorityFunction();
         try (Connection con = DriverManager.getConnection(url, userid, passwd);
              PreparedStatement ps = con.prepareStatement(GET_ALL_STMT)) {
             // 載入Driver介面的實作類別.class檔來註冊JDBC
@@ -94,10 +100,10 @@ public class AdmAuthorityJDBCDAOImpl implements AdmAuthorityDAO_interface {
             ResultSet rs = ps.executeQuery();
             // 新增VO物件，取出ResultSet內資料放入VO
             while (rs.next()) {
-                admAuthorityVO = new AdmAuthority();
-                admAuthorityVO.setTitleNo(rs.getInt("titleNo"));
-                admAuthorityVO.setAuthFuncNo(rs.getInt("authFuncNo"));
-                list.add(admAuthorityVO); // 將資料新增至列表內之後作為搜尋結果返回給View
+                admAuthority = new AdmAuthority();
+                title.setTitleNo(rs.getInt("titleNo"));
+                authorityFunction.setAuthFuncNo(rs.getInt("authFuncNo"));
+                list.add(admAuthority); // 將資料新增至列表內之後作為搜尋結果返回給View
             }
             // Handle any driver errors
         } catch (ClassNotFoundException e) {
@@ -110,15 +116,16 @@ public class AdmAuthorityJDBCDAOImpl implements AdmAuthorityDAO_interface {
     }
 
     @Override
-    public void update(AdmAuthority admAuthorityVO) {
-
+    public void update(AdmAuthority admAuthority) {
+        Title title = admAuthority.getTitle();
+        AuthorityFunction authorityFunction = admAuthority.getAuthorityFunction();
         try (Connection con = DriverManager.getConnection(url, userid, passwd);
              PreparedStatement ps = con.prepareStatement(UPDATE_STMT)) {
             // 載入Driver介面的實作類別.class檔來註冊JDBC
             Class.forName(driver);
             // 從request的VO取值放入PreparedStatement
-            ps.setInt(1, admAuthorityVO.getAuthFuncNo());
-            ps.setInt(2, admAuthorityVO.getTitleNo());
+            ps.setInt(1, authorityFunction.getAuthFuncNo());
+            ps.setInt(2, title.getTitleNo());
             // 執行SQL指令將資料庫內對應的資料修改成VO的值
             ps.executeUpdate();
             // Handle any driver errors

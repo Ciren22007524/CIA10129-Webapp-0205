@@ -2,7 +2,7 @@ package com.Entity;
 
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import jakarta.persistence.*;
+import javax.persistence.*;
 
 
 import java.io.Serializable;

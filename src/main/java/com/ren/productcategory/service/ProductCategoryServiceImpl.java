@@ -3,58 +3,53 @@ package com.ren.productcategory.service;
 import java.util.List;
 import java.util.Set;
 
-import com.Entity.ServicePicture;
-import com.Entity.ServiceRobot;
-import com.ren.productcategory.dao.ProductCategoryDAO_interface;
-import com.ren.productcategory.dao.ProductCategoryJDBCDAOImpl;
+import com.Entity.Product;
+import com.Entity.ProductCategory;
+import com.ren.product.dao.ProductRepository;
+import com.ren.productcategory.dao.ProductCategoryRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import javax.persistence.Access;
 
 public class ProductCategoryServiceImpl implements ProductCategoryService_interface {
-	
-	private ProductCategoryDAO_interface dao;
 
-	public ProductCategoryServiceImpl() {
-		dao = new ProductCategoryJDBCDAOImpl();
+	@Autowired
+	private ProductCategoryRepository productCategoryRepository;
+
+	@Autowired
+	private ProductRepository productRepository;
+
+	@Override
+	public ProductCategory addProductCategory(ProductCategory productCategory) {
+		return productCategoryRepository.save(productCategory);
 	}
 
 	@Override
-	public ServicePicture.ProductCategoryVO addProductCategory(String pCatNo) {
-		return null;
-	}
-
-	@Override
-	public List<ServicePicture.ProductCategoryVO> getAll() {
+	public ProductCategory getOneProductCatagory(Integer pCatNo) {
 		// TODO Auto-generated method stub
-		return dao.getAll();
+		return productCategoryRepository.findById(pCatNo).orElse(null);
 	}
 
 	@Override
-	public ServicePicture.ProductCategoryVO getOneProductCatagory(Integer pCatNo) {
-		// TODO Auto-generated method stub
-		return dao.findByPrimaryKey(pCatNo);
+	public List<ProductCategory> getAll() {
+		return productCategoryRepository.findAll();
 	}
 
-	@Override
-	public Set<Product> getProductsBypCatNo(Integer pCatNo) {
-		// TODO Auto-generated method stub
-		return dao.getProductsBypCatNo(pCatNo);
-	}
+//	@Override
+//	public Set<Product> getProductsBypCatNo(Integer pCatNo) {
+//		// TODO Auto-generated method stub
+//		return productRepository.findById(pCatNo);
+//	}
 
 	@Override
-	public ServicePicture.ProductCategoryVO updateProductCategory(Integer pCatNo, String pCatName) {
-		ServicePicture.ProductCategoryVO productCategoryVO = new ServicePicture.ProductCategoryVO();
-		// 將傳入參數放入VO
-		productCategoryVO.setpCatNo(pCatNo);
-		productCategoryVO.setpCatName(pCatName);
-		// 將VO放入dao定義的方法內，使其執行資料庫操作
-		dao.update(productCategoryVO);
-		// 返回值作為呈現在View上使用
-		return productCategoryVO;
+	public ProductCategory updateProductCategory(ProductCategory productCategory) {
+		return productCategoryRepository.save(productCategory);
 	}
 
 	@Override
 	public void deleteProductCategory(Integer pCatNo) {
 		// TODO Auto-generated method stub
-		dao.delete(pCatNo);
+		productCategoryRepository.deleteById(pCatNo);
 	}
 
 }

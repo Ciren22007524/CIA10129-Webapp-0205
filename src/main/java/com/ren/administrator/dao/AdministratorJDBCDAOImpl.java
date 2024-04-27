@@ -1,6 +1,7 @@
 package com.ren.administrator.dao;
 
-import com.Entity.ServicePicture;
+import com.Entity.Administrator;
+import com.Entity.Title;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -48,7 +49,7 @@ public class AdministratorJDBCDAOImpl implements AdministratorDAO_interface {
 
     @Override
     public void insert(Administrator administrator) {
-
+        Title title = administrator.getTitle();
         try (Connection con = DriverManager.getConnection(url, userid, passwd);
              PreparedStatement ps = con.prepareStatement(INSERT_STMT)) {
             // 載入Driver介面的實作類別.class檔來註冊JDBC
@@ -58,7 +59,7 @@ public class AdministratorJDBCDAOImpl implements AdministratorDAO_interface {
             ps.setString(2, administrator.getAdmName());
             ps.setByte(3, administrator.getAdmStat());
             ps.setString(4, administrator.getAdmEmail());
-            ps.setInt(5, administrator.getTitleNo());
+            ps.setInt(5, title.getTitleNo());
             ps.setDate(6, administrator.getAdmHireDate());
             // 執行SQL指令將VO資料新增進資料庫
             ps.executeUpdate();
@@ -75,6 +76,7 @@ public class AdministratorJDBCDAOImpl implements AdministratorDAO_interface {
     public Administrator findByPrimaryKey(Integer admNo) {
         // 宣告VO並指定空值，若查詢無結果會出現空值，後續於Controller作錯誤處理
         Administrator administrator = null;
+        Title title = administrator.getTitle();
         // ResultSet在相關的Statement關閉時會自動關閉，因此不用另外寫在Auto-closable
         try (Connection con = DriverManager.getConnection(url, userid, passwd);
              PreparedStatement ps = con.prepareStatement(GET_ONE_STMT)) {
@@ -91,7 +93,7 @@ public class AdministratorJDBCDAOImpl implements AdministratorDAO_interface {
                 administrator.setAdmName(rs.getString("AdmName"));
                 administrator.setAdmStat(rs.getByte("AdmStat"));
                 administrator.setAdmEmail(rs.getString("AdmEmail"));
-                administrator.setTitleNo(rs.getInt("TitleNo"));
+                title.setTitleNo(rs.getInt("TitleNo"));
                 administrator.setAdmHireDate(rs.getDate("AdmHireDate"));
                 administrator.setAdmPhoto(rs.getBytes("admPhoto"));
             }
@@ -112,6 +114,7 @@ public class AdministratorJDBCDAOImpl implements AdministratorDAO_interface {
         List<Administrator> list = new ArrayList<>();
         // 宣告VO並指定空值，若查詢無結果會出現空值，後續於Controller作錯誤處理
         Administrator administrator = null;
+        Title title = administrator.getTitle();
         try (Connection con = DriverManager.getConnection(url, userid, passwd);
              PreparedStatement ps = con.prepareStatement(GET_ALL_STMT)) {
             // 載入Driver介面的實作類別.class檔來註冊JDBC
@@ -125,7 +128,7 @@ public class AdministratorJDBCDAOImpl implements AdministratorDAO_interface {
                 administrator.setAdmName(rs.getString("AdmName"));
                 administrator.setAdmStat(rs.getByte("AdmStat"));
                 administrator.setAdmEmail(rs.getString("AdmEmail"));
-                administrator.setTitleNo(rs.getInt("TitleNo"));
+                title.setTitleNo(rs.getInt("TitleNo"));
                 administrator.setAdmHireDate(rs.getDate("AdmHireDate"));
                 administrator.setAdmPhoto(rs.getBytes("admPhoto"));
                 list.add(administrator); // 將資料新增至列表內之後作為搜尋結果返回給View
@@ -142,6 +145,7 @@ public class AdministratorJDBCDAOImpl implements AdministratorDAO_interface {
 
     @Override
     public void update(Administrator administrator) {
+        Title title = administrator.getTitle();
         try (Connection con = DriverManager.getConnection(url, userid, passwd);
              PreparedStatement ps = con.prepareStatement(UPDATE_STMT)) {
             // 載入Driver介面的實作類別.class檔來註冊JDBC
@@ -151,7 +155,7 @@ public class AdministratorJDBCDAOImpl implements AdministratorDAO_interface {
             ps.setString(2, administrator.getAdmName());
             ps.setByte(3, administrator.getAdmStat());
             ps.setString(4, administrator.getAdmEmail());
-            ps.setInt(5, administrator.getTitleNo());
+            ps.setInt(5, title.getTitleNo());
             ps.setDate(6, administrator.getAdmHireDate());
             ps.setBytes(7, administrator.getAdmPhoto());
             ps.setInt(8, administrator.getAdmNo());

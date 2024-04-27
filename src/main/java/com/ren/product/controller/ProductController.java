@@ -1,6 +1,6 @@
 package com.ren.product.controller;
 
-import com.Entity.ServiceRobot;
+import com.Entity.Product;
 import com.ren.product.service.ProductServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -9,28 +9,28 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Controller
-@RequestMapping("/product")
+@RequestMapping("/backEnd/product")
 public class ProductController {
 
     @Autowired
     private ProductServiceImpl productSvc;
 
-    @GetMapping("/{pNo}")
+    @GetMapping("/listOneProduct")
     public Product getProduct(@PathVariable Integer pNo) {
         return productSvc.getOneProduct(pNo);
     }
 
-    @GetMapping("/products")
+    @GetMapping("/listAllProduct")
     public List<Product> getAllProducts() {
         return productSvc.getAll();
     }
 
-    @PostMapping("/products")
+    @PostMapping("/addProduct")
     public Product addProduct(@RequestBody Product product) {
         return productSvc.addProduct(product);
     }
 
-    @PutMapping("/products/{pNo}")
+    @PutMapping("/updateProduct")
     public Product updateProduct(@PathVariable Integer pNo, @RequestBody Product product) {
         // Ensure the productNo in the path matches the productNo in the request body
         if (!pNo.equals(product.getpNo())) {
@@ -39,9 +39,9 @@ public class ProductController {
         return productSvc.updateProduct(product);
     }
 
-    @DeleteMapping("/products/{pNo}")
-    public void deleteProduct(@PathVariable Integer pNo) {
-        productSvc.deleteProduct(pNo);
-    }
+//    @DeleteMapping("/products/{pNo}")
+//    public void deleteProduct(@PathVariable Integer pNo) {
+//        productSvc.deleteProduct(pNo);
+//    }
 
 }
