@@ -3,8 +3,8 @@ package com.ren.productcategory.service;
 import java.util.List;
 import java.util.Set;
 
-import com.ren.product.model.ProductVO;
-import com.ren.productcategory.model.ProductCategoryVO;
+import com.Entity.ServicePicture;
+import com.Entity.ServiceRobot;
 import com.ren.productcategory.dao.ProductCategoryDAO_interface;
 import com.ren.productcategory.dao.ProductCategoryJDBCDAOImpl;
 
@@ -17,31 +17,31 @@ public class ProductCategoryServiceImpl implements ProductCategoryService_interf
 	}
 
 	@Override
-	public ProductCategoryVO addProductCategory(String pCatNo) {
+	public ServicePicture.ProductCategoryVO addProductCategory(String pCatNo) {
 		return null;
 	}
 
 	@Override
-	public List<ProductCategoryVO> getAll() {
+	public List<ServicePicture.ProductCategoryVO> getAll() {
 		// TODO Auto-generated method stub
 		return dao.getAll();
 	}
 
 	@Override
-	public ProductCategoryVO getOneProductCatagory(Integer pCatNo) {
+	public ServicePicture.ProductCategoryVO getOneProductCatagory(Integer pCatNo) {
 		// TODO Auto-generated method stub
 		return dao.findByPrimaryKey(pCatNo);
 	}
 
 	@Override
-	public Set<ProductVO> getProductsBypCatNo(Integer pCatNo) {
+	public Set<Product> getProductsBypCatNo(Integer pCatNo) {
 		// TODO Auto-generated method stub
 		return dao.getProductsBypCatNo(pCatNo);
 	}
 
 	@Override
-	public ProductCategoryVO updateProductCategory(Integer pCatNo,String pCatName) {
-		ProductCategoryVO productCategoryVO = new ProductCategoryVO();
+	public ServicePicture.ProductCategoryVO updateProductCategory(Integer pCatNo, String pCatName) {
+		ServicePicture.ProductCategoryVO productCategoryVO = new ServicePicture.ProductCategoryVO();
 		// 將傳入參數放入VO
 		productCategoryVO.setpCatNo(pCatNo);
 		productCategoryVO.setpCatName(pCatName);

@@ -10,8 +10,8 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
-import com.ren.product.model.ProductVO;
-import com.ren.productcategory.model.ProductCategoryVO;
+import com.Entity.ServicePicture;
+import com.Entity.ServiceRobot;
 
 public class ProductCategoryJDBCDAOImpl implements ProductCategoryDAO_interface {
     String driver = "com.mysql.cj.jdbc.Driver";
@@ -50,7 +50,7 @@ public class ProductCategoryJDBCDAOImpl implements ProductCategoryDAO_interface 
             "DELETE FROM productcategory where pCatNo = ?";
 
     @Override
-    public void insert(ProductCategoryVO productCategoryVO) {
+    public void insert(ServicePicture.ProductCategoryVO productCategoryVO) {
 
         Connection con = null;
         PreparedStatement pstmt = null;
@@ -94,9 +94,9 @@ public class ProductCategoryJDBCDAOImpl implements ProductCategoryDAO_interface 
     }
 
     @Override
-    public ProductCategoryVO findByPrimaryKey(Integer pCatNo) {
+    public ServicePicture.ProductCategoryVO findByPrimaryKey(Integer pCatNo) {
 
-        ProductCategoryVO productCategoryVO = null;
+        ServicePicture.ProductCategoryVO productCategoryVO = null;
         Connection con = null;
         PreparedStatement pstmt = null;
         ResultSet rs = null;
@@ -113,7 +113,7 @@ public class ProductCategoryJDBCDAOImpl implements ProductCategoryDAO_interface 
 
             while (rs.next()) {
                 // deptVO 也稱為 Domain objects
-                productCategoryVO = new ProductCategoryVO();
+                productCategoryVO = new ServicePicture.ProductCategoryVO();
                 productCategoryVO.setpCatNo(rs.getInt("pCatNo"));
                 productCategoryVO.setpCatName(rs.getString("pCatName"));
             }
@@ -152,9 +152,9 @@ public class ProductCategoryJDBCDAOImpl implements ProductCategoryDAO_interface 
     }
 
     @Override
-    public List<ProductCategoryVO> getAll() {
-        List<ProductCategoryVO> list = new ArrayList<ProductCategoryVO>();
-        ProductCategoryVO productCategoryVO = null;
+    public List<ServicePicture.ProductCategoryVO> getAll() {
+        List<ServicePicture.ProductCategoryVO> list = new ArrayList<ServicePicture.ProductCategoryVO>();
+        ServicePicture.ProductCategoryVO productCategoryVO = null;
 
         Connection con = null;
         PreparedStatement pstmt = null;
@@ -168,7 +168,7 @@ public class ProductCategoryJDBCDAOImpl implements ProductCategoryDAO_interface 
             rs = pstmt.executeQuery();
 
             while (rs.next()) {
-                productCategoryVO = new ProductCategoryVO();
+                productCategoryVO = new ServicePicture.ProductCategoryVO();
                 productCategoryVO.setpCatNo(rs.getInt("pCatNo"));
                 productCategoryVO.setpCatName(rs.getString("pCatName"));
                 list.add(productCategoryVO); // Store the row in the list
@@ -207,9 +207,9 @@ public class ProductCategoryJDBCDAOImpl implements ProductCategoryDAO_interface 
     }
 
     @Override
-    public Set<ProductVO> getProductsBypCatNo(Integer pCatNo) {
-        Set<ProductVO> set = new LinkedHashSet<>();
-        ProductVO productVO = null;
+    public Set<Product> getProductsBypCatNo(Integer pCatNo) {
+        Set<Product> set = new LinkedHashSet<>();
+        Product productVO = null;
 
         Connection con = null;
         PreparedStatement pstmt = null;
@@ -224,7 +224,7 @@ public class ProductCategoryJDBCDAOImpl implements ProductCategoryDAO_interface 
             rs = pstmt.executeQuery();
 
             while (rs.next()) {
-                productVO = new ProductVO();
+                productVO = new Product();
                 productVO.setpNo(rs.getInt("pNo"));
                 productVO.setpCatNo(rs.getInt("pCatNo"));
                 productVO.setpName(rs.getString("pName"));
@@ -272,7 +272,7 @@ public class ProductCategoryJDBCDAOImpl implements ProductCategoryDAO_interface 
     }
 
     @Override
-    public void update(ProductCategoryVO productCategoryVO) {
+    public void update(ServicePicture.ProductCategoryVO productCategoryVO) {
 
         Connection con = null;
         PreparedStatement pstmt = null;
@@ -409,22 +409,22 @@ public class ProductCategoryJDBCDAOImpl implements ProductCategoryDAO_interface 
 //		dao.delete(30);
 
         // 查詢
-        ProductCategoryVO productCategoryVO3 = dao.findByPrimaryKey(1000);
+        ServicePicture.ProductCategoryVO productCategoryVO3 = dao.findByPrimaryKey(1000);
         System.out.print(productCategoryVO3.getpCatNo() + ",");
         System.out.print(productCategoryVO3.getpCatName() + ",");
         System.out.println("---------------------");
 
         // 查詢部門
-        List<ProductCategoryVO> list = dao.getAll();
-        for (ProductCategoryVO aProductCategory : list) {
+        List<ServicePicture.ProductCategoryVO> list = dao.getAll();
+        for (ServicePicture.ProductCategoryVO aProductCategory : list) {
             System.out.print(aProductCategory.getpCatNo() + ",");
             System.out.print(aProductCategory.getpCatName());
             System.out.println();
         }
 
         // 查詢某部門的員工
-        Set<ProductVO> set = dao.getProductsBypCatNo(10);
-        for (ProductVO aProduct : set) {
+        Set<Product> set = dao.getProductsBypCatNo(10);
+        for (Product aProduct : set) {
             System.out.print(aProduct.getpNo() + ",");
             System.out.print(aProduct.getpCatNo() + ",");
             System.out.print(aProduct.getpName() + ",");

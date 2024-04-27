@@ -1,15 +1,17 @@
 package com.ren.product.dao;
 
-import com.ren.product.model.ProductVO;
-import com.ren.util.HibernateUtil;
+import com.Entity.ServiceRobot;
+import jakarta.persistence.TypedQuery;
+import jakarta.persistence.criteria.CriteriaBuilder;
+import jakarta.persistence.criteria.CriteriaQuery;
+import jakarta.persistence.criteria.Predicate;
+import jakarta.persistence.criteria.Root;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.TypedQuery;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;
 import java.math.BigDecimal;
 import java.sql.Date;
 import java.util.ArrayList;
@@ -18,12 +20,15 @@ import java.util.Map;
 
 import static com.ren.util.Constants.PAGE_MAX_RESULT;
 
+@Repository
 public class ProductHibernateDAOImpl implements ProductDAO_interface {
     // SessionFactory 為 thread-safe，可宣告為屬性讓請求執行緒們共用
+
     private SessionFactory factory;
 
-    public ProductHibernateDAOImpl() {
-        factory = HibernateUtil.getSessionFactory();
+    @Autowired
+    public ProductHibernateDAOImpl(SessionFactory sessionFactory) {
+        this.factory = sessionFactory;
     }
 
     // Session 為 not thread-safe，所以此方法在各個增刪改查方法裡呼叫
@@ -33,31 +38,34 @@ public class ProductHibernateDAOImpl implements ProductDAO_interface {
     }
 
     @Override
-    public int insert(ProductVO entity) {
+    @Transactional
+    public int insert(Product entity) {
         // 回傳給 service 剛新增成功的自增主鍵值
         return (Integer) getSession().save(entity);
     }
 
     @Override
-    public ProductVO getById(Integer id) {
+    @Transactional
+    public Product getById(Integer id) {
         System.out.println("DAO你有在嗎");
-        return getSession().get(ProductVO.class, id);
+        return getSession().get(Product.class, id);
     }
 
     @Override
-    public List<ProductVO> getAll() {
-        return getSession().createQuery("from ProductVO", ProductVO.class).list();
+    @Transactional
+    public List<Product> getAll() {
+        return getSession().createQuery("from ProductVO", Product.class).list();
     }
 
     @Override
-    public List<ProductVO> getByCompositeQuery(Map<String, String> map) {
+    public List<Product> getByCompositeQuery(Map<String, String> map) {
         if (map.size() == 0) {
             return getAll();
         }
 
         CriteriaBuilder builder = getSession().getCriteriaBuilder();
-        CriteriaQuery<ProductVO> criteria = builder.createQuery(ProductVO.class);
-        Root<ProductVO> root = criteria.from(ProductVO.class);
+        CriteriaQuery<Product> criteria = builder.createQuery(Product.class);
+        Root<Product> root = criteria.from(Product.class);
 
         List<Predicate> predicates = new ArrayList<>();
 
@@ -105,23 +113,25 @@ public class ProductHibernateDAOImpl implements ProductDAO_interface {
 
         criteria.where(builder.and());
         criteria.orderBy();
-        TypedQuery<ProductVO> query = getSession().createQuery(criteria);
+        TypedQuery<Product> query = getSession().createQuery(criteria);
 
         return query.getResultList();
     }
 
 
     @Override
-    public List<ProductVO> getAll(int currentPage) {
+    @Transactional
+    public List<Product> getAll(int currentPage) {
         int first = (currentPage - 1) * PAGE_MAX_RESULT;
-        return getSession().createQuery("from ProductVO", ProductVO.class)
+        return getSession().createQuery("from ProductVO", Product.class)
                 .setFirstResult(first)
                 .setMaxResults(PAGE_MAX_RESULT)
                 .list();
     }
 
     @Override
-    public int update(ProductVO entity) {
+    @Transactional
+    public int update(Product entity) {
         try {
             getSession().update(entity);
             // 回傳給 service，1代表刪除成功
@@ -133,8 +143,9 @@ public class ProductHibernateDAOImpl implements ProductDAO_interface {
     }
 
     @Override
+    @Transactional
     public int delete(Integer id) {
-        ProductVO product = getSession().get(ProductVO.class, id);
+        Product product = getSession().get(Product.class, id);
         if (product != null) {
             getSession().delete(product);
             // 回傳給 service，1代表刪除成功
@@ -146,6 +157,7 @@ public class ProductHibernateDAOImpl implements ProductDAO_interface {
     }
 
     @Override
+    @Transactional
     public long getTotal() {
         return getSession().createQuery("select count(*) from ProductVO", Long.class).uniqueResult();
     }

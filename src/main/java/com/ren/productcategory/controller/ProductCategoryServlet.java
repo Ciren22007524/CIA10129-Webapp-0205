@@ -1,6 +1,6 @@
 package com.ren.productcategory.controller;
 
-import com.ren.productcategory.model.ProductCategoryVO;
+import com.Entity.ServicePicture;
 import com.ren.productcategory.service.ProductCategoryServiceImpl;
 
 import javax.servlet.RequestDispatcher;
@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.math.BigDecimal;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -62,7 +61,7 @@ public class ProductCategoryServlet extends HttpServlet {
 
 			/*************************** 2.開始查詢資料 *****************************************/
 			ProductCategoryServiceImpl productCategorySvc = new ProductCategoryServiceImpl();
-			ProductCategoryVO productCategoryVO = productCategorySvc.getOneProductCatagory(pCatNo);
+			ServicePicture.ProductCategoryVO productCategoryVO = productCategorySvc.getOneProductCatagory(pCatNo);
 			// 引用類型的屬性在未附值時預設為null
 			if (productCategoryVO == null) {
 				errorMsgs.add("查無資料");
@@ -93,7 +92,7 @@ public class ProductCategoryServlet extends HttpServlet {
 
 			/*************************** 2.開始查詢資料 ****************************************/
 			ProductCategoryServiceImpl productCategorySvc = new ProductCategoryServiceImpl();
-			ProductCategoryVO productCategoryVO = productCategorySvc.getOneProductCatagory(pCatNo);
+			ServicePicture.ProductCategoryVO productCategoryVO = productCategorySvc.getOneProductCatagory(pCatNo);
 
 			/*************************** 3.查詢完成,準備轉交(Send the Success view) ************/
 			req.setAttribute("productCategoryVO", productCategoryVO);
@@ -120,7 +119,7 @@ public class ProductCategoryServlet extends HttpServlet {
 				errorMsgs.add("商品名稱: 只能是中、英文字母、數字和_ , 且長度必需在2到10之間");
 			}
 
-			ProductCategoryVO productCategoryVO = new ProductCategoryVO();
+			ServicePicture.ProductCategoryVO productCategoryVO = new ServicePicture.ProductCategoryVO();
 			productCategoryVO.setpCatNo(pCatNo);
 			productCategoryVO.setpCatName(pCatName);
 
@@ -161,7 +160,7 @@ public class ProductCategoryServlet extends HttpServlet {
 				errorMsgs.add("商品名稱: 只能是中、英文字母、數字和_ , 且長度必需在2到10之間");
 			}
 
-			ProductCategoryVO productCategoryVO = new ProductCategoryVO();
+			ServicePicture.ProductCategoryVO productCategoryVO = new ServicePicture.ProductCategoryVO();
 			productCategoryVO.setpCatName(pCatName);
 
 			// Send the use back to the form, if there were errors

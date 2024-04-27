@@ -1,6 +1,6 @@
 package com.ren.administrator.controller;
 
-import com.ren.administrator.model.AdministratorVO;
+import com.Entity.ServicePicture;
 import com.ren.administrator.service.AdministratorServiceImpl;
 
 import javax.servlet.RequestDispatcher;
@@ -10,12 +10,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 import java.io.IOException;
 import java.io.InputStream;
-import java.sql.Date;
-import java.time.LocalDate;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
-import java.util.concurrent.ThreadLocalRandom;
 
 @MultipartConfig
 @WebServlet("/administrator/administrator.do")
@@ -69,10 +66,10 @@ public class AdministratorServlet extends HttpServlet {
             /*************************** 2.開始查詢資料 *****************************************/
             AdministratorServiceImpl administratorSvc = new AdministratorServiceImpl();
             // 執行Service的getOnProduct，該方法執行DAO的findByPrimaryKey，將資料庫內的資料以VO的形式傳回
-            AdministratorVO administratorVO = administratorSvc.getOneAdministrator(admNo);
+            Administrator administrator = administratorSvc.getOneAdministrator(admNo);
             String photoBase64 = administratorSvc.photoSticker(admNo);
             // 引用類型的屬性在未附值時預設為null
-            if (administratorVO == null) {
+            if (administrator == null) {
                 errorMsgs.add("查無資料");
             }
             // Send the use back to the form, if there were errors
@@ -83,7 +80,7 @@ public class AdministratorServlet extends HttpServlet {
             }
 
             /*************************** 3.查詢完成,準備轉交(Send the Success view) *************/
-            req.setAttribute("administratorVO", administratorVO); // 資料庫取出的administratorVO物件,存入req
+            req.setAttribute("administrator", administrator); // 資料庫取出的administrator物件,存入req
             req.setAttribute("photoBase64", photoBase64);
             String url = "/administrator/listOneAdministrator.jsp";
             RequestDispatcher successView = req.getRequestDispatcher(url); // 成功轉交 listOneAdministrator.jsp
@@ -102,10 +99,10 @@ public class AdministratorServlet extends HttpServlet {
 
             /*************************** 2.開始查詢資料 ****************************************/
             AdministratorServiceImpl administratorSvc = new AdministratorServiceImpl();
-            AdministratorVO administratorVO = administratorSvc.getOneAdministrator(admNo);
+            Administrator administrator = administratorSvc.getOneAdministrator(admNo);
 
             /*************************** 3.查詢完成,準備轉交(Send the Success view) ************/
-            req.setAttribute("administratorVO", administratorVO); // 資料庫取出的administratorVO物件,存入req
+            req.setAttribute("administrator", administrator); // 資料庫取出的administrator物件,存入req
             String url = "/administrator/update_administrator_input.jsp";
             RequestDispatcher successView = req.getRequestDispatcher(url);// 成功轉交 update_administrator_input.jsp
             successView.forward(req, res);
@@ -168,19 +165,19 @@ public class AdministratorServlet extends HttpServlet {
                 errorMsgs.add("未找到照片");
             }
 
-            AdministratorVO administratorVO = new AdministratorVO();
-            administratorVO.setAdmNo(admNo);
-            administratorVO.setAdmPwd(admPwd);
-            administratorVO.setAdmName(admName);
-            administratorVO.setAdmStat(admStat);
-            administratorVO.setAdmEmail(admEmail);
-            administratorVO.setTitleNo(titleNo);
-            administratorVO.setAdmHireDate(admHireDate);
-            administratorVO.setAdmPhoto(admPhoto);
+            Administrator administrator = new Administrator();
+            administrator.setAdmNo(admNo);
+            administrator.setAdmPwd(admPwd);
+            administrator.setAdmName(admName);
+            administrator.setAdmStat(admStat);
+            administrator.setAdmEmail(admEmail);
+            administrator.setTitleNo(titleNo);
+            administrator.setAdmHireDate(admHireDate);
+            administrator.setAdmPhoto(admPhoto);
 
             // Send the use back to the form, if there were errors
             if (!errorMsgs.isEmpty()) {
-                req.setAttribute("administratorVO", administratorVO); // 含有輸入格式錯誤的administratorVO物件,也存入req
+                req.setAttribute("administrator", administrator); // 含有輸入格式錯誤的administrator物件,也存入req
                 RequestDispatcher failureView = req.getRequestDispatcher("/administrator/update_administrator_input.jsp");
                 failureView.forward(req, res);
                 return; // 程式中斷
@@ -188,10 +185,10 @@ public class AdministratorServlet extends HttpServlet {
 
             /*************************** 2.開始修改資料 *****************************************/
             AdministratorServiceImpl administratorSvc = new AdministratorServiceImpl();
-            administratorVO = administratorSvc.updateAdministrator(admNo, admPwd, admName, admStat, admEmail, titleNo, admHireDate, admPhoto);
+            administrator = administratorSvc.updateAdministrator(admNo, admPwd, admName, admStat, admEmail, titleNo, admHireDate, admPhoto);
 
             /*************************** 3.修改完成,準備轉交(Send the Success view) *************/
-            req.setAttribute("administratorVO", administratorVO); // 資料庫update成功後,正確的的administratorVO物件,存入req
+            req.setAttribute("administrator", administrator); // 資料庫update成功後,正確的的administrator物件,存入req
             String url = "/administrator/listOneAdministrator.jsp";
             RequestDispatcher successView = req.getRequestDispatcher(url);
             successView.forward(req, res);
@@ -254,18 +251,18 @@ public class AdministratorServlet extends HttpServlet {
                 errorMsgs.add("讀取 admPhoto 時發生錯誤: " + e.getMessage());
             }
 
-            AdministratorVO administratorVO = new AdministratorVO();
-            administratorVO.setAdmPwd(admPwd);
-            administratorVO.setAdmName(admName);
-            administratorVO.setAdmStat(admStat);
-            administratorVO.setAdmEmail(admEmail);
-            administratorVO.setTitleNo(titleNo);
-            administratorVO.setAdmHireDate(admHireDate);
-            administratorVO.setAdmPhoto(admPhoto);
+            Administrator administrator = new Administrator();
+            administrator.setAdmPwd(admPwd);
+            administrator.setAdmName(admName);
+            administrator.setAdmStat(admStat);
+            administrator.setAdmEmail(admEmail);
+            administrator.setTitleNo(titleNo);
+            administrator.setAdmHireDate(admHireDate);
+            administrator.setAdmPhoto(admPhoto);
 
             // Send the use back to the form, if there were errors
             if (!errorMsgs.isEmpty()) {
-                req.setAttribute("administratorVO", administratorVO); // 含有輸入格式錯誤的administratorVO物件,也存入req
+                req.setAttribute("administrator", administrator); // 含有輸入格式錯誤的administrator物件,也存入req
                 RequestDispatcher failureView = req.getRequestDispatcher("/administrator/addAdministrator.jsp");
                 failureView.forward(req, res);
                 return;
@@ -337,11 +334,11 @@ public class AdministratorServlet extends HttpServlet {
             AdministratorServiceImpl administratorSvc = new AdministratorServiceImpl();
             administratorSvc.uploadPhoto(admNo, admPhoto);
             // 根據傳入編號取得VO，後續傳入req給forward後的頁面使用
-            AdministratorVO administratorVO = administratorSvc.getOneAdministrator(admNo);
+            Administrator administrator = administratorSvc.getOneAdministrator(admNo);
             String photoBase64 = administratorSvc.photoSticker(admNo);
 
             /*************************** 3.查詢完成,準備轉交(Send the Success view) *************/
-            req.setAttribute("administratorVO", administratorVO); // 資料庫取出的administratorVO物件,存入req
+            req.setAttribute("administrator", administrator); // 資料庫取出的administrator物件,存入req
             req.setAttribute("photoBase64", photoBase64);
             String url = "/administrator/listOneAdministrator.jsp";
             RequestDispatcher successView = req.getRequestDispatcher(url); // 成功轉交 listOneAdministrator.jsp
@@ -388,16 +385,16 @@ public class AdministratorServlet extends HttpServlet {
 //            var salt = ThreadLocalRandom.current().nextInt();
 //            var encrypt = String.valueOf(salt + password.hashCode());
 //
-//            AdministratorVO administratorVO = new AdministratorVO();
-//            administratorVO.setAdmPwd(admName);
-//            administratorVO.setAdmPwd(admPwd);
-//            administratorVO.setAdmPwd(admEmail);
+//            AdministratorVO administrator = new AdministratorVO();
+//            administrator.setAdmPwd(admName);
+//            administrator.setAdmPwd(admPwd);
+//            administrator.setAdmPwd(admEmail);
 //            AdministratorServiceImpl administratorSvc = new AdministratorServiceImpl();
 //            // 執行Service的register()方法，並返回驗證後的字串集合，加入errorMsgs
-//            errorMsgs.addAll(administratorSvc.register(administratorVO));
+//            errorMsgs.addAll(administratorSvc.register(administrator));
 //            // Send the use back to the form, if there were errors
 //            if (!errorMsgs.isEmpty()) {
-//                req.setAttribute("administratorVO", administratorVO); // 含有輸入格式錯誤的administratorVO物件,也存入req
+//                req.setAttribute("administrator", administrator); // 含有輸入格式錯誤的administrator物件,也存入req
 //                RequestDispatcher failureView = req.getRequestDispatcher("/administrator/register.jsp");
 //                failureView.forward(req, res);
 //                return;

@@ -1,16 +1,12 @@
 package com.ren.title.dao;
 
-import com.ren.administrator.model.AdministratorVO;
-import com.ren.product.model.ProductVO;
-import com.ren.title.model.TitleAdmVO;
-import com.ren.title.model.TitleVO;
+import com.Entity.ServicePicture;
+import com.Entity.ServiceRobot;
 
-import java.util.LinkedHashSet;
 import java.util.List;
 
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.Set;
 
 public class TitleJDBCDAOImpl implements TitleDAO_interface {
     // 預計寫入功能
@@ -44,7 +40,7 @@ public class TitleJDBCDAOImpl implements TitleDAO_interface {
             "DELETE FROM Title where titleNo = ?";
 
     @Override
-    public void insert(TitleVO titleVO) {
+    public void insert(ServicePicture.TitleVO titleVO) {
 
         try (Connection con = DriverManager.getConnection(url, userid, passwd);
              PreparedStatement ps = con.prepareStatement(INSERT_STMT)) {
@@ -64,9 +60,9 @@ public class TitleJDBCDAOImpl implements TitleDAO_interface {
     }
 
     @Override
-    public TitleVO findByPrimaryKey(Integer titleNo) {
+    public ServicePicture.TitleVO findByPrimaryKey(Integer titleNo) {
         // 宣告VO並指定空值，若查詢無結果會出現空值，後續於Controller作錯誤處理
-        TitleVO titleVO = null;
+        ServicePicture.TitleVO titleVO = null;
         // ResultSet在相關的Statement關閉時會自動關閉，因此不用另外寫在Auto-closable
         try (Connection con = DriverManager.getConnection(url, userid, passwd);
              PreparedStatement ps = con.prepareStatement(GET_ONE_STMT)) {
@@ -93,11 +89,11 @@ public class TitleJDBCDAOImpl implements TitleDAO_interface {
     }
 
     @Override
-    public List<TitleVO> getAll() {
+    public List<ServicePicture.TitleVO> getAll() {
         // 宣告ArrayList作為放入搜尋結果的列表
-        List<TitleVO> list = new ArrayList<>();
+        List<ServicePicture.TitleVO> list = new ArrayList<>();
         // 宣告VO並指定空值，若查詢無結果會出現空值，後續於Controller作錯誤處理
-        TitleVO titleVO = null;
+        ServicePicture.TitleVO titleVO = null;
         try (Connection con = DriverManager.getConnection(url, userid, passwd);
              PreparedStatement ps = con.prepareStatement(GET_ALL_STMT)) {
             // 載入Driver介面的實作類別.class檔來註冊JDBC
@@ -106,7 +102,7 @@ public class TitleJDBCDAOImpl implements TitleDAO_interface {
             ResultSet rs = ps.executeQuery();
             // 新增VO物件，取出ResultSet內資料放入VO
             while (rs.next()) {
-                titleVO = new TitleVO();
+                titleVO = new ServicePicture.TitleVO();
                 titleVO.setTitleNo(rs.getInt("titleNo"));
                 titleVO.setTitleName(rs.getString("titleName"));
                 list.add(titleVO); // 將資料新增至列表內之後作為搜尋結果返回給View
@@ -122,11 +118,11 @@ public class TitleJDBCDAOImpl implements TitleDAO_interface {
     }
 
     @Override
-    public List<TitleAdmVO> getAdms(Integer titleNo) {
+    public List<ServiceRobot.TitleAdmVO> getAdms(Integer titleNo) {
         // 宣告ArrayList作為放入搜尋結果的列表
-        List<TitleAdmVO> list = new ArrayList<>();
+        List<ServiceRobot.TitleAdmVO> list = new ArrayList<>();
         // 宣告VO並指定空值，若查詢無結果會出現空值，後續於Controller作錯誤處理
-        TitleAdmVO titleAdmVO = null;
+        ServiceRobot.TitleAdmVO titleAdmVO = null;
         try (Connection con = DriverManager.getConnection(url, userid, passwd);
              PreparedStatement ps = con.prepareStatement(GET_ADMS_BytitleNo_STMT)) {
             // 載入Driver介面的實作類別.class檔來註冊JDBC
@@ -137,7 +133,7 @@ public class TitleJDBCDAOImpl implements TitleDAO_interface {
             ResultSet rs = ps.executeQuery();
             // 新增VO物件，取出ResultSet內資料放入VO
             while (rs.next()) {
-                titleAdmVO = new TitleAdmVO();
+                titleAdmVO = new ServiceRobot.TitleAdmVO();
                 titleAdmVO.setTitleNo(rs.getInt("titleNo"));
                 titleAdmVO.setTitleName(rs.getString("titleName"));
                 titleAdmVO.setAdmName(rs.getString("admName"));
@@ -155,11 +151,11 @@ public class TitleJDBCDAOImpl implements TitleDAO_interface {
     }
 
     @Override
-    public List<TitleAdmVO> getAdms(String titleName) {
+    public List<ServiceRobot.TitleAdmVO> getAdms(String titleName) {
         // 宣告ArrayList作為放入搜尋結果的列表
-        List<TitleAdmVO> list = new ArrayList<>();
+        List<ServiceRobot.TitleAdmVO> list = new ArrayList<>();
         // 宣告VO並指定空值，若查詢無結果會出現空值，後續於Controller作錯誤處理
-        TitleAdmVO titleAdmVO = null;
+        ServiceRobot.TitleAdmVO titleAdmVO = null;
         try (Connection con = DriverManager.getConnection(url, userid, passwd);
              PreparedStatement ps = con.prepareStatement(GET_ADMS_BytitleName_STMT)) {
             // 載入Driver介面的實作類別.class檔來註冊JDBC
@@ -170,7 +166,7 @@ public class TitleJDBCDAOImpl implements TitleDAO_interface {
             ResultSet rs = ps.executeQuery();
             // 新增VO物件，取出ResultSet內資料放入VO
             while (rs.next()) {
-                titleAdmVO = new TitleAdmVO();
+                titleAdmVO = new ServiceRobot.TitleAdmVO();
                 titleAdmVO.setTitleNo(rs.getInt("titleNo"));
                 titleAdmVO.setTitleName(rs.getString("titleName"));
                 titleAdmVO.setAdmName(rs.getString("admName"));
@@ -188,11 +184,11 @@ public class TitleJDBCDAOImpl implements TitleDAO_interface {
     }
 
     @Override
-    public List<TitleAdmVO> getAdmsAll() {
+    public List<ServiceRobot.TitleAdmVO> getAdmsAll() {
         // 宣告ArrayList作為放入搜尋結果的列表
-        List<TitleAdmVO> list = new ArrayList<>();
+        List<ServiceRobot.TitleAdmVO> list = new ArrayList<>();
         // 宣告VO並指定空值，若查詢無結果會出現空值，後續於Controller作錯誤處理
-        TitleAdmVO titleAdmVO = null;
+        ServiceRobot.TitleAdmVO titleAdmVO = null;
         try (Connection con = DriverManager.getConnection(url, userid, passwd);
              PreparedStatement ps = con.prepareStatement(GET_ADMS_ALL_STMT)) {
             // 載入Driver介面的實作類別.class檔來註冊JDBC
@@ -201,7 +197,7 @@ public class TitleJDBCDAOImpl implements TitleDAO_interface {
             ResultSet rs = ps.executeQuery();
             // 新增VO物件，取出ResultSet內資料放入VO
             while (rs.next()) {
-                titleAdmVO = new TitleAdmVO();
+                titleAdmVO = new ServiceRobot.TitleAdmVO();
                 titleAdmVO.setTitleNo(rs.getInt("titleNo"));
                 titleAdmVO.setTitleName(rs.getString("titleName"));
                 titleAdmVO.setAdmName(rs.getString("admName"));
@@ -220,7 +216,7 @@ public class TitleJDBCDAOImpl implements TitleDAO_interface {
 
 
     @Override
-    public void update(TitleVO titleVO) {
+    public void update(ServicePicture.TitleVO titleVO) {
 
         try (Connection con = DriverManager.getConnection(url, userid, passwd);
              PreparedStatement ps = con.prepareStatement(UPDATE_STMT)) {

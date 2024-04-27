@@ -1,9 +1,7 @@
 package com.ren.administrator.dao;
 
-import com.ren.administrator.model.AdministratorVO;
-import com.ren.product.model.ProductVO;
+import com.Entity.ServicePicture;
 
-import java.io.InputStream;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -49,19 +47,19 @@ public class AdministratorJDBCDAOImpl implements AdministratorDAO_interface {
 
 
     @Override
-    public void insert(AdministratorVO administratorVO) {
+    public void insert(Administrator administrator) {
 
         try (Connection con = DriverManager.getConnection(url, userid, passwd);
              PreparedStatement ps = con.prepareStatement(INSERT_STMT)) {
             // 載入Driver介面的實作類別.class檔來註冊JDBC
             Class.forName(driver);
             // 從request的VO取值放入PreparedStatement
-            ps.setString(1, administratorVO.getAdmPwd());
-            ps.setString(2, administratorVO.getAdmName());
-            ps.setByte(3, administratorVO.getAdmStat());
-            ps.setString(4, administratorVO.getAdmEmail());
-            ps.setInt(5, administratorVO.getTitleNo());
-            ps.setDate(6, administratorVO.getAdmHireDate());
+            ps.setString(1, administrator.getAdmPwd());
+            ps.setString(2, administrator.getAdmName());
+            ps.setByte(3, administrator.getAdmStat());
+            ps.setString(4, administrator.getAdmEmail());
+            ps.setInt(5, administrator.getTitleNo());
+            ps.setDate(6, administrator.getAdmHireDate());
             // 執行SQL指令將VO資料新增進資料庫
             ps.executeUpdate();
             // Handle any driver errors
@@ -74,9 +72,9 @@ public class AdministratorJDBCDAOImpl implements AdministratorDAO_interface {
     }
 
     @Override
-    public AdministratorVO findByPrimaryKey(Integer admNo) {
+    public Administrator findByPrimaryKey(Integer admNo) {
         // 宣告VO並指定空值，若查詢無結果會出現空值，後續於Controller作錯誤處理
-        AdministratorVO administratorVO = null;
+        Administrator administrator = null;
         // ResultSet在相關的Statement關閉時會自動關閉，因此不用另外寫在Auto-closable
         try (Connection con = DriverManager.getConnection(url, userid, passwd);
              PreparedStatement ps = con.prepareStatement(GET_ONE_STMT)) {
@@ -88,14 +86,14 @@ public class AdministratorJDBCDAOImpl implements AdministratorDAO_interface {
             ResultSet rs = ps.executeQuery();
             // 取出ResultSet內資料放入VO
             while (rs.next()) {
-                administratorVO = new AdministratorVO();
-                administratorVO.setAdmNo(rs.getInt("AdmNo"));
-                administratorVO.setAdmName(rs.getString("AdmName"));
-                administratorVO.setAdmStat(rs.getByte("AdmStat"));
-                administratorVO.setAdmEmail(rs.getString("AdmEmail"));
-                administratorVO.setTitleNo(rs.getInt("TitleNo"));
-                administratorVO.setAdmHireDate(rs.getDate("AdmHireDate"));
-                administratorVO.setAdmPhoto(rs.getBytes("admPhoto"));
+                administrator = new Administrator();
+                administrator.setAdmNo(rs.getInt("AdmNo"));
+                administrator.setAdmName(rs.getString("AdmName"));
+                administrator.setAdmStat(rs.getByte("AdmStat"));
+                administrator.setAdmEmail(rs.getString("AdmEmail"));
+                administrator.setTitleNo(rs.getInt("TitleNo"));
+                administrator.setAdmHireDate(rs.getDate("AdmHireDate"));
+                administrator.setAdmPhoto(rs.getBytes("admPhoto"));
             }
             // Handle any driver errors
         } catch (ClassNotFoundException e) {
@@ -105,15 +103,15 @@ public class AdministratorJDBCDAOImpl implements AdministratorDAO_interface {
             throw new RuntimeException("A database error occured. " + se.getMessage());
         }
         // 回傳VO，待後續Controller導至View呈現
-        return administratorVO;
+        return administrator;
     }
 
     @Override
-    public List<AdministratorVO> getAll() {
+    public List<Administrator> getAll() {
         // 宣告ArrayList作為放入搜尋結果的列表
-        List<AdministratorVO> list = new ArrayList<>();
+        List<Administrator> list = new ArrayList<>();
         // 宣告VO並指定空值，若查詢無結果會出現空值，後續於Controller作錯誤處理
-        AdministratorVO administratorVO = null;
+        Administrator administrator = null;
         try (Connection con = DriverManager.getConnection(url, userid, passwd);
              PreparedStatement ps = con.prepareStatement(GET_ALL_STMT)) {
             // 載入Driver介面的實作類別.class檔來註冊JDBC
@@ -122,15 +120,15 @@ public class AdministratorJDBCDAOImpl implements AdministratorDAO_interface {
             ResultSet rs = ps.executeQuery();
             // 新增VO物件，取出ResultSet內資料放入VO
             while (rs.next()) {
-                administratorVO = new AdministratorVO();
-                administratorVO.setAdmNo(rs.getInt("AdmNo"));
-                administratorVO.setAdmName(rs.getString("AdmName"));
-                administratorVO.setAdmStat(rs.getByte("AdmStat"));
-                administratorVO.setAdmEmail(rs.getString("AdmEmail"));
-                administratorVO.setTitleNo(rs.getInt("TitleNo"));
-                administratorVO.setAdmHireDate(rs.getDate("AdmHireDate"));
-                administratorVO.setAdmPhoto(rs.getBytes("admPhoto"));
-                list.add(administratorVO); // 將資料新增至列表內之後作為搜尋結果返回給View
+                administrator = new Administrator();
+                administrator.setAdmNo(rs.getInt("AdmNo"));
+                administrator.setAdmName(rs.getString("AdmName"));
+                administrator.setAdmStat(rs.getByte("AdmStat"));
+                administrator.setAdmEmail(rs.getString("AdmEmail"));
+                administrator.setTitleNo(rs.getInt("TitleNo"));
+                administrator.setAdmHireDate(rs.getDate("AdmHireDate"));
+                administrator.setAdmPhoto(rs.getBytes("admPhoto"));
+                list.add(administrator); // 將資料新增至列表內之後作為搜尋結果返回給View
             }
             // Handle any driver errors
         } catch (ClassNotFoundException e) {
@@ -143,20 +141,20 @@ public class AdministratorJDBCDAOImpl implements AdministratorDAO_interface {
     }
 
     @Override
-    public void update(AdministratorVO administratorVO) {
+    public void update(Administrator administrator) {
         try (Connection con = DriverManager.getConnection(url, userid, passwd);
              PreparedStatement ps = con.prepareStatement(UPDATE_STMT)) {
             // 載入Driver介面的實作類別.class檔來註冊JDBC
             Class.forName(driver);
             // 從request的VO取值放入PreparedStatement
-            ps.setString(1, administratorVO.getAdmPwd());
-            ps.setString(2, administratorVO.getAdmName());
-            ps.setByte(3, administratorVO.getAdmStat());
-            ps.setString(4, administratorVO.getAdmEmail());
-            ps.setInt(5, administratorVO.getTitleNo());
-            ps.setDate(6, administratorVO.getAdmHireDate());
-            ps.setBytes(7, administratorVO.getAdmPhoto());
-            ps.setInt(8, administratorVO.getAdmNo());
+            ps.setString(1, administrator.getAdmPwd());
+            ps.setString(2, administrator.getAdmName());
+            ps.setByte(3, administrator.getAdmStat());
+            ps.setString(4, administrator.getAdmEmail());
+            ps.setInt(5, administrator.getTitleNo());
+            ps.setDate(6, administrator.getAdmHireDate());
+            ps.setBytes(7, administrator.getAdmPhoto());
+            ps.setInt(8, administrator.getAdmNo());
             // 執行SQL指令將資料庫內對應的資料修改成VO的值
             ps.executeUpdate();
             // Handle any driver errors

@@ -1,9 +1,7 @@
 package com.ren.admauthority.controller;
 
-import com.ren.admauthority.model.AdmAuthorityVO;
+import com.Entity.News;
 import com.ren.admauthority.service.AdmAuthorityServiceImpl;
-import com.ren.productcategory.model.ProductCategoryVO;
-import com.ren.productcategory.service.ProductCategoryServiceImpl;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -64,7 +62,7 @@ public class AdmAuthorityServlet extends HttpServlet {
             /*************************** 2.開始查詢資料 *****************************************/
             AdmAuthorityServiceImpl admAuthoritySvc = new AdmAuthorityServiceImpl();
 
-            AdmAuthorityVO admAuthorityVO = admAuthoritySvc.getOneAdmAuthority(titleNo);
+            AdmAuthority admAuthorityVO = admAuthoritySvc.getOneAdmAuthority(titleNo);
             // 引用類型的屬性在未附值時預設為null
             if (admAuthorityVO == null) {
                 errorMsgs.add("查無資料");
@@ -95,7 +93,7 @@ public class AdmAuthorityServlet extends HttpServlet {
 
             /*************************** 2.開始查詢資料 ****************************************/
             AdmAuthorityServiceImpl admAuthoritySvc = new AdmAuthorityServiceImpl();
-            AdmAuthorityVO admAuthorityVO = admAuthoritySvc.getOneAdmAuthority(titleNo);
+            AdmAuthority admAuthorityVO = admAuthoritySvc.getOneAdmAuthority(titleNo);
 
             /*************************** 3.查詢完成,準備轉交(Send the Success view) ************/
             req.setAttribute("admAuthorityVO", admAuthorityVO);
@@ -116,7 +114,7 @@ public class AdmAuthorityServlet extends HttpServlet {
 
             Integer authFuncNo = Integer.valueOf(req.getParameter("authFuncNo").trim());
 
-            AdmAuthorityVO admAuthorityVO = new AdmAuthorityVO();
+            AdmAuthority admAuthorityVO = new AdmAuthority();
             admAuthorityVO.setTitleNo(titleNo);
             admAuthorityVO.setAuthFuncNo(authFuncNo);
 
@@ -152,7 +150,7 @@ public class AdmAuthorityServlet extends HttpServlet {
 
             Integer authFuncNo = Integer.valueOf(req.getParameter("authFuncNo").trim());
 
-            AdmAuthorityVO admAuthorityVO = new AdmAuthorityVO();
+            AdmAuthority admAuthorityVO = new AdmAuthority();
             admAuthorityVO.setAuthFuncNo(authFuncNo);
 
             // Send the use back to the form, if there were errors

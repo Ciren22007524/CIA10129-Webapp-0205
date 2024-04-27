@@ -1,6 +1,6 @@
 package com.ren.authorityfunction.controller;
 
-import com.ren.authorityfunction.model.AuthorityFunctionVO;
+import com.Entity.ServiceRobot;
 import com.ren.authorityfunction.service.AuthorityFunctionServiceImpl;
 
 import javax.servlet.RequestDispatcher;
@@ -61,7 +61,7 @@ public class AuthorityFunctionServlet extends HttpServlet {
 
             /*************************** 2.開始查詢資料 *****************************************/
             AuthorityFunctionServiceImpl authorityFunctionSvc = new AuthorityFunctionServiceImpl();
-            AuthorityFunctionVO authorityFunctionVO = authorityFunctionSvc.getOneAuthorityFunction(authFuncNo);
+            ServiceRobot.AuthorityFunctionVO authorityFunctionVO = authorityFunctionSvc.getOneAuthorityFunction(authFuncNo);
             // 引用類型的屬性在未附值時預設為null
             if (authorityFunctionVO == null) {
                 errorMsgs.add("查無資料");
@@ -92,7 +92,7 @@ public class AuthorityFunctionServlet extends HttpServlet {
 
             /*************************** 2.開始查詢資料 ****************************************/
             AuthorityFunctionServiceImpl authorityFunctionSvc = new AuthorityFunctionServiceImpl();
-            AuthorityFunctionVO authorityFunctionVO = authorityFunctionSvc.getOneAuthorityFunction(authFuncNo);
+            ServiceRobot.AuthorityFunctionVO authorityFunctionVO = authorityFunctionSvc.getOneAuthorityFunction(authFuncNo);
 
             /*************************** 3.查詢完成,準備轉交(Send the Success view) ************/
             req.setAttribute("authorityFunctionVO", authorityFunctionVO);
@@ -119,7 +119,7 @@ public class AuthorityFunctionServlet extends HttpServlet {
                 errorMsgs.add("職位名稱: 只能是中、英文字母、數字和_ , 且長度必需在2到10之間");
             }
 
-            AuthorityFunctionVO authorityFunctionVO = new AuthorityFunctionVO();
+            ServiceRobot.AuthorityFunctionVO authorityFunctionVO = new ServiceRobot.AuthorityFunctionVO();
             authorityFunctionVO.setAuthFuncNo(authFuncNo);
             authorityFunctionVO.setAuthFuncInfo(authFuncInfo);
 
@@ -159,7 +159,7 @@ public class AuthorityFunctionServlet extends HttpServlet {
                 errorMsgs.add("商品名稱: 只能是中、英文字母、數字和_ , 且長度必需在2到10之間");
             }
 
-            AuthorityFunctionVO authorityFunctionVO = new AuthorityFunctionVO();
+            ServiceRobot.AuthorityFunctionVO authorityFunctionVO = new ServiceRobot.AuthorityFunctionVO();
             authorityFunctionVO.setAuthFuncInfo(authFuncInfo);
 
             // Send the use back to the form, if there were errors

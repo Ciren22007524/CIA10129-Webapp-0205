@@ -1,11 +1,10 @@
 package com.ren.administrator.service;
 
+import com.Entity.ServicePicture;
 import com.ren.administrator.dao.AdministratorDAO_interface;
 import com.ren.administrator.dao.AdministratorJDBCDAOImpl;
-import com.ren.administrator.model.AdministratorVO;
 
 import java.sql.Date;
-import java.time.LocalDate;
 import java.util.Base64;
 import java.util.LinkedList;
 import java.util.List;
@@ -20,46 +19,46 @@ public class AdministratorServiceImpl implements AdministratorService_interface 
     }
 
     @Override
-    public AdministratorVO addAdministrator(String admPwd, String admName, Byte admStat, String admEmail, Integer titleNo, Date admHireDate) {
-        AdministratorVO administratorVO = new AdministratorVO();
+    public Administrator addAdministrator(String admPwd, String admName, Byte admStat, String admEmail, Integer titleNo, Date admHireDate) {
+        Administrator administrator = new Administrator();
         // 將傳入參數放入VO
-        administratorVO.setAdmPwd(admPwd);
-        administratorVO.setAdmName(admName);
-        administratorVO.setAdmStat(admStat);
-        administratorVO.setAdmEmail(admEmail);
-        administratorVO.setTitleNo(titleNo);
-        administratorVO.setAdmHireDate(admHireDate);
+        administrator.setAdmPwd(admPwd);
+        administrator.setAdmName(admName);
+        administrator.setAdmStat(admStat);
+        administrator.setAdmEmail(admEmail);
+        administrator.setTitleNo(titleNo);
+        administrator.setAdmHireDate(admHireDate);
         // 將VO放入dao定義的方法內，使其執行資料庫操作
-        dao.insert(administratorVO);
+        dao.insert(administrator);
         // 返回值作為呈現在View上使用
-        return administratorVO;
+        return administrator;
     }
 
     @Override
-    public AdministratorVO getOneAdministrator(Integer admNo) {
+    public Administrator getOneAdministrator(Integer admNo) {
         return dao.findByPrimaryKey(admNo);
     }
 
     @Override
-    public List<AdministratorVO> getAll() {
+    public List<Administrator> getAll() {
         return dao.getAll();
     }
 
     @Override
-    public AdministratorVO updateAdministrator(Integer admNo, String admPwd, String admName, Byte admStat, String admEmail, Integer titleNo, Date admHireDate, byte[] admPhoto) {
-        AdministratorVO administratorVO = new AdministratorVO();
+    public Administrator updateAdministrator(Integer admNo, String admPwd, String admName, Byte admStat, String admEmail, Integer titleNo, Date admHireDate, byte[] admPhoto) {
+        Administrator administrator = new Administrator();
         // 將傳入參數放入VO
-        administratorVO.setAdmNo(admNo);
-        administratorVO.setAdmPwd(admPwd);
-        administratorVO.setAdmName(admName);
-        administratorVO.setAdmStat(admStat);
-        administratorVO.setAdmEmail(admEmail);
-        administratorVO.setTitleNo(titleNo);
-        administratorVO.setAdmHireDate(admHireDate);
+        administrator.setAdmNo(admNo);
+        administrator.setAdmPwd(admPwd);
+        administrator.setAdmName(admName);
+        administrator.setAdmStat(admStat);
+        administrator.setAdmEmail(admEmail);
+        administrator.setTitleNo(titleNo);
+        administrator.setAdmHireDate(admHireDate);
         // 將VO放入dao定義的方法內，使其執行資料庫操作
-        dao.update(administratorVO);
+        dao.update(administrator);
         // 返回值作為呈現在View上使用
-        return administratorVO;
+        return administrator;
     }
 
     @Override
@@ -92,13 +91,13 @@ public class AdministratorServiceImpl implements AdministratorService_interface 
     }
 
     @Override
-    public List<String> register(AdministratorVO administratorVO) {
+    public List<String> register(Administrator administrator) {
         // 放驗證錯誤訊息，在controller迭代放入errorMessage
         List<String> existData = new LinkedList<>();
         // 輸入名字
-        String inputName = administratorVO.getAdmName();
+        String inputName = administrator.getAdmName();
         // 輸入信箱
-        String inputEmail = administratorVO.getAdmEmail();
+        String inputEmail = administrator.getAdmEmail();
         // 查詢使用者名稱與信箱，檢查是否有重複
         existData = dao.findExistData(inputName, inputEmail);
         if (existData.size() >= 1) {

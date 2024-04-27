@@ -1,7 +1,6 @@
 package com.ren.admauthority.dao;
 
-import com.ren.admauthority.model.AdmAuthorityVO;
-import com.ren.administrator.model.AdministratorVO;
+import com.Entity.News;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -31,7 +30,7 @@ public class AdmAuthorityJDBCDAOImpl implements AdmAuthorityDAO_interface {
             "DELETE FROM AdmAuthority WHERE titleNo = ?";
 
     @Override
-    public void insert(AdmAuthorityVO admAuthorityVO) {
+    public void insert(AdmAuthority admAuthorityVO) {
 
         try (Connection con = DriverManager.getConnection(url, userid, passwd);
              PreparedStatement ps = con.prepareStatement(INSERT_STMT)) {
@@ -52,9 +51,9 @@ public class AdmAuthorityJDBCDAOImpl implements AdmAuthorityDAO_interface {
     }
 
     @Override
-    public AdmAuthorityVO findByPrimaryKey(Integer titleNo) {
+    public AdmAuthority findByPrimaryKey(Integer titleNo) {
         // 宣告VO並指定空值，若查詢無結果會出現空值，後續於Controller作錯誤處理
-        AdmAuthorityVO admAuthorityVO = null;
+        AdmAuthority admAuthorityVO = null;
         // ResultSet在相關的Statement關閉時會自動關閉，因此不用另外寫在Auto-closable
         try (Connection con = DriverManager.getConnection(url, userid, passwd);
              PreparedStatement ps = con.prepareStatement(GET_ONE_STMT)) {
@@ -66,7 +65,7 @@ public class AdmAuthorityJDBCDAOImpl implements AdmAuthorityDAO_interface {
             ResultSet rs = ps.executeQuery();
             // 取出ResultSet內資料放入VO
             while (rs.next()) {
-                admAuthorityVO = new AdmAuthorityVO();
+                admAuthorityVO = new AdmAuthority();
                 admAuthorityVO.setTitleNo(rs.getInt("titleNo"));
                 admAuthorityVO.setAuthFuncNo(rs.getInt("authFuncNo"));
             }
@@ -82,11 +81,11 @@ public class AdmAuthorityJDBCDAOImpl implements AdmAuthorityDAO_interface {
     }
 
     @Override
-    public List<AdmAuthorityVO> getAll() {
+    public List<AdmAuthority> getAll() {
         // 宣告ArrayList作為放入搜尋結果的列表
-        List<AdmAuthorityVO> list = new ArrayList<>();
+        List<AdmAuthority> list = new ArrayList<>();
         // 宣告VO並指定空值，若查詢無結果會出現空值，後續於Controller作錯誤處理
-        AdmAuthorityVO admAuthorityVO = null;
+        AdmAuthority admAuthorityVO = null;
         try (Connection con = DriverManager.getConnection(url, userid, passwd);
              PreparedStatement ps = con.prepareStatement(GET_ALL_STMT)) {
             // 載入Driver介面的實作類別.class檔來註冊JDBC
@@ -95,7 +94,7 @@ public class AdmAuthorityJDBCDAOImpl implements AdmAuthorityDAO_interface {
             ResultSet rs = ps.executeQuery();
             // 新增VO物件，取出ResultSet內資料放入VO
             while (rs.next()) {
-                admAuthorityVO = new AdmAuthorityVO();
+                admAuthorityVO = new AdmAuthority();
                 admAuthorityVO.setTitleNo(rs.getInt("titleNo"));
                 admAuthorityVO.setAuthFuncNo(rs.getInt("authFuncNo"));
                 list.add(admAuthorityVO); // 將資料新增至列表內之後作為搜尋結果返回給View
@@ -111,7 +110,7 @@ public class AdmAuthorityJDBCDAOImpl implements AdmAuthorityDAO_interface {
     }
 
     @Override
-    public void update(AdmAuthorityVO admAuthorityVO) {
+    public void update(AdmAuthority admAuthorityVO) {
 
         try (Connection con = DriverManager.getConnection(url, userid, passwd);
              PreparedStatement ps = con.prepareStatement(UPDATE_STMT)) {

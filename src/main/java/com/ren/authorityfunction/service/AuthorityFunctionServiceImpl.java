@@ -1,9 +1,8 @@
 package com.ren.authorityfunction.service;
 
-import com.ren.admauthority.model.AdmAuthorityVO;
+import com.Entity.ServiceRobot;
 import com.ren.authorityfunction.dao.AuthorityFunctionDAO_interface;
 import com.ren.authorityfunction.dao.AuthorityFunctionJDBCDAOImpl;
-import com.ren.authorityfunction.model.AuthorityFunctionVO;
 
 import java.util.List;
 
@@ -16,8 +15,8 @@ public class AuthorityFunctionServiceImpl implements AuthorityFunctionService_in
     }
 
     @Override
-    public AuthorityFunctionVO addAuthorityFunction(String authFuncInfo) {
-        AuthorityFunctionVO authorityFunctionVO = new AuthorityFunctionVO();
+    public ServiceRobot.AuthorityFunctionVO addAuthorityFunction(String authFuncInfo) {
+        ServiceRobot.AuthorityFunctionVO authorityFunctionVO = new ServiceRobot.AuthorityFunctionVO();
         // 將傳入參數放入VO
         authorityFunctionVO.setAuthFuncInfo(authFuncInfo);
         // 將VO放入dao定義的方法內，使其執行資料庫操作
@@ -27,18 +26,18 @@ public class AuthorityFunctionServiceImpl implements AuthorityFunctionService_in
     }
 
     @Override
-    public AuthorityFunctionVO getOneAuthorityFunction(Integer authFuncNo) {
+    public ServiceRobot.AuthorityFunctionVO getOneAuthorityFunction(Integer authFuncNo) {
         return dao.findByPrimaryKey(authFuncNo);
     }
 
     @Override
-    public List<AuthorityFunctionVO> getAll() {
+    public List<ServiceRobot.AuthorityFunctionVO> getAll() {
         return dao.getAll();
     }
 
     @Override
-    public AuthorityFunctionVO updateAuthorityFunction(Integer authFuncNo, String authFuncInfo) {
-        AuthorityFunctionVO authorityFunctionVO = new AuthorityFunctionVO();
+    public ServiceRobot.AuthorityFunctionVO updateAuthorityFunction(Integer authFuncNo, String authFuncInfo) {
+        ServiceRobot.AuthorityFunctionVO authorityFunctionVO = new ServiceRobot.AuthorityFunctionVO();
         // 將傳入參數放入VO
         authorityFunctionVO.setAuthFuncNo(authFuncNo);
         authorityFunctionVO.setAuthFuncInfo(authFuncInfo);

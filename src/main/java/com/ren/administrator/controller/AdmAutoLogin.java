@@ -43,9 +43,9 @@ public class AdmAutoLogin extends HttpServlet {
                 errorMsgs.add("管理員密碼: 只能是中、英文字母、數字和_ , 且長度必需在6到12之間");
             }
 
-            var encrypt = Integer.parseInt(data[1]);
-            var salt = Integer.parseInt(data[2]);
-            (admPwd.hashCode() + salt) == encrypt;
+//            var encrypt = Integer.parseInt(data[1]);
+//            var salt = Integer.parseInt(data[2]);
+//            (admPwd.hashCode() + salt) == encrypt;
         }
 
         if ("autoLogin".equals(action)) {
@@ -61,7 +61,7 @@ public class AdmAutoLogin extends HttpServlet {
     }
 
     private boolean check(Cookie cookie) {
-
+        return true && true;
     }
 
 }

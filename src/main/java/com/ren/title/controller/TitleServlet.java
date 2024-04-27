@@ -1,8 +1,6 @@
 package com.ren.title.controller;
 
-import com.ren.product.model.ProductVO;
-import com.ren.product.service.ProductServiceImpl;
-import com.ren.title.model.TitleVO;
+import com.Entity.ServicePicture;
 import com.ren.title.service.TitleServiceImpl;
 
 import javax.servlet.RequestDispatcher;
@@ -12,7 +10,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.math.BigDecimal;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -64,7 +61,7 @@ public class TitleServlet extends HttpServlet {
 
 			/*************************** 2.開始查詢資料 *****************************************/
 			TitleServiceImpl titleSvc = new TitleServiceImpl();
-			TitleVO titleVO = titleSvc.getOneTitle(titleNo);
+			ServicePicture.TitleVO titleVO = titleSvc.getOneTitle(titleNo);
 			// 引用類型的屬性在未附值時預設為null
 			if (titleVO == null) {
 				errorMsgs.add("查無資料");
@@ -95,7 +92,7 @@ public class TitleServlet extends HttpServlet {
 
 			/*************************** 2.開始查詢資料 ****************************************/
 			TitleServiceImpl titleSvc = new TitleServiceImpl();
-			TitleVO titleVO = titleSvc.getOneTitle(titleNo);
+			ServicePicture.TitleVO titleVO = titleSvc.getOneTitle(titleNo);
 
 			/*************************** 3.查詢完成,準備轉交(Send the Success view) ************/
 			req.setAttribute("titleVO", titleVO);
@@ -122,7 +119,7 @@ public class TitleServlet extends HttpServlet {
 				errorMsgs.add("職位名稱: 只能是中、英文字母、數字和_ , 且長度必需在2到10之間");
 			}
 
-			TitleVO titleVO = new TitleVO();
+			ServicePicture.TitleVO titleVO = new ServicePicture.TitleVO();
 			titleVO.setTitleNo(titleNo);
 			titleVO.setTitleName(titleName);
 
@@ -162,7 +159,7 @@ public class TitleServlet extends HttpServlet {
 				errorMsgs.add("商品名稱: 只能是中、英文字母、數字和_ , 且長度必需在2到10之間");
 			}
 
-			TitleVO titleVO = new TitleVO();
+			ServicePicture.TitleVO titleVO = new ServicePicture.TitleVO();
 			titleVO.setTitleName(titleName);
 
 			// Send the use back to the form, if there were errors

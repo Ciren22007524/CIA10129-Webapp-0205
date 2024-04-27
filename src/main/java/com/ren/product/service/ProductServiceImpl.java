@@ -1,57 +1,85 @@
 package com.ren.product.service;
 
-import com.ren.product.dao.ProductHibernateDAOImpl;
+import com.Entity.Product;
 import com.ren.product.dao.ProductRepository;
-import com.ren.product.model.ProductVO;
-import com.ren.product.dao.ProductDAO_interface;
-import com.ren.productcategory.model.ProductCategoryVO;
-import com.ren.util.HibernateUtil;
-import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.swing.text.html.Option;
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
-@Service
+@Service("productSvc")
 public class ProductServiceImpl implements ProductService_interface {
+
     private final int SUCCESS = 1;
     private final int FAILURE = -1;
 
     @Autowired
-    ProductRepository repository;
+    private ProductRepository productRepository;
 
     @Override
-    public ProductVO addProduct(ProductVO productVO) {
-        repository.save(productVO);
-        return
+    public Product addProduct(Product product) {
+        return productRepository.save(product);
     }
 
     @Override
-    public ProductVO getOneProduct(Integer pNo) {
-        Optional<ProductVO> optional = repository.findById(pNo);
-        return optional.orElse(null);
+    public Product getOneProduct(Integer pNo) {
+        return productRepository.findById(pNo).orElse(null);
     }
 
     @Override
-    public List<ProductVO> getAll() {
-        return repository.findAll();
+    public List<Product> getAll() {
+        return productRepository.findAll();
     }
 
     @Override
-    public List<ProductVO> getProductsByCompositeQuery(Map<String, String[]> map) {
+    public List<Product> getAll(int currentPage) {
         return null;
     }
 
     @Override
-    public ProductVO updateProduct(ProductVO productVO) {
-        repository.save(productVO);
+    public List<Product> getProductsByCompositeQuery(Map<String, String[]> map) {
+//        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+//        Map<String, String> query = new HashMap<>();
+//        Set<Map.Entry<String, String[]>> entry = map.entrySet();
+//
+//        for (Map.Entry<String, String[]> row : entry) {
+//            String key = row.getKey();
+//            // 因為請求參數裡包含了action，做個去除動作
+//            if ("action".equals(key)) {
+//                continue;
+//            }
+//            // 若是value為空即代表沒有查詢條件，做個去除動作
+//            String value = row.getValue()[0];
+//            if (value.isEmpty() || value == null) {
+//                continue;
+//            }
+//            query.put(key, value);
+//        }
+//
+//        try {
+//            session.beginTransaction();
+//            List<Product> list = dao.getByCompositeQuery(query);
+//            session.getTransaction().commit();
+//            return list;
+//        } catch (Exception e) {
+//            session.getTransaction().rollback();
+//            e.printStackTrace();
+//            return null;
+//        }
+        return null;
+    }
+
+    @Override
+    public Product updateProduct(Product product) {
+        return productRepository.save(product);
     }
 
     @Override
     public void deleteProduct(Integer pNo) {
-        if (repository.existsById(pNo)) {
-            repository.deleteBypNo(pNo);
-        }
+        productRepository.deleteById(pNo);
     }
+
 }

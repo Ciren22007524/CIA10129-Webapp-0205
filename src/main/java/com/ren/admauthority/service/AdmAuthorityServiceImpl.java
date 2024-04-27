@@ -1,44 +1,35 @@
 package com.ren.admauthority.service;
 
-import com.ren.admauthority.dao.AdmAuthorityDAO_interface;
-import com.ren.admauthority.dao.AdmAuthorityJDBCDAOImpl;
-import com.ren.admauthority.model.AdmAuthorityVO;
+import com.Entity.AdmAuthority;
+import com.Entity.News;
+import com.ren.admauthority.dao.AdmAuthorityRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
 public class AdmAuthorityServiceImpl implements AdmAuthorityService_interface {
 
-    private AdmAuthorityDAO_interface dao;
-    // DI
-    public AdmAuthorityServiceImpl() {
-        dao = new AdmAuthorityJDBCDAOImpl();
+    @Autowired
+    private AdmAuthorityRepository admAuthorityRepository;
+
+    @Override
+    public AdmAuthority addAdmAuthority(AdmAuthority admAuthority) {
+        return admAuthorityRepository.save(admAuthority);
     }
 
     @Override
-    public AdmAuthorityVO addAdmAuthority(Integer titleNo, Integer authFuncNo) {
-        AdmAuthorityVO admAuthorityVO = new AdmAuthorityVO();
-        // 將傳入參數放入VO
-        admAuthorityVO.setTitleNo(titleNo);
-        admAuthorityVO.setAuthFuncNo(authFuncNo);
-        // 將VO放入dao定義的方法內，使其執行資料庫操作
-        dao.insert(admAuthorityVO);
-        // 返回值作為呈現在View上使用
-        return admAuthorityVO;
+    public AdmAuthority getOneAdmAuthority(Integer titleNo) {
+        return admAuthorityRepository.findById(titleNo);
     }
 
     @Override
-    public AdmAuthorityVO getOneAdmAuthority(Integer titleNo) {
-        return dao.findByPrimaryKey(titleNo);
-    }
-
-    @Override
-    public List<AdmAuthorityVO> getAll() {
+    public List<AdmAuthority> getAll() {
         return dao.getAll();
     }
 
     @Override
-    public AdmAuthorityVO updateAdmAuthority(Integer titleNo, Integer authFuncNo) {
-        AdmAuthorityVO admAuthorityVO = new AdmAuthorityVO();
+    public AdmAuthority updateAdmAuthority(Integer titleNo, Integer authFuncNo) {
+        AdmAuthority admAuthorityVO = new AdmAuthority();
         // 將傳入參數放入VO
         admAuthorityVO.setTitleNo(titleNo);
         admAuthorityVO.setAuthFuncNo(authFuncNo);

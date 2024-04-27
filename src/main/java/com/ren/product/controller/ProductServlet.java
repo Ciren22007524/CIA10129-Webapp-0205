@@ -6,27 +6,25 @@ import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 import java.util.regex.Pattern;
+import java.util.stream.Stream;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.google.gson.Gson;
-import com.ren.product.model.ProductVO;
+import com.Entity.ServicePicture;
+import com.Entity.ServiceRobot;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ren.product.service.ProductServiceImpl;
 import com.ren.product.service.ProductService_interface;
-import com.ren.productcategory.model.ProductCategoryVO;
 import com.ren.util.HibernateUtil;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 
-@WebServlet("/product/product.do")
 public class ProductServlet extends HttpServlet {
     /*****************************常數區***************************************/
     // 請輸入表格名稱:
@@ -79,6 +77,19 @@ public class ProductServlet extends HttpServlet {
         req.setCharacterEncoding("UTF-8");
         String action = req.getParameter("action");
         String forwardPath = "";
+        System.out.println("cookie開始");
+        Optional<Cookie[]> cookies = Optional.ofNullable(req.getCookies());
+        if (cookies.isPresent()) {
+            Stream.of(cookies.get())
+                    .forEach(cookie -> {
+                        String name = cookie.getName();
+                        System.out.println(name);
+                        String value = cookie.getValue();
+                        System.out.println(value);
+                    });
+        }
+        System.out.println("cookie結束");
+
         switch (action) {
             case "insert":
                 forwardPath = insert(req, res);
@@ -130,7 +141,7 @@ public class ProductServlet extends HttpServlet {
         /*************************** 2.開始查詢資料 *****************************************/
         ProductServiceImpl productSvc = new ProductServiceImpl();
         // 執行Service的getOnProduct，該方法執行DAO的findByPrimaryKey，將資料庫內的資料以VO的形式傳回
-        ProductVO productVO = productSvc.getOneProduct(pNo);
+        Product productVO = productSvc.getOneProduct(pNo);
         // 引用類型的屬性在未附值時預設為null
         if (productVO == null) {
             errorMsgs.add("查無資料");
@@ -159,17 +170,11 @@ public class ProductServlet extends HttpServlet {
 
         /*************************** 2.開始查詢資料 ****************************************/
         ProductServiceImpl productSvc = new ProductServiceImpl();
-        ProductVO productVO = productSvc.getOneProduct(pNo);
+        Product productVO = productSvc.getOneProduct(pNo);
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-        List<ProductVO> list = null;
-        try {
-            session.beginTransaction();
-            list = productSvc.getAll();
-            session.getTransaction().commit();
-        } catch (Exception e) {
-            session.getTransaction().rollback();
-            e.printStackTrace();
-        }
+        List<Product> list = null;
+
+        list = productSvc.getAll();
 
         /*************************** 3.查詢完成,準備轉交(Send the Success view) ************/
         req.setAttribute("list", list);
@@ -185,6 +190,7 @@ public class ProductServlet extends HttpServlet {
 
         /*************************** 1.接收請求參數 - 輸入格式的錯誤處理 **********************/
         Integer pNo = checkInteger(req.getParameter("pNo"), errorMsgs);
+        System.out.println(pNo);
         Integer pCatNo = checkInteger(req.getParameter("pCatNo"), errorMsgs);
         String pName = checkString(req.getParameter("pName"), errorMsgs);
         String pInfo = checkString(req.getParameter("pInfo"), errorMsgs);
@@ -201,13 +207,13 @@ public class ProductServlet extends HttpServlet {
             return UPDATE; // 程式中斷
         }
 
-        ProductCategoryVO productCategory = new ProductCategoryVO(pCatNo);
-        ProductVO product = new ProductVO(pNo, productCategory, pName, pInfo, pSize, pColor, pPrice, pStat, pSalQty, pComPeople, pComScore);
+        ServicePicture.ProductCategoryVO productCategory = new ServicePicture.ProductCategoryVO(pCatNo);
+        Product product = new Product(pNo, productCategory, pName, pInfo, pSize, pColor, pPrice, pStat, pSalQty, pComPeople, pComScore);
 
         /*************************** 2.開始修改資料 *****************************************/
         ProductServiceImpl productSvc = new ProductServiceImpl();
-        ProductVO updatedProduct = productSvc.updateProduct(product);
-
+        Product updatedProduct = productSvc.updateProduct(product);
+        System.out.println("你有執行嗎?");
         /*************************** 3.修改完成,準備轉交(Send the Success view) *************/
         req.setAttribute("productVO", updatedProduct); // 資料庫update成功後,正確的的productVO物件,存入req
         return LIST_ONE;
@@ -236,8 +242,8 @@ public class ProductServlet extends HttpServlet {
         if (!errorMsgs.isEmpty()) {
             return SELECT;
         }
-        ProductCategoryVO productCategory = new ProductCategoryVO(pCatNo);
-        ProductVO product = new ProductVO(productCategory, pName, pInfo, pSize, pColor, pPrice, pStat, pSalQty, pComPeople, pComScore);
+        ServicePicture.ProductCategoryVO productCategory = new ServicePicture.ProductCategoryVO(pCatNo);
+        Product product = new Product(productCategory, pName, pInfo, pSize, pColor, pPrice, pStat, pSalQty, pComPeople, pComScore);
         /*************************** 2.開始新增資料 ***************************************/
         ProductServiceImpl productSvc = new ProductServiceImpl();
         productSvc.addProduct(product);
@@ -264,9 +270,9 @@ public class ProductServlet extends HttpServlet {
 
     private void getProductDetails(HttpServletRequest req, HttpServletResponse res) throws IOException {
         Integer pNo = Integer.valueOf(req.getParameter("pNo").trim());
-
+        System.out.println("Controller你有在嗎");
         ProductServiceImpl productSvc = new ProductServiceImpl();
-        ProductVO productVO = productSvc.getOneProduct(pNo);
+        Product productVO = productSvc.getOneProduct(pNo);
 
         if (productVO != null) {
             System.out.println("VO你還在嗎?");
@@ -274,14 +280,16 @@ public class ProductServlet extends HttpServlet {
             System.out.println("VO你還好嗎?");
         }
 
-        System.out.println("資料你還在嗎?");
-
         if (productVO != null) {
             // 轉成 JSON 格式傳到前端
-            Gson gson = new Gson();
-            String json = gson.toJson(productVO);
+//            Gson gson = new Gson();
+//            String json = gson.toJson(productVO);
+            // 改用Jackson
+            // 使用 Jackson 的 ObjectMapper 來序列化物件為 JSON
+            ObjectMapper objectMapper = new ObjectMapper();
+            String json = objectMapper.writeValueAsString(productVO);
             System.out.println(json);
-            System.out.println("資料你還在嗎???");
+            System.out.println("資料你還在嗎?");
             // 設置標頭為 JSON 格式
             res.setContentType("application/json");
             res.setCharacterEncoding("UTF-8");
@@ -309,7 +317,7 @@ public class ProductServlet extends HttpServlet {
     /******************************參數驗證區***********************************/
     // 驗證是否為空值或空字串
     private Boolean validateSpace(String requestParameter) {
-        return requestParameter != null && requestParameter.trim().length() == 0;
+        return requestParameter != null && requestParameter.trim().length() != 0;
     }
 
     // 驗證輸入內容格式
@@ -365,7 +373,7 @@ public class ProductServlet extends HttpServlet {
         try {
             value = Integer.valueOf(parameter);
         } catch (Exception e) {
-            errorMsgs.add(TABLE_NAME + "編號格式不正確");
+            errorMsgs.add("格式不正確");
         }
         return value;
     }
@@ -373,14 +381,14 @@ public class ProductServlet extends HttpServlet {
     // Byte的錯誤處理
     private Byte checkByte(String parameter, List<String> errorMsgs) {
         if (!validateSpace(parameter)) {
-            errorMsgs.add(TABLE_NAME + "狀態: 請勿空白");
+            errorMsgs.add("請勿空白");
         }
         Byte value = null;
         try {
             value = Byte.valueOf(parameter);
         } catch (NumberFormatException e) {
             value = Byte.valueOf("0");
-            errorMsgs.add(TABLE_NAME + "狀態請填數字.");
+            errorMsgs.add("請填數字.");
         }
         return value;
     }
@@ -388,9 +396,9 @@ public class ProductServlet extends HttpServlet {
     // 字串的錯誤處理
     private String checkString(String parameter, List<String> errorMsgs) {
         if (!validateSpace(parameter)) {
-            errorMsgs.add(TABLE_NAME + "名稱: 請勿空白");
+            errorMsgs.add("請勿空白");
         } else if (!validateInput(parameter.trim())) { // 以下練習正則(規)表示式(regular-expression)
-            errorMsgs.add(TABLE_NAME + "名稱: 只能是中、英文字母、數字和_ , 且長度必需在2到10之間");
+            errorMsgs.add("名稱: 只能是中、英文字母、數字和_ , 且長度必需在2到10之間");
         }
         return parameter;
     }
@@ -402,7 +410,7 @@ public class ProductServlet extends HttpServlet {
             value = new BigDecimal(parameter.trim());
         } catch (NumberFormatException e) {
             value = BigDecimal.ZERO;
-            errorMsgs.add(TABLE_NAME + "價格請填數字.");
+            errorMsgs.add("價格請填數字.");
         }
         return value;
     }
