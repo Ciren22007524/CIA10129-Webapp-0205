@@ -1,18 +1,18 @@
 package com.ren.admauthority.dao;
 
-import com.ren.admauthority.model.AdmAuthorityVO;
+import com.Entity.*;
 
 import java.util.List;
 
 public interface AdmAuthorityDAO_interface {
     // 新增
-    public void insert(AdmAuthorityVO admAuthorityVO);
+    public void insert(AdmAuthority admAuthority);
     // 查詢單項
-    public AdmAuthorityVO findByPrimaryKey(Integer titleNo);
+    public AdmAuthority findByPrimaryKey(Integer titleNo);
     // 查詢所有
-    public List<AdmAuthorityVO> getAll();
+    public List<AdmAuthority> getAll();
     // 修改
-    public void update(AdmAuthorityVO admAuthorityVO);
+    public void update(AdmAuthority admAuthority);
     // 刪除
     public void delete(Integer titleNo);
 

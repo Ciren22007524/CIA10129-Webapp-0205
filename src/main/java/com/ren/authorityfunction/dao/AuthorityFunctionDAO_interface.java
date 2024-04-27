@@ -1,18 +1,19 @@
 package com.ren.authorityfunction.dao;
 
-import com.ren.authorityfunction.model.AuthorityFunctionVO;
+import com.Entity.AuthorityFunction;
+import com.Entity.ServiceRobot;
 
 import java.util.List;
 
 public interface AuthorityFunctionDAO_interface {
     // 新增
-    public void insert(AuthorityFunctionVO authorityFunctionVO);
+    public void insert(AuthorityFunction authorityFunction);
     // 查詢單項
-    public AuthorityFunctionVO findByPrimaryKey(Integer authFuncNo);
+    public AuthorityFunction findByPrimaryKey(Integer authFuncNo);
     // 查詢所有
-    public List<AuthorityFunctionVO> getAll();
+    public List<AuthorityFunction> getAll();
     // 修改
-    public void update(AuthorityFunctionVO authorityFunctionVO);
+    public void update(AuthorityFunction authorityFunction);
     // 刪除
     public void delete(Integer authFuncNo);
 

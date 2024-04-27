@@ -10,8 +10,7 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
-import com.ren.product.model.ProductVO;
-import com.ren.productcategory.model.ProductCategoryVO;
+import com.Entity.*;
 
 public class ProductCategoryJDBCDAOImpl implements ProductCategoryDAO_interface {
     String driver = "com.mysql.cj.jdbc.Driver";
@@ -50,7 +49,7 @@ public class ProductCategoryJDBCDAOImpl implements ProductCategoryDAO_interface 
             "DELETE FROM productcategory where pCatNo = ?";
 
     @Override
-    public void insert(ProductCategoryVO productCategoryVO) {
+    public void insert(ProductCategory productCategory) {
 
         Connection con = null;
         PreparedStatement pstmt = null;
@@ -61,7 +60,7 @@ public class ProductCategoryJDBCDAOImpl implements ProductCategoryDAO_interface 
             con = DriverManager.getConnection(url, userid, passwd);
             pstmt = con.prepareStatement(INSERT_STMT);
 
-            pstmt.setString(1, productCategoryVO.getpCatName());
+            pstmt.setString(1, productCategory.getpCatName());
 
             pstmt.executeUpdate("set auto_increment_offset=1000;");
             pstmt.executeUpdate("set auto_increment_increment=200;");
@@ -94,9 +93,9 @@ public class ProductCategoryJDBCDAOImpl implements ProductCategoryDAO_interface 
     }
 
     @Override
-    public ProductCategoryVO findByPrimaryKey(Integer pCatNo) {
+    public ProductCategory findByPrimaryKey(Integer pCatNo) {
 
-        ProductCategoryVO productCategoryVO = null;
+        ProductCategory productCategory = null;
         Connection con = null;
         PreparedStatement pstmt = null;
         ResultSet rs = null;
@@ -113,9 +112,9 @@ public class ProductCategoryJDBCDAOImpl implements ProductCategoryDAO_interface 
 
             while (rs.next()) {
                 // deptVO 也稱為 Domain objects
-                productCategoryVO = new ProductCategoryVO();
-                productCategoryVO.setpCatNo(rs.getInt("pCatNo"));
-                productCategoryVO.setpCatName(rs.getString("pCatName"));
+                productCategory = new ProductCategory();
+                productCategory.setpCatNo(rs.getInt("pCatNo"));
+                productCategory.setpCatName(rs.getString("pCatName"));
             }
 
             // Handle any driver errors
@@ -148,13 +147,13 @@ public class ProductCategoryJDBCDAOImpl implements ProductCategoryDAO_interface 
                 }
             }
         }
-        return productCategoryVO;
+        return productCategory;
     }
 
     @Override
-    public List<ProductCategoryVO> getAll() {
-        List<ProductCategoryVO> list = new ArrayList<ProductCategoryVO>();
-        ProductCategoryVO productCategoryVO = null;
+    public List<ProductCategory> getAll() {
+        List<ProductCategory> list = new ArrayList<ProductCategory>();
+        ProductCategory productCategory = null;
 
         Connection con = null;
         PreparedStatement pstmt = null;
@@ -168,10 +167,10 @@ public class ProductCategoryJDBCDAOImpl implements ProductCategoryDAO_interface 
             rs = pstmt.executeQuery();
 
             while (rs.next()) {
-                productCategoryVO = new ProductCategoryVO();
-                productCategoryVO.setpCatNo(rs.getInt("pCatNo"));
-                productCategoryVO.setpCatName(rs.getString("pCatName"));
-                list.add(productCategoryVO); // Store the row in the list
+                productCategory = new ProductCategory();
+                productCategory.setpCatNo(rs.getInt("pCatNo"));
+                productCategory.setpCatName(rs.getString("pCatName"));
+                list.add(productCategory); // Store the row in the list
             }
 
             // Handle any driver errors
@@ -207,9 +206,10 @@ public class ProductCategoryJDBCDAOImpl implements ProductCategoryDAO_interface 
     }
 
     @Override
-    public Set<ProductVO> getProductsBypCatNo(Integer pCatNo) {
-        Set<ProductVO> set = new LinkedHashSet<>();
-        ProductVO productVO = null;
+    public Set<Product> getProductsBypCatNo(Integer pCatNo) {
+        Set<Product> set = new LinkedHashSet<>();
+        Product product = null;
+        ProductCategory productCategory = product.getProductCategory();
 
         Connection con = null;
         PreparedStatement pstmt = null;
@@ -224,19 +224,19 @@ public class ProductCategoryJDBCDAOImpl implements ProductCategoryDAO_interface 
             rs = pstmt.executeQuery();
 
             while (rs.next()) {
-                productVO = new ProductVO();
-                productVO.setpNo(rs.getInt("pNo"));
-                productVO.setpCatNo(rs.getInt("pCatNo"));
-                productVO.setpName(rs.getString("pName"));
-                productVO.setpInfo(rs.getString("pInfo"));
-                productVO.setpSize(rs.getInt("pSize"));
-                productVO.setpColor(rs.getString("pColor"));
-                productVO.setpPrice(rs.getBigDecimal("pPrice"));
-                productVO.setpStat(rs.getByte("pStat"));
-                productVO.setpSalQty(rs.getInt("pSalQty"));
-                productVO.setpComPeople(rs.getInt("pComPeople"));
-                productVO.setpComScore(rs.getInt("pComScore"));
-                set.add(productVO); // Store the row in the vector
+                product = new Product();
+                product.setpNo(rs.getInt("pNo"));
+                productCategory.setpCatNo(rs.getInt("pCatNo"));
+                product.setpName(rs.getString("pName"));
+                product.setpInfo(rs.getString("pInfo"));
+                product.setpSize(rs.getInt("pSize"));
+                product.setpColor(rs.getString("pColor"));
+                product.setpPrice(rs.getBigDecimal("pPrice"));
+                product.setpStat(rs.getByte("pStat"));
+                product.setpSalQty(rs.getInt("pSalQty"));
+                product.setpComPeople(rs.getInt("pComPeople"));
+                product.setpComScore(rs.getInt("pComScore"));
+                set.add(product); // Store the row in the vector
             }
 
             // Handle any driver errors
@@ -272,7 +272,7 @@ public class ProductCategoryJDBCDAOImpl implements ProductCategoryDAO_interface 
     }
 
     @Override
-    public void update(ProductCategoryVO productCategoryVO) {
+    public void update(ProductCategory productCategory) {
 
         Connection con = null;
         PreparedStatement pstmt = null;
@@ -283,8 +283,8 @@ public class ProductCategoryJDBCDAOImpl implements ProductCategoryDAO_interface 
             con = DriverManager.getConnection(url, userid, passwd);
             pstmt = con.prepareStatement(UPDATE_STMT);
 
-            pstmt.setString(1, productCategoryVO.getpCatName());
-            pstmt.setInt(2, productCategoryVO.getpCatNo());
+            pstmt.setString(1, productCategory.getpCatName());
+            pstmt.setInt(2, productCategory.getpCatNo());
 
             pstmt.executeUpdate();
 
@@ -390,53 +390,4 @@ public class ProductCategoryJDBCDAOImpl implements ProductCategoryDAO_interface 
 
     }
 
-    public static void main(String[] args) {
-
-        ProductCategoryJDBCDAOImpl dao = new ProductCategoryJDBCDAOImpl();
-
-        // 新增
-//		ProductCategoryVO productCategoryVO1 = new ProductCategoryVO();
-//		productCategoryVO1.setDname("襯衫");
-//		dao.insert(productCategoryVO1);
-
-        // 修改
-//		ProductCategoryVO productCategoryVO2 = new ProductCategoryVO();
-//		productCategoryVO2.setpCatNo(1000);
-//		productCategoryVO2.setpCatName("吊嘎");
-//		dao.update(deptVO2);
-
-        // 刪除
-//		dao.delete(30);
-
-        // 查詢
-        ProductCategoryVO productCategoryVO3 = dao.findByPrimaryKey(1000);
-        System.out.print(productCategoryVO3.getpCatNo() + ",");
-        System.out.print(productCategoryVO3.getpCatName() + ",");
-        System.out.println("---------------------");
-
-        // 查詢部門
-        List<ProductCategoryVO> list = dao.getAll();
-        for (ProductCategoryVO aProductCategory : list) {
-            System.out.print(aProductCategory.getpCatNo() + ",");
-            System.out.print(aProductCategory.getpCatName());
-            System.out.println();
-        }
-
-        // 查詢某部門的員工
-        Set<ProductVO> set = dao.getProductsBypCatNo(10);
-        for (ProductVO aProduct : set) {
-            System.out.print(aProduct.getpNo() + ",");
-            System.out.print(aProduct.getpCatNo() + ",");
-            System.out.print(aProduct.getpName() + ",");
-            System.out.print(aProduct.getpInfo() + ",");
-            System.out.print(aProduct.getpSize() + ",");
-            System.out.print(aProduct.getpColor() + ",");
-            System.out.print(aProduct.getpPrice() + ",");
-            System.out.print(aProduct.getpStat() + ",");
-            System.out.print(aProduct.getpSalQty() + ",");
-            System.out.print(aProduct.getpComPeople() + ",");
-            System.out.print(aProduct.getpComScore());
-            System.out.println();
-        }
-    }
 }

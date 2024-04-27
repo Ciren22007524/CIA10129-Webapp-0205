@@ -4,7 +4,9 @@ import org.hibernate.SessionFactory;
 import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
+import org.springframework.stereotype.Component;
 
+@Component
 public class HibernateUtil {
     // 宣告實體變數，確保以下類別只被創建一次
     private static StandardServiceRegistry registry;

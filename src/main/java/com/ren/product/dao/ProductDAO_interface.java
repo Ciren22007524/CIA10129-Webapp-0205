@@ -1,22 +1,23 @@
 package com.ren.product.dao;
 
-import com.ren.product.model.ProductVO;
+import com.Entity.Product;
+import com.Entity.ServiceRobot;
 
 import java.util.*;
 
 public interface ProductDAO_interface {
 
-    int insert(ProductVO entity);
+    int insert(Product entity);
 
-    ProductVO getById(Integer id);
+    Product getById(Integer id);
 
-    List<ProductVO> getAll();
+    List<Product> getAll();
 
-    List<ProductVO> getByCompositeQuery(Map<String, String> map);
+    List<Product> getByCompositeQuery(Map<String, String> map);
 
-    List<ProductVO> getAll(int currentPage);
+    List<Product> getAll(int currentPage);
 
-    int update(ProductVO entity);
+    int update(Product entity);
 
     int delete(Integer id);
 

@@ -1,16 +1,14 @@
 package com.ren.title.dao;
 
-import com.ren.administrator.model.AdministratorVO;
-import com.ren.product.model.ProductVO;
-import com.ren.title.model.TitleAdmVO;
-import com.ren.title.model.TitleVO;
+import com.Entity.ServicePicture;
+import com.Entity.ServiceRobot;
+import com.Entity.Title;
+import com.Entity.TitleAdmVO;
 
-import java.util.LinkedHashSet;
 import java.util.List;
 
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.Set;
 
 public class TitleJDBCDAOImpl implements TitleDAO_interface {
     // 預計寫入功能
@@ -44,14 +42,14 @@ public class TitleJDBCDAOImpl implements TitleDAO_interface {
             "DELETE FROM Title where titleNo = ?";
 
     @Override
-    public void insert(TitleVO titleVO) {
+    public void insert(Title title) {
 
         try (Connection con = DriverManager.getConnection(url, userid, passwd);
              PreparedStatement ps = con.prepareStatement(INSERT_STMT)) {
             // 載入Driver介面的實作類別.class檔來註冊JDBC
             Class.forName(driver);
             // 從request的VO取值放入PreparedStatement
-            ps.setString(1, titleVO.getTitleName());
+            ps.setString(1, title.getTitleName());
             // 執行SQL指令將VO資料新增進資料庫
             ps.executeUpdate();
             // Handle any driver errors
@@ -64,9 +62,9 @@ public class TitleJDBCDAOImpl implements TitleDAO_interface {
     }
 
     @Override
-    public TitleVO findByPrimaryKey(Integer titleNo) {
+    public Title findByPrimaryKey(Integer titleNo) {
         // 宣告VO並指定空值，若查詢無結果會出現空值，後續於Controller作錯誤處理
-        TitleVO titleVO = null;
+        Title title = null;
         // ResultSet在相關的Statement關閉時會自動關閉，因此不用另外寫在Auto-closable
         try (Connection con = DriverManager.getConnection(url, userid, passwd);
              PreparedStatement ps = con.prepareStatement(GET_ONE_STMT)) {
@@ -78,8 +76,8 @@ public class TitleJDBCDAOImpl implements TitleDAO_interface {
             ResultSet rs = ps.executeQuery();
             // 取出ResultSet內資料放入VO
             while (rs.next()) {
-                titleVO.setTitleNo(rs.getInt("titleNo"));
-                titleVO.setTitleName(rs.getString("titleName"));
+                title.setTitleNo(rs.getInt("titleNo"));
+                title.setTitleName(rs.getString("titleName"));
             }
             // Handle any driver errors
         } catch (ClassNotFoundException e) {
@@ -89,15 +87,15 @@ public class TitleJDBCDAOImpl implements TitleDAO_interface {
             throw new RuntimeException("A database error occured. " + se.getMessage());
         }
         // 回傳VO，待後續Controller導至View呈現
-        return titleVO;
+        return title;
     }
 
     @Override
-    public List<TitleVO> getAll() {
+    public List<Title> getAll() {
         // 宣告ArrayList作為放入搜尋結果的列表
-        List<TitleVO> list = new ArrayList<>();
+        List<Title> list = new ArrayList<>();
         // 宣告VO並指定空值，若查詢無結果會出現空值，後續於Controller作錯誤處理
-        TitleVO titleVO = null;
+        Title title = null;
         try (Connection con = DriverManager.getConnection(url, userid, passwd);
              PreparedStatement ps = con.prepareStatement(GET_ALL_STMT)) {
             // 載入Driver介面的實作類別.class檔來註冊JDBC
@@ -106,10 +104,10 @@ public class TitleJDBCDAOImpl implements TitleDAO_interface {
             ResultSet rs = ps.executeQuery();
             // 新增VO物件，取出ResultSet內資料放入VO
             while (rs.next()) {
-                titleVO = new TitleVO();
-                titleVO.setTitleNo(rs.getInt("titleNo"));
-                titleVO.setTitleName(rs.getString("titleName"));
-                list.add(titleVO); // 將資料新增至列表內之後作為搜尋結果返回給View
+                title = new Title();
+                title.setTitleNo(rs.getInt("titleNo"));
+                title.setTitleName(rs.getString("titleName"));
+                list.add(title); // 將資料新增至列表內之後作為搜尋結果返回給View
             }
             // Handle any driver errors
         } catch (ClassNotFoundException e) {
@@ -220,15 +218,15 @@ public class TitleJDBCDAOImpl implements TitleDAO_interface {
 
 
     @Override
-    public void update(TitleVO titleVO) {
+    public void update(Title title) {
 
         try (Connection con = DriverManager.getConnection(url, userid, passwd);
              PreparedStatement ps = con.prepareStatement(UPDATE_STMT)) {
             // 載入Driver介面的實作類別.class檔來註冊JDBC
             Class.forName(driver);
             // 從request的VO取值放入PreparedStatement
-            ps.setInt(1, titleVO.getTitleNo());
-            ps.setString(2, titleVO.getTitleName());
+            ps.setInt(1, title.getTitleNo());
+            ps.setString(2, title.getTitleName());
             // 執行SQL指令將資料庫內對應的資料修改成VO的值
             ps.executeUpdate();
             // Handle any driver errors
