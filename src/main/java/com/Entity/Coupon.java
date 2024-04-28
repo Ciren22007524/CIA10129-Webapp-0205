@@ -1,5 +1,7 @@
 package com.Entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
@@ -25,8 +27,10 @@ public class Coupon {
     private Timestamp coupRelDate;
     @Column(name = "couprelstat")
     private Byte coupRelStat;
+    @JsonBackReference
     @OneToMany(mappedBy = "coupon", cascade = CascadeType.ALL)
     private Set<ProductOrder> productOrders;
+    @JsonBackReference
     @OneToMany(mappedBy = "coupon", cascade = CascadeType.ALL)
     private Set<MyCoupon> myCoupons;
 

@@ -1,5 +1,7 @@
 package com.Entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.sql.Timestamp;
@@ -10,9 +12,11 @@ public class MyCoupon {
     @EmbeddedId
     private CompositeCouponMember compositeCouponMember;
     @ManyToOne
+    @JsonManagedReference
     @JoinColumn(name = "coupno", referencedColumnName = "coupno", insertable = false, updatable = false)
     private Coupon coupon ;
     @ManyToOne
+    @JsonManagedReference
     @JoinColumn(name = "memno", referencedColumnName = "memno", insertable = false, updatable = false)
     private Member member;
     @Column(name = "coupusedstat")

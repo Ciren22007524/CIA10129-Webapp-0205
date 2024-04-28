@@ -1,6 +1,9 @@
 package com.Entity;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.sql.Date;
@@ -14,12 +17,15 @@ public class StudioOrder {
     @Column(name = "sordno")
     private Integer sOrdNo;
     @ManyToOne
+    @JsonManagedReference
     @JoinColumn(name = "memno", referencedColumnName = "memno")
     private Member member;
     @ManyToOne
+    @JsonManagedReference
     @JoinColumn(name = "sno", referencedColumnName = "sno")
     private StudioInfo studioInfo;
     @ManyToOne
+    @JsonManagedReference
     @JoinColumn(name = "admno", referencedColumnName = "admno")
     private Administrator administrator;
     @Column(name = "bookeddate")
@@ -54,6 +60,7 @@ public class StudioOrder {
     private String sReturnMark;
     @Column(name = "scompensation")
     private BigDecimal sCompensation;
+    @JsonBackReference
     @OneToMany(mappedBy = "studioOrder", cascade = CascadeType.ALL)
     private Set<StudioTimeBooking> studioTimeBookings;
 

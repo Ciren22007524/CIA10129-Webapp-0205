@@ -1,5 +1,8 @@
 package com.Entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.Set;
@@ -12,9 +15,11 @@ public class ColumnReply implements java.io.Serializable {
     @Column(name = "columnreplyno")
     private Integer columnReplyNo;
     @ManyToOne
+    @JsonManagedReference
     @JoinColumn(name = "artno", referencedColumnName = "artno")
     private ColumnArticle columnArticle;
     @ManyToOne
+    @JsonManagedReference
     @JoinColumn(name = "memno", referencedColumnName = "memno")
     private Member member;
     @Column(name = "comcontent")
@@ -23,6 +28,7 @@ public class ColumnReply implements java.io.Serializable {
     private Timestamp comTime;
     @Column(name = "comstat")
     private Byte comStat;
+    @JsonBackReference
     @OneToMany(mappedBy = "columnReply", cascade = CascadeType.ALL)
     private Set<Report> reports;
 

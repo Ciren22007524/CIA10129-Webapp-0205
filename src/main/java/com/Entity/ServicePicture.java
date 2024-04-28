@@ -1,5 +1,7 @@
 package com.Entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 
 @Entity
@@ -9,6 +11,7 @@ public class ServicePicture {
     @Column(name = "servicepicno")
     private Integer servicePicNo;
     @ManyToOne
+    @JsonManagedReference
     @JoinColumn(name = "recordno", referencedColumnName = "recordno")
     private ServiceRecord serviceRecord;
     @Column(name = "servicepic", columnDefinition = "longblob")

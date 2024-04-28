@@ -1,5 +1,7 @@
 package com.Entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -25,6 +27,7 @@ public class RentalOrderDetails implements Serializable{
 //    private Integer rOrdNo;
     @Id
     @ManyToOne
+    @JsonManagedReference
     @JoinColumn(name = "rordno", referencedColumnName = "rordno")
     private RentalOrder rentalOrder;
 
@@ -33,6 +36,7 @@ public class RentalOrderDetails implements Serializable{
 //    private Integer rNo;
     @Id
     @ManyToOne
+    @JsonManagedReference
     @JoinColumn(name = "rno", referencedColumnName = "rno")
     private Rental rental;
 

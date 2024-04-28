@@ -1,5 +1,7 @@
 package com.Entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 
 
@@ -10,6 +12,7 @@ public class ProductPicture implements java.io.Serializable {
     @Column(name = "ppicno", updatable = false)
     private Integer pPicNo;
     @ManyToOne
+    @JsonManagedReference
     @JoinColumn(name = "pno", referencedColumnName = "pno")
     private Product product;
     @Column(name = "ppic", columnDefinition = "longblob")

@@ -1,5 +1,7 @@
 package com.Entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
@@ -12,12 +14,14 @@ public class ClickLike implements java.io.Serializable {
     private CompositeClickLike compositeClickLike;
 
     @ManyToOne
+    @JsonManagedReference
     @JoinColumn(name = "memno", referencedColumnName = "memno", insertable = false, updatable = false)
     private Member member;
 
     // private Integer memNo;
 
     @ManyToOne
+    @JsonManagedReference
     @JoinColumn(name = "artno", referencedColumnName = "artno", insertable = false, updatable = false)
     private ColumnArticle columnArticle;
 

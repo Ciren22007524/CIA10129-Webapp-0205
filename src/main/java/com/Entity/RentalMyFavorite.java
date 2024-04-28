@@ -1,5 +1,7 @@
 package com.Entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.sql.Timestamp;
 
@@ -15,10 +17,12 @@ public class RentalMyFavorite implements java.io.Serializable {
     private Timestamp rFavTime;
 
     @ManyToOne
+    @JsonManagedReference
     @JoinColumn(name = "rno", referencedColumnName = "rno", insertable = false, updatable = false)
     private Rental rental;
 
     @ManyToOne
+    @JsonManagedReference
     @JoinColumn(name = "memno", referencedColumnName = "memno", insertable = false, updatable = false)
     private Member member;
 

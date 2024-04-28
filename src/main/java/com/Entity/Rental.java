@@ -1,6 +1,9 @@
 package com.Entity;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Set;
@@ -14,6 +17,7 @@ public class Rental {
     @Column(name="rno")
     private Integer rNo;
     @ManyToOne
+    @JsonManagedReference
     @JoinColumn(name = "rcatno", referencedColumnName = "rcatno") //對應rental的rCatNo
     private RentalCategory rentalCategory;
     @Column(name="rname", length=40)
@@ -28,10 +32,13 @@ public class Rental {
     private String rInfo;
     @Column(name="rstat",columnDefinition = "TINYINT")
     private Byte rStat;
+    @JsonBackReference
     @OneToMany(mappedBy = "rental", cascade = CascadeType.ALL)
     private Set<RentalOrderDetails> rentalOrderDetails;
+    @JsonBackReference
     @OneToMany(mappedBy = "rental",cascade = CascadeType.ALL)
     private Set<RentalMyFavorite> rentalMyFavorites;
+    @JsonBackReference
     @OneToMany(mappedBy = "rental", cascade = CascadeType.ALL)
     private Set<RentalPic> rentalPics;
 
