@@ -1,5 +1,8 @@
 package com.Entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -19,6 +22,7 @@ public class RentalOrder implements Serializable {
     @Column(name = "rordno", updatable = false)
     private Integer rOrdNo; // -> 租借品訂單編號
     @ManyToOne
+    @JsonManagedReference
     @JoinColumn(name = "memno", referencedColumnName = "memno")
     private Member member;
     @Column(name = "rbyrname")
@@ -59,6 +63,7 @@ public class RentalOrder implements Serializable {
     private String rtnRemark; // -> 歸還註記
     @Column(name = "rtncompensation")
     private BigDecimal rtnCompensation; // -> 賠償金額
+    @JsonBackReference
     @OneToMany(mappedBy = "rentalOrder", cascade = CascadeType.ALL)
     private Set<RentalOrderDetails> rentalOrderDetailses;
 

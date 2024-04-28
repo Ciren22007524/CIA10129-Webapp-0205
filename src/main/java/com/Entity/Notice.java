@@ -1,5 +1,7 @@
 package com.Entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.sql.Timestamp;
 
@@ -13,6 +15,7 @@ public class Notice implements java.io.Serializable {
     private Integer motNo;
 
     @ManyToOne
+    @JsonManagedReference
     @JoinColumn(name = "memno", referencedColumnName = "memno")
     private Member member; // 定義多對一關係(現在表示:通知\(多)，會員(單))，該字段關聯到 MemberVO 實體類，使用 memNo 列作為外來鍵。 需要再生成getter and setter
 

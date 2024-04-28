@@ -1,5 +1,7 @@
 package com.Entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.sql.*;
@@ -11,10 +13,12 @@ import java.util.Objects;
 public class RentalMyTrack implements Serializable {
     @Id
     @ManyToOne
+    @JsonManagedReference
     @JoinColumn(name = "rno", referencedColumnName = "rno")
     private Rental rental;
     @Id
     @ManyToOne
+    @JsonManagedReference
     @JoinColumn(name = "memno", referencedColumnName = "memno")
     private Member member;
 	@Column(name = "rtracktime")

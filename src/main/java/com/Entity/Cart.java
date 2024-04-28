@@ -1,5 +1,7 @@
 package com.Entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.io.Serializable;
 
@@ -12,9 +14,11 @@ public class Cart {
     @Column(name = "pbuyqty")
     private Integer pBuyQty;
     @ManyToOne
+    @JsonManagedReference
     @JoinColumn(name = "memno", referencedColumnName = "memno", insertable = false, updatable = false)
     private Member member;
     @ManyToOne
+    @JsonManagedReference
     @JoinColumn(name = "pno", referencedColumnName = "pno", insertable = false, updatable = false)
     private Product product;
 

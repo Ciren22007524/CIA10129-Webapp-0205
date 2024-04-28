@@ -1,5 +1,7 @@
 package com.Entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 
     @Entity  //標示類別為"永續類別"
@@ -14,6 +16,7 @@ import javax.persistence.*;
         private byte[] rPic;
 
         @ManyToOne
+        @JsonManagedReference
         @JoinColumn(name="rno", referencedColumnName="rno")
         private Rental rental;
 

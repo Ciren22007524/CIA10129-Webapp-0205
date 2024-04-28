@@ -1,5 +1,7 @@
 package com.Entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import java.util.Set;
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -23,7 +25,7 @@ public class RentalCategory {
 
     @Column(name="rdesprice",columnDefinition="BigDecimal")
     private BigDecimal rDesPrice;
-
+    @JsonBackReference
     @OneToMany(mappedBy = "rentalCategory", cascade = CascadeType.ALL) //CascadeType.ALL把對應到的相關資料刪除
     private Set<Rental> rentals;
 

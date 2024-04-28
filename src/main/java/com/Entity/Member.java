@@ -1,5 +1,7 @@
 package com.Entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 import java.sql.Date;
 import java.sql.Timestamp;
@@ -49,32 +51,46 @@ public class Member implements java.io.Serializable {
     @Column(name = "memstat")
     private Byte memStat;
 
+    @JsonBackReference
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
     private Set<Notice> notices;
+    @JsonBackReference
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
     private Set<MyCoupon> myCoupons;
+    @JsonBackReference
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
     private Set<ProductOrder> productOrders;
+    @JsonBackReference
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
     private Set<ProductMyFavorite> productMyFavorites;
+    @JsonBackReference
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
     private Set<Cart> carts;
+    @JsonBackReference
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
     private Set<ClickLike> clickLikes;
+    @JsonBackReference
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
     private Set<ArticleCollection> articleCollections;
+    @JsonBackReference
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
     private Set<Report> reports;
+    @JsonBackReference
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
     private Set<ColumnReply> columnReplies;
+    @JsonBackReference
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
     private Set<RentalOrder> rentalOrders;
+    @JsonBackReference
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
     private Set<RentalMyTrack> rentalMyTracks;
+    @JsonBackReference
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
     private Set<RentalMyFavorite> rentalMyFavorites;
+    @JsonBackReference
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
     private Set<StudioOrder> studioOrders;
+    @JsonBackReference
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
     private Set<ServiceRecord> serviceRecords;
 

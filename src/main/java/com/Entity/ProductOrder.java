@@ -1,5 +1,8 @@
 package com.Entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
@@ -13,6 +16,7 @@ public class ProductOrder {
     @Column(name = "pordno", updatable = false)
     private Integer pOrdNo;
     @ManyToOne
+    @JsonManagedReference
     @JoinColumn(name = "memno", referencedColumnName = "memno")
     private Member member;
     @Column(name = "pbyrname")
@@ -34,6 +38,7 @@ public class ProductOrder {
     @Column(name = "pallprice")
     private BigDecimal pAllPrice;
     @ManyToOne
+    @JsonManagedReference
     @JoinColumn(name = "coupno", referencedColumnName = "coupno")
     private Coupon coupon;
     @Column(name = "pdisc")
@@ -46,6 +51,7 @@ public class ProductOrder {
     private Byte pOrdStat;
     @Column(name = "pstat")
     private Byte pStat;
+    @JsonBackReference
     @OneToMany(mappedBy = "productOrder", cascade = CascadeType.ALL)
     @PrimaryKeyJoinColumn
     private Set<ProductOrderDetail> productOrderDetails;

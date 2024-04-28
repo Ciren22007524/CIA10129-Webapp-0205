@@ -1,5 +1,7 @@
 package com.Entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.sql.Timestamp;
 
@@ -13,18 +15,21 @@ public class Report implements java.io.Serializable {
     private Integer reportNo;
 
     @ManyToOne
+    @JsonManagedReference
     @JoinColumn(name = "artreplyno", referencedColumnName = "columnreplyno")
     private ColumnReply columnReply;
 
     // private Integer artReplyNo;
 
     @ManyToOne
+    @JsonManagedReference
     @JoinColumn(name = "memno", referencedColumnName = "memno")
     private Member member;
 
     // private Integer memNo;
 
     @ManyToOne
+    @JsonManagedReference
     @JoinColumn(name = "admno", referencedColumnName = "admno")
     private Administrator administrator;
 

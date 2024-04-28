@@ -1,5 +1,7 @@
 package com.Entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -21,9 +23,11 @@ public class ProductOrderDetail {
     @Column(name = "pscore")
     private Integer pScore;
     @ManyToOne
+    @JsonManagedReference
     @JoinColumn(name = "pno", referencedColumnName = "pno", insertable = false, updatable = false)
     private Product product;
     @ManyToOne
+    @JsonManagedReference
     @JoinColumn(name = "pordno", referencedColumnName = "pordno", insertable = false, updatable = false)
     private ProductOrder productOrder ;
     // 需要宣告一個有包含複合主鍵屬性的類別，並一定實作 java.io.Serializable 介面

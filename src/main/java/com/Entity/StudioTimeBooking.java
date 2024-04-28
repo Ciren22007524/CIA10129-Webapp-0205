@@ -1,6 +1,8 @@
 package com.Entity;
 
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.sql.Date;
 
@@ -11,9 +13,11 @@ public class StudioTimeBooking {
     @Column(name = "stimeno")
     private Integer sTimeNo;
     @ManyToOne
+    @JsonManagedReference
     @JoinColumn(name = "sordno", referencedColumnName = "sordno")
     private StudioOrder studioOrder;
     @ManyToOne
+    @JsonManagedReference
     @JoinColumn(name = "sno", referencedColumnName = "sno")
     private StudioInfo studioInfo;
     @Column(name = "closedate")

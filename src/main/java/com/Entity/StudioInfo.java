@@ -1,6 +1,9 @@
 package com.Entity;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Set;
@@ -17,8 +20,10 @@ public class StudioInfo {
     private String sInfo;
     @Column(name = "sprice")
     private BigDecimal sPrice;
+    @JsonBackReference
     @OneToMany(mappedBy = "studioInfo", cascade = CascadeType.ALL)
     private Set<StudioOrder> studioOrders;
+    @JsonBackReference
     @OneToMany(mappedBy = "studioInfo", cascade = CascadeType.ALL)
     private Set<StudioTimeBooking> studioTimeBookings;
 

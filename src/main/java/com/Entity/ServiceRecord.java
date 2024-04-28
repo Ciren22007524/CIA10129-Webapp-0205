@@ -1,5 +1,8 @@
 package com.Entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.Set;
@@ -11,9 +14,11 @@ public class ServiceRecord {
     @Column(name = "recordno")
 	private Integer recordNo;
     @ManyToOne
+    @JsonManagedReference
     @JoinColumn(name = "admno", referencedColumnName = "admno")
     private Administrator administrator;
     @ManyToOne
+    @JsonManagedReference
     @JoinColumn(name = "memno", referencedColumnName = "memno")
     private Member member;
     @Column(name = "recordtime")
@@ -22,6 +27,7 @@ public class ServiceRecord {
     private String recordContent;
     @Column(name = "speaker")
     private Byte speaker;
+    @JsonBackReference
     @OneToMany(mappedBy = "serviceRecord", cascade = CascadeType.ALL)
     private Set<ServicePicture> ServicePictures;
 

@@ -1,5 +1,7 @@
 package com.Entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.io.Serializable;
 
@@ -9,9 +11,11 @@ public class ProductMyFavorite {
     @EmbeddedId
     private CompositeProductMyFavorite compositeProductMyFavorite;
     @ManyToOne
+    @JsonManagedReference
     @JoinColumn(name = "pno", referencedColumnName = "pno", insertable = false, updatable = false)
     private Product product;
     @ManyToOne
+    @JsonManagedReference
     @JoinColumn(name = "memno", referencedColumnName = "memno", insertable = false, updatable = false)
     private Member member;
     @Embeddable
