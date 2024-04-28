@@ -1,12 +1,9 @@
 package com.ren.product.dao;
 
 import com.Entity.Product;
-import com.Entity.ServiceRobot;
-import jakarta.persistence.TypedQuery;
-import jakarta.persistence.criteria.CriteriaBuilder;
-import jakarta.persistence.criteria.CriteriaQuery;
-import jakarta.persistence.criteria.Predicate;
-import jakarta.persistence.criteria.Root;
+import javax.persistence.*;
+import javax.persistence.criteria.*;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -3,15 +3,15 @@ package com.Entity;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "ServicePicture")
+@Table(name = "servicepicture")
 public class ServicePicture {
     @Id
-    @Column(name = "servicePicNo")
+    @Column(name = "servicepicno")
     private Integer servicePicNo;
     @ManyToOne
-    @JoinColumn(name = "recordNo", referencedColumnName = "recordNo")
+    @JoinColumn(name = "recordno", referencedColumnName = "recordno")
     private ServiceRecord serviceRecord;
-    @Column(name = "servicePic", columnDefinition = "longblob")
+    @Column(name = "servicepic", columnDefinition = "longblob")
     private byte[] servicePic;
 
     public Integer getServicePicNo() {

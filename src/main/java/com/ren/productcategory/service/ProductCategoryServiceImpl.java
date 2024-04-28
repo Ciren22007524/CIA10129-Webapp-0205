@@ -3,14 +3,15 @@ package com.ren.productcategory.service;
 import java.util.List;
 import java.util.Set;
 
-import com.Entity.Product;
 import com.Entity.ProductCategory;
 import com.ren.product.dao.ProductRepository;
 import com.ren.productcategory.dao.ProductCategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import javax.persistence.Access;
 
+@Service
 public class ProductCategoryServiceImpl implements ProductCategoryService_interface {
 
 	@Autowired

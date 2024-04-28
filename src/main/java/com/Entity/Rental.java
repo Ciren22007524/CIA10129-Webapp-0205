@@ -7,26 +7,26 @@ import java.util.Set;
 
 
 @Entity  //標示類別為"永續類別"
-@Table(name = "Rental")  //此"永續類別"對應到的表格
+@Table(name = "rental")  //此"永續類別"對應到的表格
 public class Rental {
 
     @Id //標示為PK
-    @Column(name="rNo")
+    @Column(name="rno")
     private Integer rNo;
     @ManyToOne
-    @JoinColumn(name = "rCatNo", referencedColumnName = "rCatNo") //對應rental的rCatNo
+    @JoinColumn(name = "rcatno", referencedColumnName = "rcatno") //對應rental的rCatNo
     private RentalCategory rentalCategory;
-    @Column(name="rName", length=40)
+    @Column(name="rname", length=40)
     private String rName;
-    @Column(name="rPrice",columnDefinition="BigDecimal")
+    @Column(name="rprice",columnDefinition="BigDecimal")
     private BigDecimal rPrice;
-    @Column(name="rSize")
+    @Column(name="rsize")
     private Integer rSize;
-    @Column(name="rColor", length=10)
+    @Column(name="rcolor", length=10)
     private String rColor;
-    @Column(name="rInfo", length=1000)
+    @Column(name="rinfo", length=1000)
     private String rInfo;
-    @Column(name="rStat",columnDefinition = "TINYINT")
+    @Column(name="rstat",columnDefinition = "TINYINT")
     private Byte rStat;
     @OneToMany(mappedBy = "rental", cascade = CascadeType.ALL)
     private Set<RentalOrderDetails> rentalOrderDetails;

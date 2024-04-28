@@ -8,51 +8,51 @@ import java.sql.Timestamp;
 import java.util.Set;
 
 @Entity
-@Table(name = "StudioOrder")
+@Table(name = "studioorder")
 public class StudioOrder {
     @Id
-    @Column(name = "sOrdNo")
+    @Column(name = "sordno")
     private Integer sOrdNo;
     @ManyToOne
-    @JoinColumn(name = "memNo", referencedColumnName = "memNo")
+    @JoinColumn(name = "memno", referencedColumnName = "memno")
     private Member member;
     @ManyToOne
-    @JoinColumn(name = "sNo", referencedColumnName = "sNo")
+    @JoinColumn(name = "sno", referencedColumnName = "sno")
     private StudioInfo studioInfo;
     @ManyToOne
-    @JoinColumn(name = "admNo", referencedColumnName = "admNo")
+    @JoinColumn(name = "admno", referencedColumnName = "admno")
     private Administrator administrator;
-    @Column(name = "bookedDate")
+    @Column(name = "bookeddate")
     private Date bookedDate;
-    @Column(name = "bookedTimeMorning")
+    @Column(name = "bookedtimemorning")
     private Byte bookedTimeMorning;
-    @Column(name = "bookedTimeAfternoon")
+    @Column(name = "bookedtimeafternoon")
     private Byte bookedTimeAfternoon;
-    @Column(name = "bookedTimeNight")
+    @Column(name = "bookedtimenight")
     private Byte bookedTimeNight;
-    @Column(name = "sOrdTime")
+    @Column(name = "sordtime")
     private Timestamp sOrdTime;
-    @Column(name = "sOrdStat")
+    @Column(name = "sordstat")
     private Byte sOrdStat;
-    @Column(name = "sTtlPrice")
+    @Column(name = "sttlprice")
     private BigDecimal sTtlPrice;
-    @Column(name = "sDepPrice")
+    @Column(name = "sdepprice")
     private BigDecimal sDepPrice;
-    @Column(name = "sByrName")
+    @Column(name = "sbyrname")
     private String sByrName;
-    @Column(name = "sByrPhone")
+    @Column(name = "sbyrphone")
     private String sByrPhone;
-    @Column(name = "sByrEmail")
+    @Column(name = "sbyremail")
     private String sByrEmail;
-    @Column(name = "sPayMethod")
+    @Column(name = "spaymethod")
     private Byte sPayMethod;
-    @Column(name = "sPayStat")
+    @Column(name = "spaystat")
     private Byte sPayStat;
-    @Column(name = "checkInStat")
+    @Column(name = "checkinstat")
     private Byte checkInStat;
-    @Column(name = "sReturnMark")
+    @Column(name = "sreturnmark")
     private String sReturnMark;
-    @Column(name = "sCompensation")
+    @Column(name = "scompensation")
     private BigDecimal sCompensation;
     @OneToMany(mappedBy = "studioOrder", cascade = CascadeType.ALL)
     private Set<StudioTimeBooking> studioTimeBookings;

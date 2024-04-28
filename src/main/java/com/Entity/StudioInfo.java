@@ -6,16 +6,16 @@ import java.math.BigDecimal;
 import java.util.Set;
 
 @Entity
-@Table(name = "StudioInfo")
+@Table(name = "studioinfo")
 public class StudioInfo {
     @Id
-    @Column(name = "sNo")
+    @Column(name = "sno")
     private Integer sNo;
-    @Column(name = "sName")
+    @Column(name = "sname")
     private String sName;
-    @Column(name = "sInfo")
+    @Column(name = "sinfo")
     private String sInfo;
-    @Column(name = "sPrice")
+    @Column(name = "sprice")
     private BigDecimal sPrice;
     @OneToMany(mappedBy = "studioInfo", cascade = CascadeType.ALL)
     private Set<StudioOrder> studioOrders;

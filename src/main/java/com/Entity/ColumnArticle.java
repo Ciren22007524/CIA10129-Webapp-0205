@@ -10,29 +10,29 @@ public class ColumnArticle implements java.io.Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "artNo")
+    @Column(name = "artno")
     private Integer artNo;
 
     @ManyToOne
-    @JoinColumn(name = "admNo", referencedColumnName = "admNo")
+    @JoinColumn(name = "admno", referencedColumnName = "admno")
     private Administrator administrator;
 
 //    @Column(name = "admNo")
 //    private Integer admNo;
 
-    @Column(name = "artTitle")
+    @Column(name = "arttitle")
     private String artTitle;
 
-    @Column(name = "artContent", columnDefinition = "longtext")
+    @Column(name = "artcontent", columnDefinition = "longtext")
     private String artContent;
 
-    @Column(name = "artTime")
+    @Column(name = "arttime")
     private Timestamp artTime;
 
-    @Column(name = "artCatNo")
+    @Column(name = "artcatno")
     private Integer artCatNo;
 
-    @Column(name = "artStat")
+    @Column(name = "artstat")
     private Byte artStat;
 
     @OneToMany(mappedBy = "columnArticle", cascade = CascadeType.ALL)

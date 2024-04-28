@@ -5,23 +5,23 @@ import java.sql.Timestamp;
 import java.util.Set;
 
 @Entity
-@Table(name = "columnReply")
+@Table(name = "columnreply")
 public class ColumnReply implements java.io.Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "columnReplyNo")
+    @Column(name = "columnreplyno")
     private Integer columnReplyNo;
     @ManyToOne
-    @JoinColumn(name = "artNo", referencedColumnName = "artNo")
+    @JoinColumn(name = "artno", referencedColumnName = "artno")
     private ColumnArticle columnArticle;
     @ManyToOne
-    @JoinColumn(name = "memNo", referencedColumnName = "memNo")
+    @JoinColumn(name = "memno", referencedColumnName = "memno")
     private Member member;
-    @Column(name = "comContent")
+    @Column(name = "comcontent")
     private String comContent;
-    @Column(name = "comTime")
+    @Column(name = "comtime")
     private Timestamp comTime;
-    @Column(name = "comStat")
+    @Column(name = "comstat")
     private Byte comStat;
     @OneToMany(mappedBy = "columnReply", cascade = CascadeType.ALL)
     private Set<Report> reports;

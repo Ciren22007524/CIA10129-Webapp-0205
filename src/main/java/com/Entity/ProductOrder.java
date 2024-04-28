@@ -10,41 +10,41 @@ import java.util.Set;
 @Table(name = "productorder")
 public class ProductOrder {
     @Id
-    @Column(name = "pOrdNo", updatable = false)
+    @Column(name = "pordno", updatable = false)
     private Integer pOrdNo;
     @ManyToOne
-    @JoinColumn(name = "memNo", referencedColumnName = "memNo")
+    @JoinColumn(name = "memno", referencedColumnName = "memno")
     private Member member;
-    @Column(name = "pByrName")
+    @Column(name = "pbyrname")
     private String pByrName;
-    @Column(name = "pByrPhone")
+    @Column(name = "pbyrphone")
     private Integer pByrPhone;
-    @Column(name = "pByrEmail")
+    @Column(name = "pbyremail")
     private String pByrEmail;
-    @Column(name = "pRcvName")
+    @Column(name = "prcvname")
     private String pRcvName;
-    @Column(name = "pRcvPhone")
+    @Column(name = "prcvphone")
     private String pRcvPhone;
-    @Column(name = "pTakeMethod")
+    @Column(name = "ptakemethod")
     private Byte pTakeMethod;
-    @Column(name = "pAddr")
+    @Column(name = "paddr")
     private String pAddr;
-    @Column(name = "pPayMethod")
+    @Column(name = "ppaymethod")
     private Byte pPayMethod;
-    @Column(name = "pAllPrice")
+    @Column(name = "pallprice")
     private BigDecimal pAllPrice;
     @ManyToOne
-    @JoinColumn(name = "coupNo", referencedColumnName = "coupNo")
+    @JoinColumn(name = "coupno", referencedColumnName = "coupno")
     private Coupon coupon;
-    @Column(name = "pDisc")
+    @Column(name = "pdisc")
     private BigDecimal pDisc;
-    @Column(name = "pRealPrice")
+    @Column(name = "prealprice")
     private BigDecimal pRealPrice;
-    @Column(name = "pOrdTime")
+    @Column(name = "pordtime")
     private Timestamp pOrdTime;
-    @Column(name = "pOrdStat")
+    @Column(name = "pordstat")
     private Byte pOrdStat;
-    @Column(name = "pStat")
+    @Column(name = "pstat")
     private Byte pStat;
     @OneToMany(mappedBy = "productOrder", cascade = CascadeType.ALL)
     @PrimaryKeyJoinColumn

@@ -5,24 +5,24 @@ import javax.persistence.*;
 import java.sql.Date;
 
 @Entity
-@Table(name = "StudioTimeBooking")
+@Table(name = "studiotimebooking")
 public class StudioTimeBooking {
     @Id
-    @Column(name = "sTimeNo")
+    @Column(name = "stimeno")
     private Integer sTimeNo;
     @ManyToOne
-    @JoinColumn(name = "sOrdNo", referencedColumnName = "sOrdNo")
+    @JoinColumn(name = "sordno", referencedColumnName = "sordno")
     private StudioOrder studioOrder;
     @ManyToOne
-    @JoinColumn(name = "sNo", referencedColumnName = "sNo")
+    @JoinColumn(name = "sno", referencedColumnName = "sno")
     private StudioInfo studioInfo;
-    @Column(name = "closeDate")
+    @Column(name = "closedate")
     private Date closeDate;
-    @Column(name = "closeTimeMorning")
+    @Column(name = "closetimemorning")
     private Byte closeTimeMorning;
-    @Column(name = "closeTimeAfternoon")
+    @Column(name = "closetimeafternoon")
     private Byte closeTimeAfternoon;
-    @Column(name = "closeTimeNight")
+    @Column(name = "closetimenight")
     private Byte closeTimeNight;
 
     public Integer getsTimeNo() {

@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-@Service("productSvc")
+@Service
 public class ProductServiceImpl implements ProductService_interface {
 
     private final int SUCCESS = 1;

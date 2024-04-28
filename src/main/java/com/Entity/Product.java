@@ -8,33 +8,33 @@ import java.math.BigDecimal;
 import java.util.Set;
 
 @Entity
-@Table(name = "Product")
+@Table(name = "product")
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "pNo")
+    @Column(name = "pno")
     private Integer pNo;
     @ManyToOne
     @JsonManagedReference
-    @JoinColumn(name = "pCatNo", referencedColumnName = "pCatNo")
+    @JoinColumn(name = "pcatno", referencedColumnName = "pcatno")
     private ProductCategory productCategory;
-    @Column(name = "pName")
+    @Column(name = "pname")
     private String pName;
-    @Column(name = "pInfo")
+    @Column(name = "pinfo")
     private String pInfo;
-    @Column(name = "pSize")
+    @Column(name = "psize")
     private Integer pSize;
-    @Column(name = "pColor")
+    @Column(name = "pcolor")
     private String pColor;
-    @Column(name = "pPrice")
+    @Column(name = "pprice")
     private BigDecimal pPrice;
-    @Column(name = "pStat")
+    @Column(name = "pstat")
     private Byte pStat;
-    @Column(name = "pSalQty")
+    @Column(name = "psalqty")
     private Integer pSalQty;
-    @Column(name = "pComPeople")
+    @Column(name = "pcompeople")
     private Integer pComPeople;
-    @Column(name = "pComScore")
+    @Column(name = "pcomscore")
     private Integer pComScore;
     @JsonBackReference
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)

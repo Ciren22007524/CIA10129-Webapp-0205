@@ -9,17 +9,17 @@ public class ProductMyFavorite {
     @EmbeddedId
     private CompositeProductMyFavorite compositeProductMyFavorite;
     @ManyToOne
-    @JoinColumn(name = "pNo", referencedColumnName = "pNo", insertable = false, updatable = false)
+    @JoinColumn(name = "pno", referencedColumnName = "pno", insertable = false, updatable = false)
     private Product product;
     @ManyToOne
-    @JoinColumn(name = "memNo", referencedColumnName = "memNo", insertable = false, updatable = false)
+    @JoinColumn(name = "memno", referencedColumnName = "memno", insertable = false, updatable = false)
     private Member member;
     @Embeddable
     public static class CompositeProductMyFavorite implements Serializable {
         private static final long serialVersionUID = 1L;
-        @Column(name = "pNo")
+        @Column(name = "pno")
         private Integer pNo;
-        @Column(name = "memNo")
+        @Column(name = "memno")
         private Integer memNo;
 
         public Integer getpNo() {

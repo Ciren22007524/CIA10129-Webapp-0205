@@ -11,15 +11,15 @@ public class RentalMyFavorite implements java.io.Serializable {
     @EmbeddedId   //加上@EmbeddedId 標註，必須override此類別的hashcode()、equals()
     private CompositeDetail compositeKey;
 
-    @Column(name = "rFavTime", columnDefinition = "DATETIME")
+    @Column(name = "rfavtime", columnDefinition = "DATETIME")
     private Timestamp rFavTime;
 
     @ManyToOne
-    @JoinColumn(name = "rNo", referencedColumnName = "rNo", insertable = false, updatable = false)
+    @JoinColumn(name = "rno", referencedColumnName = "rno", insertable = false, updatable = false)
     private Rental rental;
 
     @ManyToOne
-    @JoinColumn(name = "memNo", referencedColumnName = "memNo", insertable = false, updatable = false)
+    @JoinColumn(name = "memno", referencedColumnName = "memno", insertable = false, updatable = false)
     private Member member;
 
     public CompositeDetail getCompositeKey() {
@@ -59,10 +59,10 @@ public class RentalMyFavorite implements java.io.Serializable {
     public static class CompositeDetail implements java.io.Serializable {
         private static final long serialVersionUID = 1L;
 
-        @Column(name = "rNo")
+        @Column(name = "rno")
         private Integer rNo;
 
-        @Column(name = "memNo")
+        @Column(name = "memno")
         private Integer memNo;
 
         // 一定要有無參數建構子

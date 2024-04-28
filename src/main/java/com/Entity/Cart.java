@@ -9,13 +9,13 @@ public class Cart {
 
     @EmbeddedId
     private CompositeDetail2 compositeKey2;
-    @Column(name = "pBuyQty")
+    @Column(name = "pbuyqty")
     private Integer pBuyQty;
     @ManyToOne
-    @JoinColumn(name = "memNo", referencedColumnName = "memNo", insertable = false, updatable = false)
+    @JoinColumn(name = "memno", referencedColumnName = "memno", insertable = false, updatable = false)
     private Member member;
     @ManyToOne
-    @JoinColumn(name = "pNo", referencedColumnName = "pNo", insertable = false, updatable = false)
+    @JoinColumn(name = "pno", referencedColumnName = "pno", insertable = false, updatable = false)
     private Product product;
 
     public CompositeDetail2 getCompositeKey2() {
@@ -53,9 +53,9 @@ public class Cart {
     @Embeddable
     public static class CompositeDetail2 implements Serializable {
         private static final long serialVersionUID = 1L;
-        @Column(name = "pNo")
+        @Column(name = "pno")
         private Integer pNo;
-        @Column(name = "memNo")
+        @Column(name = "memno")
         private Integer memNo;
 
 

@@ -3,14 +3,14 @@ package com.Entity;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "ServiceRobot")
+@Table(name = "servicerobot")
 public class ServiceRobot {
 	@Id
-    @Column(name = "keywordNo")
+    @Column(name = "keywordno")
 	private Integer keywordNo;
-    @Column(name = "keywordName")
+    @Column(name = "keywordname")
     private String keywordName;
-    @Column(name = "responseContent")
+    @Column(name = "responsecontent")
     private String responseContent;
 
     public Integer getKeywordNo() {

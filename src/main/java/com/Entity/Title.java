@@ -6,12 +6,12 @@ import javax.persistence.*;
 import java.util.Set;
 
 @Entity
-@Table(name = "Title")
+@Table(name = "title")
 public class Title {
     @Id
-    @Column(name = "titleNo")
+    @Column(name = "titleno")
     private Integer titleNo;
-    @Column(name = "titleName")
+    @Column(name = "titlename")
     private String titleName;
     @JsonBackReference
     @OneToMany(mappedBy = "title", cascade = CascadeType.ALL)

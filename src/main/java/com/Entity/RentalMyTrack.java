@@ -11,15 +11,15 @@ import java.util.Objects;
 public class RentalMyTrack implements Serializable {
     @Id
     @ManyToOne
-    @JoinColumn(name = "rNo", referencedColumnName = "rNo")
+    @JoinColumn(name = "rno", referencedColumnName = "rno")
     private Rental rental;
     @Id
     @ManyToOne
-    @JoinColumn(name = "memNo", referencedColumnName = "memNo")
+    @JoinColumn(name = "memno", referencedColumnName = "memno")
     private Member member;
-	@Column(name = "rTrackTime")
+	@Column(name = "rtracktime")
     private Timestamp rTrackTime;
-	@Column(name = "expRentalDate")
+	@Column(name = "exprentaldate")
     private Date expRentalDate;
 
     public Rental getRental() {

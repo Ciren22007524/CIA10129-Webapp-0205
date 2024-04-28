@@ -16,48 +16,48 @@ public class RentalOrder implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "rOrdNo", updatable = false)
+    @Column(name = "rordno", updatable = false)
     private Integer rOrdNo; // -> 租借品訂單編號
     @ManyToOne
-    @JoinColumn(name = "memNo", referencedColumnName = "memNo")
+    @JoinColumn(name = "memno", referencedColumnName = "memno")
     private Member member;
-    @Column(name = "rByrName")
+    @Column(name = "rbyrname")
     private String rByrName; // -> 訂購人姓名
-    @Column(name = "rByrPhone")
+    @Column(name = "rbyrphone")
     private String rByrPhone; // -> 訂購人手機號碼
-    @Column(name = "rByrEmail")
+    @Column(name = "rbyremail")
     private String rByrEmail; // -> 訂購人Email
-    @Column(name = "rRcvName")
+    @Column(name = "rrcvname")
     private String rRcvName; // -> 收件人姓名
-    @Column(name = "rRcvPhone")
+    @Column(name = "rrcvphone")
     private String rRcvPhone; // -> 收件人手機號碼
-    @Column(name = "rTakeMethod")
+    @Column(name = "rtakemethod")
     private byte rTakeMethod; // -> 取貨方式
-    @Column(name = "rAddr")
+    @Column(name = "raddr")
     private String rAddr; // -> 宅配住址
-    @Column(name = "rPayMethod")
+    @Column(name = "rpaymethod")
     private byte rPayMethod; // -> 付款方式
-    @Column(name = "rAllPrice")
+    @Column(name = "rallprice")
     private BigDecimal rAllPrice; // -> 訂單總金額
-    @Column(name = "rAllDepPrice")
+    @Column(name = "ralldepprice")
     private BigDecimal rAllDepPrice; // -> 押金總金額
-    @Column(name = "rOrdTime")
+    @Column(name = "rordtime")
     private Timestamp rOrdTime; // -> 下單時間
-    @Column(name = "rDate")
+    @Column(name = "rdate")
     private Timestamp rDate; // -> 預計租借日期
-    @Column(name = "rBackDate")
+    @Column(name = "rbackdate")
     private Timestamp rBackDate; // -> 預計歸還日期
-    @Column(name = "rRealBackDate")
+    @Column(name = "rrealbackdate")
     private Timestamp rRealBackDate; // -> 實際歸還日期
-    @Column(name = "rPayStat")
+    @Column(name = "rpaystat")
     private byte rPayStat; // -> 付款狀態
-    @Column(name = "rOrdStat")
+    @Column(name = "rordstat")
     private byte rOrdStat; // -> 訂單狀態
-    @Column(name = "rtnStat")
+    @Column(name = "rtnstat")
     private byte rtnStat; // -> 歸還狀態
-    @Column(name = "rtnRemark")
+    @Column(name = "rtnremark")
     private String rtnRemark; // -> 歸還註記
-    @Column(name = "rtnCompensation")
+    @Column(name = "rtncompensation")
     private BigDecimal rtnCompensation; // -> 賠償金額
     @OneToMany(mappedBy = "rentalOrder", cascade = CascadeType.ALL)
     private Set<RentalOrderDetails> rentalOrderDetailses;

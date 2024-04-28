@@ -4,16 +4,16 @@ import javax.persistence.*;
 import java.sql.Timestamp;
 
 @Entity
-@Table(name = "News")
+@Table(name = "news")
 public class News {
     @Id
-    @Column(name = "newsNo")
+    @Column(name = "newsno")
     private Integer newsNo;
-    @Column(name = "newsTitle")
+    @Column(name = "newstitle")
     private String newsTitle;
-    @Column(name = "newsContent", columnDefinition = "longtext")
+    @Column(name = "newscontent", columnDefinition = "longtext")
     private String newsContent;
-    @Column(name = "postTime")
+    @Column(name = "posttime")
     private Timestamp postTime;
 
     public Integer getNewsNo() {
