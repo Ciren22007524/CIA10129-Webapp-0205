@@ -1,12 +1,13 @@
 package com.ren.admauthority.service;
 
 import com.Entity.*;
-import com.Entity.News;
 import com.ren.admauthority.dao.AdmAuthorityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class AdmAuthorityServiceImpl implements AdmAuthorityService_interface {
 
     @Autowired

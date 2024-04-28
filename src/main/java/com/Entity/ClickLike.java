@@ -5,20 +5,20 @@ import java.io.Serializable;
 import java.util.Objects;
 
 @Entity
-@Table(name = "clickLike")
+@Table(name = "clicklike")
 public class ClickLike implements java.io.Serializable {
 
     @EmbeddedId
     private CompositeClickLike compositeClickLike;
 
     @ManyToOne
-    @JoinColumn(name = "memNo", referencedColumnName = "memNo", insertable = false, updatable = false)
+    @JoinColumn(name = "memno", referencedColumnName = "memno", insertable = false, updatable = false)
     private Member member;
 
     // private Integer memNo;
 
     @ManyToOne
-    @JoinColumn(name = "artNo", referencedColumnName = "artNo", insertable = false, updatable = false)
+    @JoinColumn(name = "artno", referencedColumnName = "artno", insertable = false, updatable = false)
     private ColumnArticle columnArticle;
 
     // private Integer artNo;
@@ -53,10 +53,10 @@ public class ClickLike implements java.io.Serializable {
 
         private static final long serialVersionUID = 1L;
 
-        @Column(name = "memNo")
+        @Column(name = "memno")
         private Integer memNo;
 
-        @Column(name = "artNo")
+        @Column(name = "artno")
         private Integer artNo;
 
         public CompositeClickLike() {

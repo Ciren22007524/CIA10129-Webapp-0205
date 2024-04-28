@@ -5,29 +5,29 @@ import java.io.Serializable;
 import java.sql.Timestamp;
 
 @Entity
-@Table(name = "MyCoupon")
+@Table(name = "mycoupon")
 public class MyCoupon {
     @EmbeddedId
     private CompositeCouponMember compositeCouponMember;
     @ManyToOne
-    @JoinColumn(name = "coupNo", referencedColumnName = "coupNo", insertable = false, updatable = false)
+    @JoinColumn(name = "coupno", referencedColumnName = "coupno", insertable = false, updatable = false)
     private Coupon coupon ;
     @ManyToOne
-    @JoinColumn(name = "memNo", referencedColumnName = "memNo", insertable = false, updatable = false)
+    @JoinColumn(name = "memno", referencedColumnName = "memno", insertable = false, updatable = false)
     private Member member;
-    @Column(name = "coupUsedStat")
+    @Column(name = "coupusedstat")
     private Byte coupUsedStat;
-    @Column(name = "coupInfo")
+    @Column(name = "coupinfo")
     private String coupInfo;
-    @Column(name = "coupExpDate")
+    @Column(name = "coupexpdate")
     private Timestamp coupExpDate;
 
     @Embeddable
     public static class CompositeCouponMember implements Serializable {
         private static final long serialVersionUID = 1L;
-        @Column(name = "coupNo")
+        @Column(name = "coupno")
         private Integer coupNo;
-        @Column(name = "memNo")
+        @Column(name = "memno")
         private Integer memNo;
 
         public Integer getTitleNo() {

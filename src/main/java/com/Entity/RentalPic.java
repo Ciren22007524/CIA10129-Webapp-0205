@@ -3,18 +3,18 @@ package com.Entity;
 import javax.persistence.*;
 
     @Entity  //標示類別為"永續類別"
-    @Table(name = "RentalPic")  //此"永續類別"對應到的表格
+    @Table(name = "rentalpic")  //此"永續類別"對應到的表格
     public class RentalPic {
 
         @Id //標示為PK
-        @Column(name="rPicNo", nullable=false)
+        @Column(name="rpicno", nullable=false)
         private Integer rPicNo;
 
-        @Column(name="rPic", columnDefinition = "LongBLOB")
+        @Column(name="rpic", columnDefinition = "longblob")
         private byte[] rPic;
 
         @ManyToOne
-        @JoinColumn(name="rNo", referencedColumnName="rNo")
+        @JoinColumn(name="rno", referencedColumnName="rno")
         private Rental rental;
 
         public Integer getrPicNo() {

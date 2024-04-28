@@ -8,24 +8,24 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "AdmAuthority")
+@Table(name = "admauthority")
 public class AdmAuthority {
     @EmbeddedId
     private CompositeAdmAuthority compositeAdmAuthority;
     @ManyToOne
     @JsonManagedReference
-    @JoinColumn(name = "titleNo", referencedColumnName = "titleNo", insertable = false, updatable = false)
+    @JoinColumn(name = "titleno", referencedColumnName = "titleno", insertable = false, updatable = false)
     private Title title;
     @ManyToOne
     @JsonManagedReference
-    @JoinColumn(name = "authFuncNo", referencedColumnName = "authFuncNo", insertable = false, updatable = false)
+    @JoinColumn(name = "authfuncno", referencedColumnName = "authfuncno", insertable = false, updatable = false)
     private AuthorityFunction authorityFunction;
     @Embeddable
     public static class CompositeAdmAuthority implements Serializable {
         private static final long serialVersionUID = 1L;
-        @Column(name = "titleNo")
+        @Column(name = "titleno")
         private Integer titleNo;
-        @Column(name = "authFuncNo")
+        @Column(name = "authfuncno")
         private Integer authFuncNo;
 
         public Integer getTitleNo() {

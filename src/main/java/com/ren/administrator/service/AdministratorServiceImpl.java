@@ -3,12 +3,14 @@ package com.ren.administrator.service;
 import com.Entity.Administrator;
 import com.ren.administrator.dao.AdministratorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.sql.Date;
 import java.util.Base64;
 import java.util.LinkedList;
 import java.util.List;
 
+@Service
 public class AdministratorServiceImpl implements AdministratorService_interface {
 
     @Autowired

@@ -9,34 +9,34 @@ public class Report implements java.io.Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "reportNo")
+    @Column(name = "reportno")
     private Integer reportNo;
 
     @ManyToOne
-    @JoinColumn(name = "artReplyNo", referencedColumnName = "columnReplyNo")
+    @JoinColumn(name = "artreplyno", referencedColumnName = "columnreplyno")
     private ColumnReply columnReply;
 
     // private Integer artReplyNo;
 
     @ManyToOne
-    @JoinColumn(name = "memNo", referencedColumnName = "memNo")
+    @JoinColumn(name = "memno", referencedColumnName = "memno")
     private Member member;
 
     // private Integer memNo;
 
     @ManyToOne
-    @JoinColumn(name = "admNo", referencedColumnName = "admNo")
+    @JoinColumn(name = "admno", referencedColumnName = "admno")
     private Administrator administrator;
 
     // private Integer admNo;
 
-    @Column(name = "reportTime")
+    @Column(name = "reporttime")
     private Timestamp reportTime;
 
-    @Column(name = "reportReason")
+    @Column(name = "reportreason")
     private String reportReason;
 
-    @Column(name = "reportType")
+    @Column(name = "reporttype")
     private Byte reportType;
 
     public Integer getReportNo() {

@@ -10,29 +10,29 @@ import java.math.BigDecimal;
 public class ProductOrderDetail {
     @EmbeddedId
     private CompositeDetail compositeKey;
-    @Column(name = "pPrice")
+    @Column(name = "pprice")
     private BigDecimal pPrice;
-    @Column(name = "pOrdQty")
+    @Column(name = "pordqty")
     private Integer pOrdQty;
-    @Column(name = "pRealPrice")
+    @Column(name = "prealprice")
     private BigDecimal pRealPrice;
-    @Column(name = "pComContent")
+    @Column(name = "pcomcontent")
     private String pComContent;
-    @Column(name = "pScore")
+    @Column(name = "pscore")
     private Integer pScore;
     @ManyToOne
-    @JoinColumn(name = "pNo", referencedColumnName = "pNo", insertable = false, updatable = false)
+    @JoinColumn(name = "pno", referencedColumnName = "pno", insertable = false, updatable = false)
     private Product product;
     @ManyToOne
-    @JoinColumn(name = "pOrdNo", referencedColumnName = "pOrdNo", insertable = false, updatable = false)
+    @JoinColumn(name = "pordno", referencedColumnName = "pordno", insertable = false, updatable = false)
     private ProductOrder productOrder ;
     // 需要宣告一個有包含複合主鍵屬性的類別，並一定實作 java.io.Serializable 介面
     @Embeddable
     public static class CompositeDetail implements Serializable {
         private static final long serialVersionUID = 1L;
-        @Column(name = "pOrdNo", updatable = false)
+        @Column(name = "pordno", updatable = false)
         private Integer pOrdNo;
-        @Column(name = "pNo", updatable = false)
+        @Column(name = "pno", updatable = false)
         private Integer pNo;
 
         public CompositeDetail() {

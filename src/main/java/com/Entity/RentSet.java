@@ -3,17 +3,17 @@ package com.Entity;
 import javax.persistence.*;
 
 @Entity  //標示類別為"永續類別"
-@Table(name = "RentSet")  //此"永續類別"對應到的表格
+@Table(name = "rentset")  //此"永續類別"對應到的表格
 public class RentSet {
 
     @Id //標示為PK
-    @Column(name = "rOrdNo")
+    @Column(name = "rordno")
     private Integer rOrdNo;
 
-    @Column(name = "rSetName", length = 20)
+    @Column(name = "rsetname", length = 20)
     private String rSetName;
 
-    @Column(name = "rSetDays", columnDefinition = "TINYINT")
+    @Column(name = "rsetdays", columnDefinition = "tinyint")
     private Byte rSetDays;
 
     public Integer getrOrdNo() {

@@ -9,20 +9,20 @@ public class Notice implements java.io.Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "motNo")
+    @Column(name = "motno")
     private Integer motNo;
 
     @ManyToOne
-    @JoinColumn(name = "memNo", referencedColumnName = "memNo")
+    @JoinColumn(name = "memno", referencedColumnName = "memno")
     private Member member; // 定義多對一關係(現在表示:通知\(多)，會員(單))，該字段關聯到 MemberVO 實體類，使用 memNo 列作為外來鍵。 需要再生成getter and setter
 
-    @Column(name = "notContent")
+    @Column(name = "notcontent")
     private String notContent;
 
-    @Column(name = "notTime")
+    @Column(name = "nottime")
     private Timestamp notTime;
 
-    @Column(name = "notStat")
+    @Column(name = "notstat")
     private Byte notStat;
 
     public Integer getMotNo() {

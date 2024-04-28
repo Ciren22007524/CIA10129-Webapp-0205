@@ -7,12 +7,12 @@ import javax.persistence.*;
 @Table(name = "productpicture")
 public class ProductPicture implements java.io.Serializable {
     @Id
-    @Column(name = "pPicNo", updatable = false)
+    @Column(name = "ppicno", updatable = false)
     private Integer pPicNo;
     @ManyToOne
-    @JoinColumn(name = "pNo", referencedColumnName = "pNo")
+    @JoinColumn(name = "pno", referencedColumnName = "pno")
     private Product product;
-    @Column(name = "pPic", columnDefinition = "longblob")
+    @Column(name = "ppic", columnDefinition = "longblob")
     private byte[] pPic;
 
     public Integer getpPicNo() {

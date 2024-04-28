@@ -10,43 +10,43 @@ import java.util.Set;
 public class Member implements java.io.Serializable {
     @Id // 主鍵
     @GeneratedValue(strategy = GenerationType.IDENTITY) // 設置自動增長鍵
-    @Column(name = "memNo") // 映射到資料庫中的column的memNo
+    @Column(name = "memno") // 映射到資料庫中的column的memNo
     private Integer memNo;
-    @Column(name = "mName")
+    @Column(name = "mname")
     private String mName;
-    @Column(name = "memAcc", unique = true) //`unique` 屬性設置為 `true`，表示該列應該具有唯一性約束。這意味著數據庫中的每一個 `memAcc` 值都必須是唯一的，不能有重複的值。
+    @Column(name = "memacc", unique = true) //`unique` 屬性設置為 `true`，表示該列應該具有唯一性約束。這意味著數據庫中的每一個 `memAcc` 值都必須是唯一的，不能有重複的值。
     private String memAcc;
-    @Column(name = "memPwd")
+    @Column(name = "mempwd")
     private String memPwd;
-    @Column(name = "memMob", unique = true)
+    @Column(name = "memmob", unique = true)
     private String memMob;
-    @Column(name = "mGender")
+    @Column(name = "mgender")
     private Byte mGender;
-    @Column(name = "memMail", unique = true)
+    @Column(name = "memmail", unique = true)
     private String memMail;
-    @Column(name = "memAdd")
+    @Column(name = "memadd")
     private String memAdd;
-    @Column(name = "memBd")
+    @Column(name = "membd")
     private Date memBd;
-    @Column(name = "memCard")
+    @Column(name = "memcard")
     private String memCard;
     @Column(name = "provider")
     private Byte provider;
-    @Column(name = "clientID")
+    @Column(name = "clientid")
     private String clientID;
-    @Column(name = "displayName")
+    @Column(name = "displayname")
     private String displayName;
-    @Column(name = "accessToken")
+    @Column(name = "accesstoken")
     private String accessToken;
-    @Column(name = "refreshToken")
+    @Column(name = "refreshtoken")
     private String refreshToken;
-    @Column(name = "tknExpireTime")
+    @Column(name = "tknexpiretime")
     private Timestamp tknExpireTime;
-    @Column(name = "creationTime")
+    @Column(name = "creationtime")
     private Timestamp creationTime;
-    @Column(name = "memberJoinTime")
+    @Column(name = "memberjointime")
     private Timestamp memberJoinTime;
-    @Column(name = "memStat")
+    @Column(name = "memstat")
     private Byte memStat;
 
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)

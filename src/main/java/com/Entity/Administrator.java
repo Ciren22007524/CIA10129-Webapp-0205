@@ -8,27 +8,27 @@ import java.sql.Date;
 import java.util.Set;
 
 @Entity
-@Table(name = "Administrator")
+@Table(name = "administrator")
 public class Administrator {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "admNo")
+    @Column(name = "admno")
     private Integer admNo;
-    @Column(name = "admPwd")
+    @Column(name = "admpwd")
     private String admPwd;
-    @Column(name = "admName")
+    @Column(name = "admname")
     private String admName;
-    @Column(name = "admStat")
+    @Column(name = "admstat")
     private Byte admStat;
-    @Column(name = "admEmail")
+    @Column(name = "admemail")
     private String admEmail;
     @ManyToOne
     @JsonManagedReference
-    @JoinColumn(name = "titleNo", referencedColumnName = "titleNo")
+    @JoinColumn(name = "titleno", referencedColumnName = "titleno")
     private Title title;
-    @Column(name = "admHireDate")
+    @Column(name = "admhiredate")
     private Date admHireDate;
-    @Column(name = "admPhoto", columnDefinition = "blob")
+    @Column(name = "admphoto", columnDefinition = "blob")
     private byte[] admPhoto;
     @JsonBackReference
     @OneToMany(mappedBy = "administrator", cascade = CascadeType.ALL)

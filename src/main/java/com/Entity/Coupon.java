@@ -6,24 +6,24 @@ import java.sql.Timestamp;
 import java.util.Set;
 
 @Entity
-@Table(name = "Coupon")
+@Table(name = "coupon")
 public class Coupon {
     @Id
-    @Column(name = "coupNo")
+    @Column(name = "coupno")
     private Integer coupNo;
-    @Column(name = "coupName")
+    @Column(name = "coupname")
     private String coupName;
-    @Column(name = "coupCond")
+    @Column(name = "coupcond")
     private String coupCond;
-    @Column(name = "coupDisc")
+    @Column(name = "coupdisc")
     private BigDecimal coupDisc;
-    @Column(name = "coupAddDate")
+    @Column(name = "coupadddate")
     private Timestamp coupAddDate;
-    @Column(name = "coupExpDate")
+    @Column(name = "coupexpdate")
     private Timestamp coupExpDate;
-    @Column(name = "coupRelDate")
+    @Column(name = "coupreldate")
     private Timestamp coupRelDate;
-    @Column(name = "coupRelStat")
+    @Column(name = "couprelstat")
     private Byte coupRelStat;
     @OneToMany(mappedBy = "coupon", cascade = CascadeType.ALL)
     private Set<ProductOrder> productOrders;

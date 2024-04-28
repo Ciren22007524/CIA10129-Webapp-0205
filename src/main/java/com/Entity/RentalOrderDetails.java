@@ -7,7 +7,6 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "rentalorderdetails")
-@IdClass(RentalOrderDetails.CompositeDetail.class)
 public class RentalOrderDetails implements Serializable{
 
     public RentalOrderDetails() {
@@ -26,7 +25,7 @@ public class RentalOrderDetails implements Serializable{
 //    private Integer rOrdNo;
     @Id
     @ManyToOne
-    @JoinColumn(name = "rOrdNo", referencedColumnName = "rOrdNo")
+    @JoinColumn(name = "rordno", referencedColumnName = "rordno")
     private RentalOrder rentalOrder;
 
 //    @Id
@@ -34,12 +33,12 @@ public class RentalOrderDetails implements Serializable{
 //    private Integer rNo;
     @Id
     @ManyToOne
-    @JoinColumn(name = "rNo", referencedColumnName = "rNo")
+    @JoinColumn(name = "rno", referencedColumnName = "rno")
     private Rental rental;
 
-    @Column(name = "rPrice")
+    @Column(name = "rprice")
     private BigDecimal rPrice;
-    @Column(name = "rDesPrice")
+    @Column(name = "rdesprice")
     private BigDecimal rDesPrice;
 
     public RentalOrder getRentalOrder() {

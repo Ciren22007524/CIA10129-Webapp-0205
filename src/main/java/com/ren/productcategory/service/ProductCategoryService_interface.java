@@ -5,8 +5,6 @@ import java.util.Set;
 
 import com.Entity.Product;
 import com.Entity.ProductCategory;
-import com.Entity.ServicePicture;
-import com.Entity.ServiceRobot;
 
 public interface ProductCategoryService_interface {
 

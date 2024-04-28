@@ -9,19 +9,19 @@ import java.math.BigDecimal;
 public class RentalCategory {
 
     @Id //標示此為Pk
-    @Column(name="rCatNo")
+    @Column(name="rcatno")
     private Integer rCatNo;
 
-    @Column(name="rCatName", length=40)
+    @Column(name="rcatname", length=40)
     private String rCatName;
 
-    @Column(name="rStockQty")
+    @Column(name="rstockqty")
     private Integer rStockQty;
 
-    @Column(name="rRentedQty")
+    @Column(name="rrentedqty")
     private Integer rRentedQty;
 
-    @Column(name="rDesPrice",columnDefinition="BigDecimal")
+    @Column(name="rdesprice",columnDefinition="BigDecimal")
     private BigDecimal rDesPrice;
 
     @OneToMany(mappedBy = "rentalCategory", cascade = CascadeType.ALL) //CascadeType.ALL把對應到的相關資料刪除

@@ -5,20 +5,20 @@ import java.sql.Timestamp;
 import java.util.Set;
 
 @Entity
-@Table(name = "ServiceRecord")
+@Table(name = "servicerecord")
 public class ServiceRecord {
 	@Id
-    @Column(name = "recordNo")
+    @Column(name = "recordno")
 	private Integer recordNo;
     @ManyToOne
-    @JoinColumn(name = "admNo", referencedColumnName = "admNo")
+    @JoinColumn(name = "admno", referencedColumnName = "admno")
     private Administrator administrator;
     @ManyToOne
-    @JoinColumn(name = "memNo", referencedColumnName = "memNo")
+    @JoinColumn(name = "memno", referencedColumnName = "memno")
     private Member member;
-    @Column(name = "recordTime")
+    @Column(name = "recordtime")
     private Timestamp recordTime;
-    @Column(name = "recordContent")
+    @Column(name = "recordcontent")
     private String recordContent;
     @Column(name = "speaker")
     private Byte speaker;

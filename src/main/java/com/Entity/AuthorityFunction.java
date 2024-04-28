@@ -6,13 +6,13 @@ import javax.persistence.*;
 import java.util.Set;
 
 @Entity
-@Table(name = "AuthorityFunction")
+@Table(name = "authorityfunction")
 public class AuthorityFunction {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "authFuncNo")
+    @Column(name = "authfuncno")
     private Integer authFuncNo;
-    @Column(name = "authFuncInfo")
+    @Column(name = "authfuncinfo")
     private String authFuncInfo;
     @JsonBackReference
     @OneToMany(mappedBy = "authorityFunction", cascade = CascadeType.ALL)
