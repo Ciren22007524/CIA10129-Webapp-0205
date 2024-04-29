@@ -68,19 +68,20 @@ CREATE TABLE Member
     tknExpireTime  DATETIME     NULL,
     creationTime   DATETIME     NULL,
     memberJoinTime DATETIME     NULL,
-    memStat        TINYINT      NOT NULL DEFAULT 0
+    memStat        TINYINT      NOT NULL DEFAULT 0,
+    memSalt        VARCHAR(12)  NOT NULL
 );
 
-INSERT INTO Member(mName, memAcc, memPwd, memMob, mGender, memMail, memAdd, memBd, memCard, provider, clientID, displayName, accessToken, refreshToken, tknExpireTime, creationTime, memberJoinTime, memStat) VALUES ('John', 'John123', '123456', '0912345678', 1, 'John123@gmail.com','台北市大安區忠孝東路四段100號', '1990-01-15', '411235678901234', NULL, NULL, NULL, NULL, NULL, NULL, NULL, CURRENT_TIMESTAMP, 0);
-INSERT INTO Member(mName, memAcc, memPwd, memMob, mGender, memMail, memAdd, memBd, memCard, provider, clientID, displayName, accessToken, refreshToken, tknExpireTime, creationTime, memberJoinTime, memStat) VALUES ('Emma', 'Emma456', 'abcdef', '0987654321', 2, 'Emma456@gmail.com','新北市板橋區文化路二段50巷20號', '1985-03-28', '510510510510510', NULL, NULL, NULL, NULL, NULL, NULL, NULL, CURRENT_TIMESTAMP, 1);
-INSERT INTO Member(mName, memAcc, memPwd, memMob, mGender, memMail, memAdd, memBd, memCard, provider, clientID, displayName, accessToken, refreshToken, tknExpireTime, creationTime, memberJoinTime, memStat) VALUES ('Michael', 'Michael789', 'qwerty', '0965412378', 1, 'Michael789@gmail.com','台中市西屯區市政北二路100號', '1998-07-10', '378282246310005', NULL, NULL, NULL, NULL, NULL, NULL, NULL, CURRENT_TIMESTAMP, 2);
-INSERT INTO Member(mName, memAcc, memPwd, memMob, mGender, memMail, memAdd, memBd, memCard, provider, clientID, displayName, accessToken, refreshToken, tknExpireTime, creationTime, memberJoinTime, memStat) VALUES ('Emily', 'Emily987', '987654', '0945678912', 2, 'Emily987@gmail.com','台南市中西區民族路三段30號', '1982-09-05', '371449635398431', NULL, NULL, NULL, NULL, NULL, NULL, NULL, CURRENT_TIMESTAMP, 0);
-INSERT INTO Member(mName, memAcc, memPwd, memMob, mGender, memMail, memAdd, memBd, memCard, provider, clientID, displayName, accessToken, refreshToken, tknExpireTime, creationTime, memberJoinTime, memStat) VALUES ('Daniel', 'Daniel321', 'asdfgh', '0978912345', 1, 'Daniel321@gmail.com','高雄市左營區高鐵路100號', '1976-11-20', '378734493671000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, CURRENT_TIMESTAMP, 1);
-INSERT INTO Member(mName, memAcc, memPwd, memMob, mGender, memMail, memAdd, memBd, memCard, provider, clientID, displayName, accessToken, refreshToken, tknExpireTime, creationTime, memberJoinTime, memStat) VALUES ('Sophia', 'Sophia654', 'zxcvbn', '0921654987', 1, 'Sophia654@gmail.com','桃園市中壢區中央西路200號', '1995-04-12', '601111111111111', NULL, NULL, NULL, NULL, NULL, NULL, NULL, CURRENT_TIMESTAMP, 2);
-INSERT INTO Member(mName, memAcc, memPwd, memMob, mGender, memMail, memAdd, memBd, memCard, provider, clientID, displayName, accessToken, refreshToken, tknExpireTime, creationTime, memberJoinTime, memStat) VALUES ('Liam', 'Liam789', 'qazwsx', '0965498732', 2, 'Liam789@gmail.com','新竹市東區光復路二段50巷10號', '1988-06-30', '555555555555444', NULL, NULL, NULL, NULL, NULL, NULL, NULL, CURRENT_TIMESTAMP, 0);
-INSERT INTO Member(mName, memAcc, memPwd, memMob, mGender, memMail, memAdd, memBd, memCard, provider, clientID, displayName, accessToken, refreshToken, tknExpireTime, creationTime, memberJoinTime, memStat) VALUES ('Olivia', 'Olivia456', 'yhnqwe', '0987321654', 2, 'Olivia456@gmail.com','基隆市安樂區中正路100號', '1979-10-22', '356611111111111', NULL, NULL, NULL, NULL, NULL, NULL, NULL, CURRENT_TIMESTAMP, 1);
-INSERT INTO Member(mName, memAcc, memPwd, memMob, mGender, memMail, memAdd, memBd, memCard, provider, clientID, displayName, accessToken, refreshToken, tknExpireTime, creationTime, memberJoinTime, memStat) VALUES ('James', 'James123', '654321', '0921987654', 1, 'James123@gmail.com','嘉義市西區興業路一段20號', '1992-12-08', '353011133330000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, CURRENT_TIMESTAMP, 2);
-INSERT INTO Member(mName, memAcc, memPwd, memMob, mGender, memMail, memAdd, memBd, memCard, provider, clientID, displayName, accessToken, refreshToken, tknExpireTime, creationTime, memberJoinTime, memStat) VALUES ('Ava', 'Ava789', 'plmokn', '0915935746', 1, 'Ava789@gmail.com','彰化縣彰化市中山路100號', '1987-02-18', '352800000000000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, CURRENT_TIMESTAMP, 0);
+INSERT INTO Member(mName, memAcc, memPwd, memMob, mGender, memMail, memAdd, memBd, memCard, provider, clientID, displayName, accessToken, refreshToken, tknExpireTime, creationTime, memberJoinTime, memStat) VALUES ('John', 'John123', '123456', '0912345678', 1, 'John123@gmail.com','台北市大安區忠孝東路四段100號', '1990-01-15', '411235678901234', NULL, NULL, NULL, NULL, NULL, NULL, NULL, CURRENT_TIMESTAMP, 0, '1');
+INSERT INTO Member(mName, memAcc, memPwd, memMob, mGender, memMail, memAdd, memBd, memCard, provider, clientID, displayName, accessToken, refreshToken, tknExpireTime, creationTime, memberJoinTime, memStat) VALUES ('Emma', 'Emma456', 'abcdef', '0987654321', 2, 'Emma456@gmail.com','新北市板橋區文化路二段50巷20號', '1985-03-28', '510510510510510', NULL, NULL, NULL, NULL, NULL, NULL, NULL, CURRENT_TIMESTAMP, '1');
+INSERT INTO Member(mName, memAcc, memPwd, memMob, mGender, memMail, memAdd, memBd, memCard, provider, clientID, displayName, accessToken, refreshToken, tknExpireTime, creationTime, memberJoinTime, memStat) VALUES ('Michael', 'Michael789', 'qwerty', '0965412378', 1, 'Michael789@gmail.com','台中市西屯區市政北二路100號', '1998-07-10', '378282246310005', NULL, NULL, NULL, NULL, NULL, NULL, NULL, CURRENT_TIMESTAMP, 2, '1');
+INSERT INTO Member(mName, memAcc, memPwd, memMob, mGender, memMail, memAdd, memBd, memCard, provider, clientID, displayName, accessToken, refreshToken, tknExpireTime, creationTime, memberJoinTime, memStat) VALUES ('Emily', 'Emily987', '987654', '0945678912', 2, 'Emily987@gmail.com','台南市中西區民族路三段30號', '1982-09-05', '371449635398431', NULL, NULL, NULL, NULL, NULL, NULL, NULL, CURRENT_TIMESTAMP, 0, '1');
+INSERT INTO Member(mName, memAcc, memPwd, memMob, mGender, memMail, memAdd, memBd, memCard, provider, clientID, displayName, accessToken, refreshToken, tknExpireTime, creationTime, memberJoinTime, memStat) VALUES ('Daniel', 'Daniel321', 'asdfgh', '0978912345', 1, 'Daniel321@gmail.com','高雄市左營區高鐵路100號', '1976-11-20', '378734493671000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, CURRENT_TIMESTAMP, 1, '1');
+INSERT INTO Member(mName, memAcc, memPwd, memMob, mGender, memMail, memAdd, memBd, memCard, provider, clientID, displayName, accessToken, refreshToken, tknExpireTime, creationTime, memberJoinTime, memStat) VALUES ('Sophia', 'Sophia654', 'zxcvbn', '0921654987', 1, 'Sophia654@gmail.com','桃園市中壢區中央西路200號', '1995-04-12', '601111111111111', NULL, NULL, NULL, NULL, NULL, NULL, NULL, CURRENT_TIMESTAMP, 2, '1');
+INSERT INTO Member(mName, memAcc, memPwd, memMob, mGender, memMail, memAdd, memBd, memCard, provider, clientID, displayName, accessToken, refreshToken, tknExpireTime, creationTime, memberJoinTime, memStat) VALUES ('Liam', 'Liam789', 'qazwsx', '0965498732', 2, 'Liam789@gmail.com','新竹市東區光復路二段50巷10號', '1988-06-30', '555555555555444', NULL, NULL, NULL, NULL, NULL, NULL, NULL, CURRENT_TIMESTAMP, 0, '1');
+INSERT INTO Member(mName, memAcc, memPwd, memMob, mGender, memMail, memAdd, memBd, memCard, provider, clientID, displayName, accessToken, refreshToken, tknExpireTime, creationTime, memberJoinTime, memStat) VALUES ('Olivia', 'Olivia456', 'yhnqwe', '0987321654', 2, 'Olivia456@gmail.com','基隆市安樂區中正路100號', '1979-10-22', '356611111111111', NULL, NULL, NULL, NULL, NULL, NULL, NULL, CURRENT_TIMESTAMP, 1, '1');
+INSERT INTO Member(mName, memAcc, memPwd, memMob, mGender, memMail, memAdd, memBd, memCard, provider, clientID, displayName, accessToken, refreshToken, tknExpireTime, creationTime, memberJoinTime, memStat) VALUES ('James', 'James123', '654321', '0921987654', 1, 'James123@gmail.com','嘉義市西區興業路一段20號', '1992-12-08', '353011133330000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, CURRENT_TIMESTAMP, 2, '1');
+INSERT INTO Member(mName, memAcc, memPwd, memMob, mGender, memMail, memAdd, memBd, memCard, provider, clientID, displayName, accessToken, refreshToken, tknExpireTime, creationTime, memberJoinTime, memStat) VALUES ('Ava', 'Ava789', 'plmokn', '0915935746', 1, 'Ava789@gmail.com','彰化縣彰化市中山路100號', '1987-02-18', '352800000000000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, CURRENT_TIMESTAMP, 0, '1');
 
 -- 創建會員通知表格
 CREATE TABLE Notice
@@ -222,20 +223,21 @@ CREATE TABLE Administrator
     titleNo INT NOT NULL,
     admHireDate DATE NOT NULL,
     admPhoto BLOB NULL,
+    admSalt VARCHAR(12) NOT NULL,
     FOREIGN KEY (titleNo) REFERENCES Title(titleNo)
 );
 
-INSERT INTO Administrator (admNo, admPwd, admName, admStat, admEmail, titleNo, admHireDate, admPhoto) VALUES
-(1, 'password1', '蔡陰魂', 1, 'admin1@gmail.com', 1, '2001-01-09', null),
-(2, 'password2', '韓果魚', 1, 'admin2@gmail.com', 2, '2002-07-08', null),
-(3, 'password3', '賴皮寮', 1, 'admin3@gmail.com', 3, '1987-08-07', null),
-(4, 'password4', '趙紹康', 1, 'admin4@gmail.com', 4, '1985-06-04', null),
-(5, 'password5', '陳石中', 1, 'admin5@gmail.com', 5, '1991-11-12', null),
-(6, 'password6', '郭拔跋', 1, 'admin6@gmail.com', 6, '1999-02-24', null),
-(7, 'password7', '柯阿伯', 1, 'admin7@gmail.com', 7, '1998-03-04', null),
-(8, 'password8', '黃國倉', 1, 'admin8@gmail.com', 8, '1995-12-24', null),
-(9, 'password9', '周船熊', 1, 'admin9@gmail.com', 9, '2002-05-06', null),
-(10, 'password10', '王小明', 1, 'admin10@gmail.com', 10, '2015-04-09', null);
+INSERT INTO Administrator (admNo, admPwd, admName, admStat, admEmail, titleNo, admHireDate, admPhoto, admSalt) VALUES
+(1, 'password1', '蔡陰魂', 1, 'admin1@gmail.com', 1, '2001-01-09', null, '1'),
+(2, 'password2', '韓果魚', 1, 'admin2@gmail.com', 2, '2002-07-08', null, '1'),
+(3, 'password3', '賴皮寮', 1, 'admin3@gmail.com', 3, '1987-08-07', null, '1'),
+(4, 'password4', '趙紹康', 1, 'admin4@gmail.com', 4, '1985-06-04', null, '1'),
+(5, 'password5', '陳石中', 1, 'admin5@gmail.com', 5, '1991-11-12', null, '1'),
+(6, 'password6', '郭拔跋', 1, 'admin6@gmail.com', 6, '1999-02-24', null, '1'),
+(7, 'password7', '柯阿伯', 1, 'admin7@gmail.com', 7, '1998-03-04', null, '1'),
+(8, 'password8', '黃國倉', 1, 'admin8@gmail.com', 8, '1995-12-24', null, '1'),
+(9, 'password9', '周船熊', 1, 'admin9@gmail.com', 9, '2002-05-06', null, '1'),
+(10, 'password10', '王小明', 1, 'admin10@gmail.com', 10, '2015-04-09', null, '1');
 
 -- 創建客服紀錄表格
 CREATE TABLE ServiceRecord(

@@ -2,6 +2,7 @@ package com.ren.product.dao;
 
 import com.Entity.Product;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
@@ -15,17 +16,23 @@ import java.util.Optional;
 public interface ProductRepository extends JpaRepository<Product, Integer> {
 
 //    // 根據關鍵字搜尋產品
-//    List<Product> findByProductNameContaining(String keyword);
-//    List<Product> findByProductNameContainingAndProductCatNo(String keyword, Integer pCatNo);
-//    List<Product> findByProductCatNo(Integer pCatNo);
-//    // 新增方法以獲取所有上架的商品
-//    List<Product> findByProductStat(Integer pStat);
-//
-//    // 新增方法以根據商品編號查找商品
-//    Optional<Product> findByProductNo(Integer pNo);
+//    @Transactional
+//    List<Product> findBypNameContaining(String keyword);
+//    @Transactional
+//    List<Product> findBypNameContainingAndProductCategoryPcatNo(String keyword, Integer pCatNo);
 //
 //    @Transactional
-//    @Query("SELECT p FROM ProductVO p WHERE " +
+//    List<Product> findByProductCategorypCatNo(Integer pCatNo);
+//    // 新增方法以獲取所有上架的商品
+//    @Transactional
+//    List<Product> findBypStat(Integer pStat);
+//    // 新增方法以根據商品編號查找商品
+//    @Transactional
+//    Optional<Product> findBypNo(Integer pNo);
+
+//    @Transactional
+//    @Modifying
+//    @Query("SELECT p FROM product p WHERE " +
 //            "(:pName IS NULL OR p.pName = :pName) AND " +
 //            "(:pInfo IS NULL OR p.pInfo = :pInfo) AND " +
 //            "(:pSize IS NULL OR p.pSize = :pSize) AND " +
@@ -36,6 +43,8 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
 //            "(:pComPeople IS NULL OR p.pComPeople = :pComPeople) AND " +
 //            "(:pComScore IS NULL OR p.pComScore = :pComScore)")
 //    List<Product> findByAttributes(
+////                @Param("pNo") Integer pNo,
+////                @Param("pCatNo") Integer pCatNo,
 //            @Param("pName") String pName,
 //            @Param("pInfo") String pInfo,
 //            @Param("pSize") Integer pSize,

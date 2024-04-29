@@ -1,6 +1,7 @@
 package com.ren.administrator.controller;
 
 import com.Entity.Administrator;
+import com.Entity.Product;
 import com.ren.administrator.service.AdministratorServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,7 +21,7 @@ public class AdministratorController {
         return administratorSvc.getOneAdministrator(admNo);
     }
 
-    @GetMapping("/listAllAdministrator")
+    @GetMapping("/listAllAdministrators")
     public List<Administrator> getAllAdministrators() {
         return administratorSvc.getAll();
     }
@@ -43,5 +44,10 @@ public class AdministratorController {
     public void deleteAdministrator(@PathVariable Integer admNo) {
         administratorSvc.deleteAdministrator(admNo);
     }
-    
+
+    @ModelAttribute("AllProducts")
+    protected List<Product> getAllAs(){
+        return null;
+    }
+
 }
