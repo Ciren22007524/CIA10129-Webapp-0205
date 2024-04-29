@@ -16,12 +16,12 @@ public class TitleController {
     private TitleServiceImpl titleSvc;
 
     @GetMapping("/listOneTitle")
-    public Title getTitle(@PathVariable Integer titleNo) {
-        return titleSvc.getOneTitle(titleNo);
+    public String listOne(@PathVariable Integer titleNo) {
+        return "/backend/title/listOneTitle";
     }
 
     @GetMapping("/listAllTitles")
-    public List<Title> getAllTitles() {
+    public List<Title> listAll() {
         return titleSvc.getAll();
     }
 
@@ -42,5 +42,10 @@ public class TitleController {
     @DeleteMapping("/titles/{titleNo}")
     public void deleteTitle(@PathVariable Integer titleNo) {
         titleSvc.deleteTitle(titleNo);
+    }
+
+    @ModelAttribute("/")
+    protected List<Title> getAllTitles() {
+        return titleSvc.getAll();
     }
 }

@@ -22,5 +22,4 @@ public interface TitleService_interface {
 //    List<TitleAdmVO> getAdms(String titleName);
 //    // 查詢所有管理員
 //    List<TitleAdmVO> getAdmsAll();
-
 }

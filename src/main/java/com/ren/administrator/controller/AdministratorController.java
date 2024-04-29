@@ -1,10 +1,10 @@
 package com.ren.administrator.controller;
 
 import com.Entity.Administrator;
-import com.Entity.Product;
 import com.ren.administrator.service.AdministratorServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,13 +17,14 @@ public class AdministratorController {
     private AdministratorServiceImpl administratorSvc;
 
     @GetMapping("/listOneAdministrator")
-    public Administrator getAdministrator(@PathVariable Integer admNo) {
-        return administratorSvc.getOneAdministrator(admNo);
+    public String getAdministrator(@PathVariable Integer admNo, ModelMap modelMap) {
+        administratorSvc.getOneAdministrator(admNo);
+        return "/backend/administrator/listOneAdministrator";
     }
 
     @GetMapping("/listAllAdministrators")
-    public List<Administrator> getAllAdministrators() {
-        return administratorSvc.getAll();
+    public String listAll() {
+        return "/backend/administrator/listAllAdminstrators";
     }
 
     @PostMapping("/addAdministrator")
@@ -46,8 +47,14 @@ public class AdministratorController {
     }
 
     @ModelAttribute("AllProducts")
-    protected List<Product> getAllAs(){
-        return null;
+    protected List<Administrator> getAllAdministrators(){
+
+        return administratorSvc.getAll();
+    }
+
+    @GetMapping("/")
+    public String toHome() {
+        return "/home";
     }
 
 }

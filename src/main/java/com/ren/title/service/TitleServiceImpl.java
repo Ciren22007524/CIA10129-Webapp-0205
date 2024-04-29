@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class TitleServiceImpl implements TitleService_interface {
+public class TitleServiceImpl implements TitleService_interface{
 
     @Autowired
     private TitleRepository titleRepository;
