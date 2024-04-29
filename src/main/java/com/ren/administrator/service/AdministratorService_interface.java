@@ -9,15 +9,15 @@ import java.util.List;
 public interface AdministratorService_interface {
     // 新增(將前端request值放入VO由DAO執行SQL語法，並返回VO由Controller轉給View)
     // 不包括圖片
-    public Administrator addAdministrator(Administrator administrator);
+    Administrator addAdministrator(Administrator administrator);
     // 查詢單筆資料
-    public Administrator getOneAdministrator(Integer admNo);
+    Administrator getOneAdministrator(Integer admNo);
     // 查詢所有資料
-    public List<Administrator> getAll();
+    List<Administrator> getAll();
     // 修改(返回值由Controller轉給View)
-    public Administrator updateAdministrator(Administrator administrator);
+    Administrator updateAdministrator(Administrator administrator);
     // 刪除
-    public void deleteAdministrator(Integer admNo);
+    void deleteAdministrator(Integer admNo);
     // 上傳圖片
 //    public void uploadPhoto(Integer admNo, byte[] admPhoto);
 //    // 顯示大頭貼

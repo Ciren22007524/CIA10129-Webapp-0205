@@ -12,7 +12,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/backend/product")
-public class ProductController {
+public class ProductBackEndController {
 
     @Autowired
     private ProductServiceImpl productSvc;
