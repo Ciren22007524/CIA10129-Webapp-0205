@@ -57,4 +57,9 @@ public class AdministratorController {
         return "/home";
     }
 
+    @GetMapping("/backend")
+    public String tobackendHome() {
+        return "/backend/listAll";
+    }
+
 }

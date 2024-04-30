@@ -1,4 +1,7 @@
 package com.ren.listener;
 
-public class RefreshResourcesListener {
+import javax.servlet.ServletContextAttributeListener;
+
+public class RefreshResourcesListener implements ServletContextAttributeListener {
+    // 預計使用來同步redis與資料庫資源
 }

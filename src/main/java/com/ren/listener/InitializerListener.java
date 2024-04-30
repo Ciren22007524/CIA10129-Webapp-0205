@@ -1,20 +1,7 @@
-//package com.ren.listener;
-//
-//import com.ren.util.HibernateUtil;
-//
-//import javax.servlet.ServletContextEvent;
-//import javax.servlet.ServletContextListener;
-//
-//public class InitializerListener implements ServletContextListener {
-//    @Override
-//    public void contextInitialized(ServletContextEvent sce) {
-//        System.out.println("context started");
-//        HibernateUtil.getSessionFactory();
-//    }
-//
-//    @Override
-//    public void contextDestroyed(ServletContextEvent sce) {
-//        System.out.println("context ended");
-//        HibernateUtil.shutdown();
-//    }
-//}
+package com.ren.listener;
+
+import javax.servlet.ServletContextListener;
+
+public class InitializerListener implements ServletContextListener {
+    // 預計用來開啟Redis資料庫
+}
