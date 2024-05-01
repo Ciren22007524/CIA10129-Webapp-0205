@@ -32,6 +32,7 @@ public class Rental {
     private String rInfo;
     @Column(name="rstat",columnDefinition = "TINYINT")
     private Byte rStat;
+
     @JsonBackReference
     @OneToMany(mappedBy = "rental", cascade = CascadeType.ALL)
     private Set<RentalOrderDetails> rentalOrderDetails;
@@ -41,6 +42,9 @@ public class Rental {
     @JsonBackReference
     @OneToMany(mappedBy = "rental", cascade = CascadeType.ALL)
     private Set<RentalPic> rentalPics;
+    @JsonBackReference
+    @OneToMany(mappedBy = "rental", cascade = CascadeType.ALL)
+    private Set<RentalMyTrack> rentalMyTracks;
 
     public Integer getrNo() {
         return rNo;

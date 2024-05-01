@@ -54,12 +54,22 @@ public class AdministratorController {
 
     @GetMapping("/")
     public String toHome() {
-        return "/home";
+        return "/listAll";
     }
 
     @GetMapping("/backend")
     public String tobackendHome() {
         return "/backend/listAll";
+    }
+
+    @GetMapping("/index")
+    public String toIndex() {
+        return "/backend/index";
+    }
+
+    @GetMapping("/selectAdministrator")
+    public String toSelect() {
+        return "/backend/administrator/selectAdministrator";
     }
 
 }
