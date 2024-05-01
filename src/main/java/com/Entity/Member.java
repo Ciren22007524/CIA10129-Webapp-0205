@@ -52,7 +52,7 @@ public class Member implements java.io.Serializable {
     private Byte memStat;
     @Column(name = "memsalt")
     private String memSalt;
-    @Column(name = "mempic")
+    @Column(name = "mempic", columnDefinition = "blob")
     private byte[] memPic;
 
     @JsonBackReference
