@@ -3,7 +3,7 @@
 <head th:insert="~{backend/component/plugin/backendplugin.html :: css}">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>商品清單</title>
     <!-- Custom styles for this page -->
     <link th:href="@{/backend/vendor/datatables/dataTables.bootstrap4.min.css}" rel="stylesheet"/>
 
@@ -46,6 +46,7 @@
                                     <th>商品已售出數量</th>
                                     <th>評價總人數</th>
                                     <th>評價總星數</th>
+                                    <th>修改</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -55,7 +56,14 @@
                                         <td th:text="${product.productCategory.productCatNo}"></td>
                                         <td th:text="${product.productName}"></td>
                                         <td th:text="${product.productInfo}"></td>
-                                        <td th:text="${product.productSize}"></td>
+                                        <td>
+                                            <span th:if="${product.productStat == 0}" th:text="XS"></span>
+                                            <span th:if="${product.productStat == 1}" th:text="S"></span>
+                                            <span th:if="${product.productStat == 2}" th:text="M"></span>
+                                            <span th:if="${product.productStat == 3}" th:text="L"></span>
+                                            <span th:if="${product.productStat == 4}" th:text="XL"></span>
+                                            <span th:if="${product.productStat == 5}" th:text="2L"></span>
+                                        </td>
                                         <td th:text="${product.productColor}"></td>
                                         <td th:text="${product.productPrice}"></td>
                                         <td>
@@ -67,10 +75,9 @@
                                         <td th:text="${product.productComScore}"></td>
                                         <td>
                                             <form method="post" th:action="@{updateProduct}">
+                                                <input type="hidden" name="productNo" th:value="${product.productNo}">
                                                 <button type="submit">
-                                                    <i class="fa-solid fa-pen-to-square"></i>
-                                                    <input type="hidden" name="productNo" value="${product.productNo}">
-                                                    <input type="hidden" name="action" value="getOne_For_Update">
+                                                    <i class="far fa-edit"></i>
                                                 </button>
                                             </form>
                                         </td>

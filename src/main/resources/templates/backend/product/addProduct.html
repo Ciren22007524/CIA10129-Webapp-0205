@@ -1,164 +1,55 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="Big5"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ page import="com.ren.product.model.ProductVO" %>
-
-<% //¨£com.product.com.controller.ProductServlet.java²Ä238¦æ¦s¤JreqªºproductVOª«¥ó (¦¹¬°¿é¤J®æ¦¡¦³¿ù»~®ÉªºproductVOª«¥ó)
-   ProductVO productVO = (ProductVO) request.getAttribute("productVO");
-%>
---<%= productVO==null %>--${productVO.productCategory.pCatNo}-- <!-- line 100 -->
-<html>
-<head>
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
-<title>­û¤u¸ê®Æ·s¼W - addProduct.jsp</title>
-
-	<link
-			href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css"
-			rel="stylesheet"
-			integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ"
-			crossorigin="anonymous"/>
-
-	<link rel="stylesheet"
-		  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-		  integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
-		  crossorigin="anonymous" referrerpolicy="no-referrer"/>
-
-	<link rel="stylesheet" href="<%=request.getContextPath()%>/css/components/hamburger.css"/>
-
-<style>
-  table#table-1 {
-	background-color: #CCCCFF;
-    border: 2px solid black;
-    text-align: center;
-  }
-  table#table-1 h4 {
-    color: red;
-    display: block;
-    margin-bottom: 1px;
-  }
-  h4 {
-    color: blue;
-    display: inline;
-  }
-</style>
-
-<style>
-  table {
-	width: 450px;
-	background-color: white;
-	margin-top: 1px;
-	margin-bottom: 1px;
-  }
-  table, th, td {
-    border: 0px solid #CCCCFF;
-  }
-  th, td {
-    padding: 1px;
-  }
-</style>
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:insert="~{backend/component/plugin/backendplugin.html :: css}">
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>æ–°å¢å•†å“</title>
+	<!-- Custom styles for this page -->
+	<link th:href="@{/backend/vendor/datatables/dataTables.bootstrap4.min.css}" rel="stylesheet" />
 
 </head>
-<body bgcolor='white'>
+<body id="page-top">
+<!-- Page Wrapper -->
+<div id="wrapper">
+	<!-- Sidebar -->
+	<ul th:replace="backend/component/sidebar :: sidebar"></ul>
+	<!-- End of Sidebar -->
+	<!-- Content Wrapper -->
+	<div id="content-wrapper" class="d-flex flex-column">
+		<!-- Main Content -->
+		<div id="content">
+			<!-- Topbar -->
+			<nav th:replace="backend/component/nav :: nav"></nav>
+			<!-- End of Topbar -->
+			<!-- Begin Page Content -->
+			<div class="container-fluid">
+				<div th:replace="backend/component/breadcrumb :: breadcrumb"></div>
+				<!-- å…§å®¹è«‹å¡«é€™è£¡~~~~~~~~~~~~~~~ -->
 
-<!-- ¾ÉÄı¦C -->
-<nav>
-	<div>FallElove</div>
-	<input id="hamburger" type="checkbox">
-	<label class="hamburger-icon" for="hamburger">
-		<div class="bar"></div>
-	</label>
-	<ul class="menu">
-		<li><a href="<%=request.getContextPath()%>/administrator/select_administrator.jsp">ºŞ²z­û</a></li>
-		<li><a href="<%=request.getContextPath()%>/admauthority/select_admAuthority.jsp">ºŞ²z­ûÅv­­</a></li>
-		<li><a href="<%=request.getContextPath()%>/authorityfunction/select_authorityFunction.jsp">¥\¯àÅv­­</a></li>
-		<li><a href="<%=request.getContextPath()%>/title/select_title.jsp">Â¾¦ì</a></li>
-		<li><a href="<%=request.getContextPath()%>/product/select_product.jsp">°Ó«~</a></li>
-		<li><a href="<%=request.getContextPath()%>/productcategory/select_productCategory.jsp">°Ó«~ºØÃş</a></li>
-	</ul>
-</nav>
+			</div>
+			<!-- /.container-fluid -->
+		</div>
+		<!-- End of Main Content -->
 
-<table id="table-1">
-	<tr><td>
-		 <h3>­û¤u¸ê®Æ·s¼W - addProduct.jsp</h3></td><td>
-		 <h4><a href="select_product.jsp">¦^­º­¶</a></h4>
-	</td></tr>
-</table>
+		<!-- Footer -->
+		<footer th:replace="backend/component/bottom :: bottom"></footer>
+		<!-- End of Footer -->
+	</div>
+	<!-- End of Content Wrapper -->
+</div>
+<!-- End of Page Wrapper -->
 
-<h3>¸ê®Æ·s¼W:</h3>
+<!-- Scroll to Top Button-->
+<a th:replace="backend/component/scrolltotop :: scrolltotop"></a>
+<!-- Logout Modal-->
+<div th:replace="backend/component/logout :: logout"></div>
 
-<%-- ¿ù»~ªí¦C --%>
-<c:if test="${not empty errorMsgs}">
-	<font style="color:red">½Ğ­×¥¿¥H¤U¿ù»~:</font>
-	<ul>
-		<c:forEach var="message" items="${errorMsgs}">
-			<li style="color:red">${message}</li>
-		</c:forEach>
-	</ul>
-</c:if>
-
-<FORM METHOD="post" ACTION="product.do" name="form1">
-<table>
-	
-	
-	
-	
-<!-- 	<tr> -->
-<!-- 		<td>°Ó«~½s¸¹:</td> -->
-<%-- 		<td><input type="TEXT" name="pNo" value="<%= (productVO==null)? "10000001" : productVO.getpNo()%>" size="45"/></td> --%>
-<!-- 	</tr> -->
-	<tr>
-		<td>°Ó«~¦WºÙ:</td>
-		<td><input type="TEXT" name="pName" value="<%= (productVO==null)? "µuÅ¨­m" : productVO.getpName()%>" size="45"/></td>
-	</tr>
-	<tr>
-		<td>°Ó«~¸ê°T:</td>
-		<td><input type="TEXT" name="pInfo" value="<%= (productVO==null)? "µuµuªºÅ¨­m" : productVO.getpInfo()%>" size="45"/></td>
-	</tr>
-	<tr>
-		<td>¤Ø¤o:</td>
-		<td><input type="TEXT" name="pSize" value="<%= (productVO==null)? "1" : productVO.getpSize()%>" size="45"/></td>
-	</tr>
-	<tr>
-		<td>ÃC¦â:</td>
-		<td><input type="TEXT" name="pColor" value="<%= (productVO==null)? "ÂÅ¦â" : productVO.getpColor()%>" size="45"/></td>
-	</tr>
-	<tr>
-		<td>°Ó«~³æ»ù:</td>
-		<td><input type="TEXT" name="pPrice" value="<%= (productVO==null)? "5000" : productVO.getpPrice()%>" size="45"/></td>
-	</tr>
-	<tr>
-		<td>°Ó«~ª¬ºA:</td>
-		<td><input type="TEXT" name="pStat" value="<%= (productVO==null)? "1" : productVO.getpStat()%>" size="45"/></td>
-	</tr>
-	<tr>
-		<td>°Ó«~¤w°â¥X¼Æ¶q:</td>
-		<td><input type="TEXT" name="pSalQty" value="<%= (productVO==null)? "200" : productVO.getpSalQty()%>" size="45"/></td>
-	</tr>
-	<tr>
-		<td>µû»ùÁ`¤H¼Æ:</td>
-		<td><input type="TEXT" name="pComPeople" value="<%= (productVO==null)? "50" : productVO.getpComPeople()%>" size="45"/></td>
-	</tr>
-	<tr>
-		<td>µû»ùÁ`¬P¼Æ:</td>
-		<td><input type="TEXT" name="pComScore" value="<%= (productVO==null)? "3" : productVO.getpComScore()%>" size="45"/></td>
-	</tr>					
-
-	<jsp:useBean id="productCategorySvc" scope="page" class="com.ren.productcategory.service.ProductCategoryServiceImpl" />
-	<tr>
-		<td>°Ó«~Ãş§O½s¸¹:<font color=red><b>*</b></font></td>
-		<td><select size="1" name="pCatNo">
-			<c:forEach var="productCategoryVO" items="${productCategorySvc.all}">
-				<option value="${productCategoryVO.pCatNo}" ${(productVO.prodcutCategory.pCatNo==productCategoryVO.pCatNo)? 'selected':'' } >${productCategoryVO.pCatName}
-			</c:forEach>
-		</select></td>
-	</tr>
-
-</table>
-
-<br>
-
-<input type="hidden" name="action" value="insert">
-<input type="submit" value="°e¥X·s¼W"></FORM>
+<th:block th:insert="~{backend/component/plugin/backendplugin.html :: js}"></th:block>
+<!-- Page level plugins -->
+<script th:src="@{/backend/vendor/datatables/jquery.dataTables.min.js}"></script>
+<script th:src="@{/backend/vendor/datatables/dataTables.bootstrap4.min.js}"></script>
+<!-- Page level custom scripts -->
+<script th:src="@{/backend/js/demo/datatables-demo.js}"></script>
 
 </body>
-
 </html>
