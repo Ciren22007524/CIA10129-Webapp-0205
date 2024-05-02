@@ -505,7 +505,7 @@ CREATE TABLE ProductOrder
     productOrdNo         INT              Not Null PRIMARY KEY AUTO_INCREMENT,
     memNo          		 INT              Not Null,
     productByrName       VARCHAR(20)      Not Null,
-    productByrPhone      INT              Not Null,
+    productByrPhone      VARCHAR(10),
     productByrEmail      VARCHAR(40)      Not Null,
     productRcvName       VARCHAR(20),
     productRcvPhone      VARCHAR (10),
