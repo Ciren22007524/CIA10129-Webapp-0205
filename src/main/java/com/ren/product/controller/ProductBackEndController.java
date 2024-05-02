@@ -26,21 +26,14 @@ public class ProductBackEndController {
     }
 
     @GetMapping("/listOneProduct")
-    public Product getProduct(@PathVariable Integer pNo, HttpSession session) {
-        return productSvc.getOneProduct(pNo);
+    public String getProduct(@PathVariable Integer pNo, HttpSession session) {
+        return "/backend/product/listOneProduct";
     }
 
     @GetMapping("/listAllProducts")
     public String getAllProducts(ModelMap modelMap) {
         return "/backend/product/listAllProducts";
     }
-
-//    // 全部json到前端
-//    @GetMapping("/listAllProducts")
-//    public ResponseEntity<List<Product>> getAllProducts() {
-//        List<Product> products = productSvc.getAll();
-//        return ResponseEntity.status(HttpStatus.OK).body(products);
-//    }
 
     @PostMapping("/addProduct")
     public Product addProduct(@RequestBody Product product) {

@@ -20,7 +20,6 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
     List<Product> findByProductNameContaining(String keyword);
     @Transactional
     List<Product> findByProductNameContainingAndProductCategoryProductCatNo(String keyword, Integer productCatNo);
-
     @Transactional
     List<Product> findByProductCategoryProductCatNo(Integer productCatNo);
     // 新增方法以獲取所有上架的商品
@@ -33,6 +32,8 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
     @Transactional
     @Modifying
     @Query("SELECT p FROM Product p WHERE " +
+//            "(:productNo IS NULL OR p.productNo = :productNo) AND " +
+//            "(:productCatNo IS NULL OR p.productCatNo = :productCatNo) AND " +
             "(:productName IS NULL OR p.productName = :productName) AND " +
             "(:productInfo IS NULL OR p.productInfo = :productInfo) AND " +
             "(:productSize IS NULL OR p.productSize = :productSize) AND " +
@@ -43,6 +44,8 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
             "(:productComPeople IS NULL OR p.productComPeople = :productComPeople) AND " +
             "(:productComScore IS NULL OR p.productComScore = :productComScore)")
     List<Product> findByAttributes(
+//            @Param("productNo") Integer productNo,
+//            @Param("productCatNo") Integer productCatNo,
             @Param("productName") String productName,
             @Param("productInfo") String productInfo,
             @Param("productSize") Integer productSize,
@@ -53,7 +56,5 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
             @Param("productComPeople") Integer productComPeople,
             @Param("productComScore") Integer productComScore
     );
-    //            @Param("productNo") Integer productNo,
-//            @Param("productCatNo") Integer productCatNo,
 
 }

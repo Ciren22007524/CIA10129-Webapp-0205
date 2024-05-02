@@ -22,7 +22,7 @@ public class ProductOrder {
     @Column(name = "productbyrname")
     private String productByrName;
     @Column(name = "productbyrphone")
-    private Integer productByrPhone;
+    private String productByrPhone;
     @Column(name = "productbyremail")
     private String productByrEmail;
     @Column(name = "productrcvname")
