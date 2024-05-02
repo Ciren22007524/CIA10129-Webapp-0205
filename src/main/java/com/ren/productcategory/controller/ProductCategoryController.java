@@ -32,16 +32,16 @@ public class ProductCategoryController {
     }
 
     @PutMapping("/updateProductCategory")
-    public ProductCategory updateProductCategory(@PathVariable Integer pCatNo, @RequestBody ProductCategory productCategory) {
+    public ProductCategory updateProductCategory(@PathVariable Integer productCatNo, @RequestBody ProductCategory productCategory) {
         // Ensure the productNo in the path matches the productNo in the request body
-        if (!pCatNo.equals(productCategory.getpCatNo())) {
+        if (!productCatNo.equals(productCategory.getProductCatNo())) {
             throw new IllegalArgumentException("Path variable productNo must match the productNo in the request body");
         }
         return productCategorySvc.updateProductCategory(productCategory);
     }
 
-    @DeleteMapping("/productCategories/{pCatNo}")
-    public void deleteProductCategory(@PathVariable Integer pCatNo) {
-        productCategorySvc.deleteProductCategory(pCatNo);
-    }
+//    @DeleteMapping("/productCategories/{pCatNo}")
+//    public void deleteProductCategory(@PathVariable Integer pCatNo) {
+//        productCategorySvc.deleteProductCategory(pCatNo);
+//    }
 }

@@ -7,43 +7,64 @@ import javax.persistence.*;
 public class RentSet {
 
     @Id //標示為PK
-    @Column(name = "rordno")
-    private Integer rOrdNo;
+    @Column(name = "rentalordno")
+    private Integer rentalOrdNo;
 
-    @Column(name = "rsetname", length = 20)
-    private String rSetName;
+    @Column(name = "rentalsetname", length = 20)
+    private String rentalSetName;
 
-    @Column(name = "rsetdays", columnDefinition = "tinyint")
-    private Byte rSetDays;
+    @Column(name = "rentalsetdays", columnDefinition = "tinyint")
+    private Byte rentalSetDays;
 
-    public Integer getrOrdNo() {
-        return rOrdNo;
+    public RentSet() {
     }
 
-    public void setrOrdNo(Integer rOrdNo) {
-        this.rOrdNo = rOrdNo;
+    public RentSet(Integer rentalOrdNo) {
+        this.rentalOrdNo = rentalOrdNo;
     }
 
-    public String getrSetName() {
-        return rSetName;
+    public RentSet(String rentalSetName, Byte rentalSetDays) {
+        this.rentalSetName = rentalSetName;
+        this.rentalSetDays = rentalSetDays;
     }
 
-    public void setrSetName(String rSetName) {
-        this.rSetName = rSetName;
+    public RentSet(Integer rentalOrdNo, String rentalSetName, Byte rentalSetDays) {
+        this.rentalOrdNo = rentalOrdNo;
+        this.rentalSetName = rentalSetName;
+        this.rentalSetDays = rentalSetDays;
     }
 
-    public Byte getrSetDays() {
-        return rSetDays;
+    public Integer getRentalOrdNo() {
+        return rentalOrdNo;
     }
 
-    public void setrSetDays(Byte rSetDays) {
-        this.rSetDays = rSetDays;
+    public void setRentalOrdNo(Integer rentalOrdNo) {
+        this.rentalOrdNo = rentalOrdNo;
+    }
+
+    public String getRentalSetName() {
+        return rentalSetName;
+    }
+
+    public void setRentalSetName(String rentalSetName) {
+        this.rentalSetName = rentalSetName;
+    }
+
+    public Byte getRentalSetDays() {
+        return rentalSetDays;
+    }
+
+    public void setRentalSetDays(Byte rentalSetDays) {
+        this.rentalSetDays = rentalSetDays;
     }
 
     @Override
     public String toString() {
-        return "RentalCategory [rOrdNo=" + rOrdNo + ", rSetName=" + rSetName + "," + " rSetDays=" + rSetDays + "]";
+        return "RentSet{" +
+                "rentalOrdNo=" + rentalOrdNo +
+                ", rentalSetName='" + rentalSetName + '\'' +
+                ", rentalSetDays=" + rentalSetDays +
+                '}';
     }
-
 }
 

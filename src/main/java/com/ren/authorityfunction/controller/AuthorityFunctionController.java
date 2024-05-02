@@ -39,9 +39,9 @@ public class AuthorityFunctionController {
         return authorityFunctionSvc.updateAuthorityFunction(authorityFunction);
     }
 
-    @DeleteMapping("/authorityFunctions/{authFuncNo}")
-    public void deleteAuthorityFunction(@PathVariable Integer authFuncNo) {
-        authorityFunctionSvc.deleteAuthorityFunction(authFuncNo);
-    }
+//    @DeleteMapping("/authorityFunctions/{authFuncNo}")
+//    public void deleteAuthorityFunction(@PathVariable Integer authFuncNo) {
+//        authorityFunctionSvc.deleteAuthorityFunction(authFuncNo);
+//    }
 
 }

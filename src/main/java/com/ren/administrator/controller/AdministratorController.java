@@ -41,10 +41,10 @@ public class AdministratorController {
         return administratorSvc.updateAdministrator(administrator);
     }
 
-    @DeleteMapping("/administrators/{admNo}")
-    public void deleteAdministrator(@PathVariable Integer admNo) {
-        administratorSvc.deleteAdministrator(admNo);
-    }
+//    @DeleteMapping("/administrators/{admNo}")
+//    public void deleteAdministrator(@PathVariable Integer admNo) {
+//        administratorSvc.deleteAdministrator(admNo);
+//    }
 
     @ModelAttribute("AllProducts")
     protected List<Administrator> getAllAdministrators(){

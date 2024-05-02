@@ -39,10 +39,10 @@ public class TitleController {
         return titleSvc.updateTitle(title);
     }
 
-    @DeleteMapping("/titles/{titleNo}")
-    public void deleteTitle(@PathVariable Integer titleNo) {
-        titleSvc.deleteTitle(titleNo);
-    }
+//    @DeleteMapping("/titles/{titleNo}")
+//    public void deleteTitle(@PathVariable Integer titleNo) {
+//        titleSvc.deleteTitle(titleNo);
+//    }
 
     @ModelAttribute("/")
     protected List<Title> getAllTitles() {
