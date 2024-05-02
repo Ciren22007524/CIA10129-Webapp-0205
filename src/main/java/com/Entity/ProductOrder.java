@@ -8,7 +8,6 @@ import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.util.Set;
 
-
 @Entity
 @Table(name = "productorder")
 public class ProductOrder {
@@ -57,13 +56,14 @@ public class ProductOrder {
     private Set<ProductOrderDetail> productOrderDetails;
 
     public ProductOrder() {
+
     }
 
     public ProductOrder(Integer productOrdNo) {
         this.productOrdNo = productOrdNo;
     }
 
-    public ProductOrder(Member member, String productByrName, Integer productByrPhone, String productByrEmail, String productRcvName, String productRcvPhone, Byte productTakeMethod, String productAddr, Byte productPayMethod, BigDecimal productAllPrice, Coupon coupon, BigDecimal productDisc, BigDecimal productRealPrice, Timestamp productOrdTime, Byte productOrdStat, Byte productStat) {
+    public ProductOrder(Member member, String productByrName, String productByrPhone, String productByrEmail, String productRcvName, String productRcvPhone, Byte productTakeMethod, String productAddr, Byte productPayMethod, BigDecimal productAllPrice, Coupon coupon, BigDecimal productDisc, BigDecimal productRealPrice, Timestamp productOrdTime, Byte productOrdStat, Byte productStat) {
         this.member = member;
         this.productByrName = productByrName;
         this.productByrPhone = productByrPhone;
@@ -82,7 +82,7 @@ public class ProductOrder {
         this.productStat = productStat;
     }
 
-    public ProductOrder(Integer productOrdNo, Member member, String productByrName, Integer productByrPhone, String productByrEmail, String productRcvName, String productRcvPhone, Byte productTakeMethod, String productAddr, Byte productPayMethod, BigDecimal productAllPrice, Coupon coupon, BigDecimal productDisc, BigDecimal productRealPrice, Timestamp productOrdTime, Byte productOrdStat, Byte productStat) {
+    public ProductOrder(Integer productOrdNo, Member member, String productByrName, String productByrPhone, String productByrEmail, String productRcvName, String productRcvPhone, Byte productTakeMethod, String productAddr, Byte productPayMethod, BigDecimal productAllPrice, Coupon coupon, BigDecimal productDisc, BigDecimal productRealPrice, Timestamp productOrdTime, Byte productOrdStat, Byte productStat) {
         this.productOrdNo = productOrdNo;
         this.member = member;
         this.productByrName = productByrName;
@@ -126,11 +126,11 @@ public class ProductOrder {
         this.productByrName = productByrName;
     }
 
-    public Integer getProductByrPhone() {
+    public String getProductByrPhone() {
         return productByrPhone;
     }
 
-    public void setProductByrPhone(Integer productByrPhone) {
+    public void setProductByrPhone(String productByrPhone) {
         this.productByrPhone = productByrPhone;
     }
 

@@ -10,10 +10,8 @@ import java.util.Objects;
 @Entity
 @Table(name = "rentalorderdetails")
 public class RentalOrderDetails implements Serializable{
-
     @EmbeddedId
     private CompositeDetail compositeDetail;
-
     @ManyToOne
     @JsonManagedReference
     @JoinColumn(name = "rentalordno", referencedColumnName = "rentalordno", insertable = false, updatable = false)
@@ -26,7 +24,6 @@ public class RentalOrderDetails implements Serializable{
     BigDecimal rentalPrice;
     @Column(name = "rentaldesprice")
     BigDecimal rentalDesPrice;
-
     @Embeddable
     public static class CompositeDetail implements Serializable {
 
