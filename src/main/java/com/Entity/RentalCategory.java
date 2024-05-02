@@ -11,62 +11,84 @@ import java.math.BigDecimal;
 public class RentalCategory {
 
     @Id //標示此為Pk
-    @Column(name="rcatno")
-    private Integer rCatNo;
+    @Column(name="rentalcatno")
+    private Integer rentalCatNo;
 
-    @Column(name="rcatname", length=40)
-    private String rCatName;
+    @Column(name="rentalcatname", length=40)
+    private String rentalCatName;
 
-    @Column(name="rstockqty")
-    private Integer rStockQty;
+    @Column(name="rentalstockqty")
+    private Integer rentalStockQty;
 
-    @Column(name="rrentedqty")
-    private Integer rRentedQty;
+    @Column(name="rentalrentedqty")
+    private Integer rentalRentedQty;
 
-    @Column(name="rdesprice",columnDefinition="BigDecimal")
-    private BigDecimal rDesPrice;
+    @Column(name="rentaldesprice",columnDefinition="BigDecimal")
+    private BigDecimal rentalDesPrice;
     @JsonBackReference
     @OneToMany(mappedBy = "rentalCategory", cascade = CascadeType.ALL) //CascadeType.ALL把對應到的相關資料刪除
     private Set<Rental> rentals;
 
-    public Integer getrCatNo() {
-        return rCatNo;
+    public RentalCategory() {
     }
 
-    public void setrCatNo(Integer rCatNo) {
-        this.rCatNo = rCatNo;
+    public RentalCategory(Integer rentalCatNo) {
+        this.rentalCatNo = rentalCatNo;
     }
 
-    public String getrCatName() {
-        return rCatName;
+    public RentalCategory(String rentalCatName, Integer rentalStockQty, Integer rentalRentedQty, BigDecimal rentalDesPrice) {
+        this.rentalCatName = rentalCatName;
+        this.rentalStockQty = rentalStockQty;
+        this.rentalRentedQty = rentalRentedQty;
+        this.rentalDesPrice = rentalDesPrice;
     }
 
-    public void setrCatName(String rCatName) {
-        this.rCatName = rCatName;
+    public RentalCategory(Integer rentalCatNo, String rentalCatName, Integer rentalStockQty, Integer rentalRentedQty, BigDecimal rentalDesPrice) {
+        this.rentalCatNo = rentalCatNo;
+        this.rentalCatName = rentalCatName;
+        this.rentalStockQty = rentalStockQty;
+        this.rentalRentedQty = rentalRentedQty;
+        this.rentalDesPrice = rentalDesPrice;
     }
 
-    public Integer getrStockQty() {
-        return rStockQty;
+    public Integer getRentalCatNo() {
+        return rentalCatNo;
     }
 
-    public void setrStockQty(Integer rStockQty) {
-        this.rStockQty = rStockQty;
+    public void setRentalCatNo(Integer rentalCatNo) {
+        this.rentalCatNo = rentalCatNo;
     }
 
-    public Integer getrRentedQty() {
-        return rRentedQty;
+    public String getRentalCatName() {
+        return rentalCatName;
     }
 
-    public void setrRentedQty(Integer rRentedQty) {
-        this.rRentedQty = rRentedQty;
+    public void setRentalCatName(String rentalCatName) {
+        this.rentalCatName = rentalCatName;
     }
 
-    public BigDecimal getrDesPrice() {
-        return rDesPrice;
+    public Integer getRentalStockQty() {
+        return rentalStockQty;
     }
 
-    public void setrDesPrice(BigDecimal rDesPrice) {
-        this.rDesPrice = rDesPrice;
+    public void setRentalStockQty(Integer rentalStockQty) {
+        this.rentalStockQty = rentalStockQty;
+    }
+
+    public Integer getRentalRentedQty() {
+        return rentalRentedQty;
+    }
+
+    public void setRentalRentedQty(Integer rentalRentedQty) {
+        this.rentalRentedQty = rentalRentedQty;
+    }
+
+    public BigDecimal getRentalDesPrice() {
+        return rentalDesPrice;
+    }
+
+    public void setRentalDesPrice(BigDecimal rentalDesPrice) {
+        this.rentalDesPrice = rentalDesPrice;
     }
 
     public Set<Rental> getRentals() {

@@ -1,4 +1,4 @@
--- 新增與修改級聯版
+-- 最新版
 CREATE DATABASE IF NOT EXISTS fallElove;
 USE fallElove;
 
@@ -51,11 +51,11 @@ DROP TABLE IF EXISTS ServiceRobot;
 CREATE TABLE Member
 (
     memNo          INT          NOT NULL PRIMARY KEY AUTO_INCREMENT,
-    mName          VARCHAR(20)  NOT NULL,
+    memName        VARCHAR(20)  NOT NULL,
     memAcc         VARCHAR(20)  NOT NULL UNIQUE,
-    memPwd         VARCHAR(20)  NOT NULL,
+    memPwd         VARCHAR(32)  NOT NULL,
     memMob         VARCHAR(20)  NOT NULL UNIQUE,
-    mGender        TINYINT      NULL,
+    memGender      TINYINT      NULL,
     memMail        VARCHAR(40)  NOT NULL,
     memAdd         VARCHAR(100) NOT NULL UNIQUE,
     memBd          DATE         NULL,
@@ -69,19 +69,21 @@ CREATE TABLE Member
     creationTime   DATETIME     NULL,
     memberJoinTime DATETIME     NULL,
     memStat        TINYINT      NOT NULL DEFAULT 0,
-    memSalt        VARCHAR(12)  NOT NULL
+    memSalt        VARCHAR(12)  NOT NULL,
+    memPic	       BLOB 		NULL
 );
 
-INSERT INTO Member(mName, memAcc, memPwd, memMob, mGender, memMail, memAdd, memBd, memCard, provider, clientID, displayName, accessToken, refreshToken, tknExpireTime, creationTime, memberJoinTime, memStat) VALUES ('John', 'John123', '123456', '0912345678', 1, 'John123@gmail.com','台北市大安區忠孝東路四段100號', '1990-01-15', '411235678901234', NULL, NULL, NULL, NULL, NULL, NULL, NULL, CURRENT_TIMESTAMP, 0, '1');
-INSERT INTO Member(mName, memAcc, memPwd, memMob, mGender, memMail, memAdd, memBd, memCard, provider, clientID, displayName, accessToken, refreshToken, tknExpireTime, creationTime, memberJoinTime, memStat) VALUES ('Emma', 'Emma456', 'abcdef', '0987654321', 2, 'Emma456@gmail.com','新北市板橋區文化路二段50巷20號', '1985-03-28', '510510510510510', NULL, NULL, NULL, NULL, NULL, NULL, NULL, CURRENT_TIMESTAMP, '1');
-INSERT INTO Member(mName, memAcc, memPwd, memMob, mGender, memMail, memAdd, memBd, memCard, provider, clientID, displayName, accessToken, refreshToken, tknExpireTime, creationTime, memberJoinTime, memStat) VALUES ('Michael', 'Michael789', 'qwerty', '0965412378', 1, 'Michael789@gmail.com','台中市西屯區市政北二路100號', '1998-07-10', '378282246310005', NULL, NULL, NULL, NULL, NULL, NULL, NULL, CURRENT_TIMESTAMP, 2, '1');
-INSERT INTO Member(mName, memAcc, memPwd, memMob, mGender, memMail, memAdd, memBd, memCard, provider, clientID, displayName, accessToken, refreshToken, tknExpireTime, creationTime, memberJoinTime, memStat) VALUES ('Emily', 'Emily987', '987654', '0945678912', 2, 'Emily987@gmail.com','台南市中西區民族路三段30號', '1982-09-05', '371449635398431', NULL, NULL, NULL, NULL, NULL, NULL, NULL, CURRENT_TIMESTAMP, 0, '1');
-INSERT INTO Member(mName, memAcc, memPwd, memMob, mGender, memMail, memAdd, memBd, memCard, provider, clientID, displayName, accessToken, refreshToken, tknExpireTime, creationTime, memberJoinTime, memStat) VALUES ('Daniel', 'Daniel321', 'asdfgh', '0978912345', 1, 'Daniel321@gmail.com','高雄市左營區高鐵路100號', '1976-11-20', '378734493671000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, CURRENT_TIMESTAMP, 1, '1');
-INSERT INTO Member(mName, memAcc, memPwd, memMob, mGender, memMail, memAdd, memBd, memCard, provider, clientID, displayName, accessToken, refreshToken, tknExpireTime, creationTime, memberJoinTime, memStat) VALUES ('Sophia', 'Sophia654', 'zxcvbn', '0921654987', 1, 'Sophia654@gmail.com','桃園市中壢區中央西路200號', '1995-04-12', '601111111111111', NULL, NULL, NULL, NULL, NULL, NULL, NULL, CURRENT_TIMESTAMP, 2, '1');
-INSERT INTO Member(mName, memAcc, memPwd, memMob, mGender, memMail, memAdd, memBd, memCard, provider, clientID, displayName, accessToken, refreshToken, tknExpireTime, creationTime, memberJoinTime, memStat) VALUES ('Liam', 'Liam789', 'qazwsx', '0965498732', 2, 'Liam789@gmail.com','新竹市東區光復路二段50巷10號', '1988-06-30', '555555555555444', NULL, NULL, NULL, NULL, NULL, NULL, NULL, CURRENT_TIMESTAMP, 0, '1');
-INSERT INTO Member(mName, memAcc, memPwd, memMob, mGender, memMail, memAdd, memBd, memCard, provider, clientID, displayName, accessToken, refreshToken, tknExpireTime, creationTime, memberJoinTime, memStat) VALUES ('Olivia', 'Olivia456', 'yhnqwe', '0987321654', 2, 'Olivia456@gmail.com','基隆市安樂區中正路100號', '1979-10-22', '356611111111111', NULL, NULL, NULL, NULL, NULL, NULL, NULL, CURRENT_TIMESTAMP, 1, '1');
-INSERT INTO Member(mName, memAcc, memPwd, memMob, mGender, memMail, memAdd, memBd, memCard, provider, clientID, displayName, accessToken, refreshToken, tknExpireTime, creationTime, memberJoinTime, memStat) VALUES ('James', 'James123', '654321', '0921987654', 1, 'James123@gmail.com','嘉義市西區興業路一段20號', '1992-12-08', '353011133330000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, CURRENT_TIMESTAMP, 2, '1');
-INSERT INTO Member(mName, memAcc, memPwd, memMob, mGender, memMail, memAdd, memBd, memCard, provider, clientID, displayName, accessToken, refreshToken, tknExpireTime, creationTime, memberJoinTime, memStat) VALUES ('Ava', 'Ava789', 'plmokn', '0915935746', 1, 'Ava789@gmail.com','彰化縣彰化市中山路100號', '1987-02-18', '352800000000000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, CURRENT_TIMESTAMP, 0, '1');
+INSERT INTO Member(memName, memAcc, memPwd, memMob, memGender, memMail, memAdd, memBd, memCard, provider, clientID, displayName, accessToken, refreshToken, tknExpireTime, creationTime, memberJoinTime, memStat, memSalt, memPic) VALUES
+('John', 'John123', '123456', '0912345678', 1, 'John123@gmail.com','台北市大安區忠孝東路四段100號', '1990-01-15', '411235678901234', NULL, NULL, NULL, NULL, NULL, NULL, NULL, CURRENT_TIMESTAMP, 0, '1', null),
+('Emma', 'Emma456', 'abcdef', '0987654321', 2, 'Emma456@gmail.com','新北市板橋區文化路二段50巷20號', '1985-03-28', '510510510510510', NULL, NULL, NULL, NULL, NULL, NULL, NULL, CURRENT_TIMESTAMP, 0,'2', null),
+('Michael', 'Michael789', 'qwerty', '0965412378', 1, 'Michael789@gmail.com','台中市西屯區市政北二路100號', '1998-07-10', '378282246310005', NULL, NULL, NULL, NULL, NULL, NULL, NULL, CURRENT_TIMESTAMP, 2, '3', null),
+('Emily', 'Emily987', '987654', '0945678912', 2, 'Emily987@gmail.com','台南市中西區民族路三段30號', '1982-09-05', '371449635398431', NULL, NULL, NULL, NULL, NULL, NULL, NULL, CURRENT_TIMESTAMP, 0, '4', null),
+('Daniel', 'Daniel321', 'asdfgh', '0978912345', 1, 'Daniel321@gmail.com','高雄市左營區高鐵路100號', '1976-11-20', '378734493671000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, CURRENT_TIMESTAMP, 1, '5', null),
+('Sophia', 'Sophia654', 'zxcvbn', '0921654987', 1, 'Sophia654@gmail.com','桃園市中壢區中央西路200號', '1995-04-12', '601111111111111', NULL, NULL, NULL, NULL, NULL, NULL, NULL, CURRENT_TIMESTAMP, 2, '6', null),
+('Liam', 'Liam789', 'qazwsx', '0965498732', 2, 'Liam789@gmail.com','新竹市東區光復路二段50巷10號', '1988-06-30', '555555555555444', NULL, NULL, NULL, NULL, NULL, NULL, NULL, CURRENT_TIMESTAMP, 0, '7', null),
+('Olivia', 'Olivia456', 'yhnqwe', '0987321654', 2, 'Olivia456@gmail.com','基隆市安樂區中正路100號', '1979-10-22', '356611111111111', NULL, NULL, NULL, NULL, NULL, NULL, NULL, CURRENT_TIMESTAMP, 1, '8', null),
+('James', 'James123', '654321', '0921987654', 1, 'James123@gmail.com','嘉義市西區興業路一段20號', '1992-12-08', '353011133330000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, CURRENT_TIMESTAMP, 2, '9', null),
+('Ava', 'Ava789', 'plmokn', '0915935746', 1, 'Ava789@gmail.com','彰化縣彰化市中山路100號', '1987-02-18', '352800000000000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, CURRENT_TIMESTAMP, 0, '10', null);
 
 -- 創建會員通知表格
 CREATE TABLE Notice
@@ -216,7 +218,7 @@ INSERT INTO AdmAuthority (titleNo,authFuncNo) VALUES
 CREATE TABLE Administrator
 (
 	admNo INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
-    admPwd VARCHAR(20) NOT NULL,
+    admPwd VARCHAR(32) NOT NULL,
     admName VARCHAR(50) NOT NULL,
     admStat TINYINT NOT NULL,
     admEmail VARCHAR(40) NOT NULL,
@@ -435,10 +437,10 @@ INSERT INTO Report(reportNo, artReplyNo, memNo, admNo, reportTime,reportReason, 
 -- 創建商品類別表格
 CREATE TABLE ProductCategory
 (
-	pCatNo INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
-    pCatName VARCHAR(40) NOT NULL
+	productCatNo INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    productCatName VARCHAR(40) NOT NULL
 );
-INSERT INTO ProductCategory (pCatNo, pCatName) VALUES
+INSERT INTO ProductCategory (productCatNo, productCatName) VALUES
 (1644, '男士襯衫'),
 (4133, '女士連衣裙'),
 (1321, '男士西裝'),
@@ -453,20 +455,20 @@ INSERT INTO ProductCategory (pCatNo, pCatName) VALUES
 -- 創建商品表格
 CREATE TABLE product
 (
-	pNo INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
-    pCatNo INT NOT NULL,
-    pName VARCHAR(40) NOT NULL,
-    pInfo VARCHAR(1000) NOT NULL,
-    pSize INT NOT NULL,
-    pColor VARCHAR(10),
-    pPrice DECIMAL(6,0) NOT NULL,
-    pStat TINYINT NOT NULL,
-    pSalQty INT NOT NULL,
-    pComPeople INT NOT NULL,
-    pComScore INT NOT NULL,
-    FOREIGN KEY (pCatNo) REFERENCES ProductCategory(pCatNo)
+	productNo INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    productCatNo INT NOT NULL,
+    productName VARCHAR(40) NOT NULL,
+    productInfo VARCHAR(1000) NOT NULL,
+    productSize INT NOT NULL,
+    productColor VARCHAR(10),
+    productPrice DECIMAL(6,0) NOT NULL,
+    productStat TINYINT NOT NULL,
+    productSalQty INT NOT NULL,
+    productComPeople INT NOT NULL,
+    productComScore INT NOT NULL,
+    FOREIGN KEY (productCatNo) REFERENCES ProductCategory(productCatNo)
 );
-INSERT INTO product (pCatNo, pName, pInfo, pSize, pColor, pPrice, pStat, pSalQty, pComPeople, pComScore) VALUES
+INSERT INTO product (productCatNo, productName, productInfo, productSize, productColor, productPrice, productStat, productSalQty, productComPeople, productComScore) VALUES
 (1644, '男士襯衫', '舒適且時尚的男士襯衫', 2, '藍色', 30, 1, 1000, 500, 2),
 (4133, '女士連衣裙', '優雅的女士連衣裙，適合各種場合', 1, '紅色', 50, 1, 500, 200, 5),
 (1321, '男士西裝', '高品質的男士西裝套裝，專業又時尚', 3, '黑色', 200, 0, 300, 150, 1),
@@ -481,13 +483,13 @@ INSERT INTO product (pCatNo, pName, pInfo, pSize, pColor, pPrice, pStat, pSalQty
 -- 創建 ProductPicture 表格
 CREATE TABLE ProductPicture
 (
-    pPicNo         INT              NOT NULL   PRIMARY KEY   AUTO_INCREMENT,
-    pNo            INT              NOT NULL,
-    pPic           LONGBLOB,
-    CONSTRAINT FK_ProductPicture_pNo foreign key(pNo) REFERENCES Product(pNo)
+    productPicNo         INT              NOT NULL   PRIMARY KEY   AUTO_INCREMENT,
+    productNo            INT              NOT NULL,
+    productPic           LONGBLOB,
+    CONSTRAINT FK_ProductPicture_productNo foreign key(productNo) REFERENCES Product(productNo)
 );
 
-INSERT INTO  ProductPicture  (pNo,pPic) VALUES
+INSERT INTO  ProductPicture  (productNo,productPic) VALUES
 (1,'null'),
 (2,'null'),
 (3,'null'),
@@ -500,28 +502,28 @@ INSERT INTO  ProductPicture  (pNo,pPic) VALUES
 -- 創建 ProductOrder 表格
 CREATE TABLE ProductOrder
 (
-    pOrdNo         INT              Not Null PRIMARY KEY AUTO_INCREMENT   ,
-    memNo          INT              Not Null,
-    pByrName       VARCHAR(20)      Not Null,
-    pByrPhone      INT              Not Null,
-    pByrEmail      VARCHAR(40)      Not Null,
-    pRcvName       VARCHAR(20),
-    pRcvPhone      VARCHAR (10),
-    pTakeMethod    TINYINT          Not Null,
-    pAddr          VARCHAR(100)     Null,
-    pPayMethod     TINYINT          Not Null,
-    pAllPrice      DECIMAL(6,0)     Not Null,
-    coupNo         INT,
-    pDisc          DECIMAL(6,0)     Not Null,
-    pRealPrice     DECIMAL(6,0)     Not Null,
-    pOrdTime       DATETIME         Not Null DEFAULT CURRENT_TIMESTAMP,
-    pOrdStat       TINYINT          Not Null,
-    pStat          TINYINT          Not Null,
+    productOrdNo         INT              Not Null PRIMARY KEY AUTO_INCREMENT,
+    memNo          		 INT              Not Null,
+    productByrName       VARCHAR(20)      Not Null,
+    productByrPhone      INT              Not Null,
+    productByrEmail      VARCHAR(40)      Not Null,
+    productRcvName       VARCHAR(20),
+    productRcvPhone      VARCHAR (10),
+    productTakeMethod    TINYINT          Not Null,
+    productAddr          VARCHAR(100)     Null,
+    productPayMethod     TINYINT          Not Null,
+    productAllPrice      DECIMAL(6,0)     Not Null,
+    coupNo               INT,
+    productDisc          DECIMAL(6,0)     Not Null,
+    productRealPrice     DECIMAL(6,0)     Not Null,
+    productOrdTime       DATETIME         Not Null DEFAULT CURRENT_TIMESTAMP,
+    productOrdStat       TINYINT          Not Null,
+    productStat          TINYINT          Not Null,
    CONSTRAINT FK_ProductOrder_memNo foreign key(memNo) REFERENCES Member(memNo) ,
    CONSTRAINT FK_ProductOrder_Coupon foreign key(coupNo) REFERENCES Coupon(coupNo)
 );
 
-INSERT INTO ProductOrder (memNo, pByrName, pByrPhone, pByrEmail, pRcvName, pRcvPhone, pTakeMethod, pAddr, pPayMethod, pAllPrice, coupNo, pDisc, pRealPrice, pOrdTime, pOrdStat, pStat) VALUES
+INSERT INTO ProductOrder (memNo, productByrName, productByrPhone, productByrEmail, productRcvName, productRcvPhone, productTakeMethod, productAddr, productPayMethod, productAllPrice, coupNo, productDisc, productRealPrice, productOrdTime, productOrdStat, productStat) VALUES
 (1, 'John Doe', '0912345678', 'john.doe@example.com', 'Jane Doe', '0912345678', 2, '台北市大安區忠孝東路四段100號', 1, 5400, NULL, 0, 5400, '2022-08-16 04:23:00', 10, 0),
 (2, 'Alice Smith', '0923456789', 'alice.smith@example.com', 'Bob Smith', '0923456789', 2, '台北市大安區忠孝東路四段100號', 1, 7060, 4, 706, 6354, CURRENT_TIMESTAMP, 50, 1),
 (3, 'Emily Johnson', '0934567890', 'emily.johnson@example.com', 'Michael Johnson', '0934567890', 3, null, 1, 3070, NULL, 0, 3070, '2024-01-16 14:14:00', 81, 1),
@@ -533,19 +535,19 @@ INSERT INTO ProductOrder (memNo, pByrName, pByrPhone, pByrEmail, pRcvName, pRcvP
 -- 創建 ProductOrderDetail 表格
 CREATE TABLE ProductOrderDetail
 (
-   pOrdNo          INT              NOT NULL,
-   pNo             INT              NOT NULL,
-   pPrice          DECIMAL  (6,0)   NOT NULL,
-   pOrdQty         INT              NOT NULL,
-   pRealPrice      DECIMAL  (6,0)   NOT NULL,
-   pComContent     VARCHAR  (500),
-   pScore          INT,
-   CONSTRAINT PK_ProductOrderDetail_pOrdNo_pNo PRIMARY KEY(pOrdNo, pNo),
-   CONSTRAINT FK_ProductOrderDetail_pOrdNo foreign key(pOrdNo) REFERENCES ProductOrder (pOrdNo) ,
-   CONSTRAINT FK_ProductOrderDetail_pNo foreign key(pNo) REFERENCES Product(pNo)
+   productOrdNo          INT              NOT NULL,
+   productNo             INT              NOT NULL,
+   productPrice          DECIMAL  (6,0)   NOT NULL,
+   productOrdQty         INT              NOT NULL,
+   productRealPrice      DECIMAL  (6,0)   NOT NULL,
+   productComContent     VARCHAR  (500),
+   productScore          INT,
+   CONSTRAINT PK_ProductOrderDetail_productOrdNo_productNo PRIMARY KEY(productOrdNo, productNo),
+   CONSTRAINT FK_ProductOrderDetail_productOrdNo foreign key(productOrdNo) REFERENCES ProductOrder (productOrdNo) ,
+   CONSTRAINT FK_ProductOrderDetail_productNo foreign key(productNo) REFERENCES Product(productNo)
 );
 
-INSERT INTO  ProductOrderDetail	(pOrdNo,pNo,pPrice,pOrdQty,pRealPrice,pComContent,pScore) VALUES
+INSERT INTO  ProductOrderDetail	(productOrdNo,productNo,productPrice,productOrdQty,productRealPrice,productComContent,productScore) VALUES
 (3,5,3000,1,3000, '商品品質很好，速度也很快，非常滿意！',5),
 (7,3,8600,1,8600, '商品外觀漂亮，但用起來有點不太方便。',2),
 (3,6,3000,2,6000, '物超所值，推薦給大家！',5),
@@ -557,14 +559,14 @@ INSERT INTO  ProductOrderDetail	(pOrdNo,pNo,pPrice,pOrdQty,pRealPrice,pComConten
 -- 創建 ProductMyFavorite 表格
 CREATE TABLE ProductMyFavorite
 (
-   pNo             INT              NOT NULL ,
+   productNo       INT              NOT NULL ,
    memNo           INT              NOT NULL,
-   CONSTRAINT PK_ProductMyFavorite_pNo_memNo PRIMARY KEY(pNo, memNo),
-   CONSTRAINT FK_ProductMyFavorite_pNo foreign key(pNo) REFERENCES Product(pNo) ,
+   CONSTRAINT PK_ProductMyFavorite_productNo_memNo PRIMARY KEY(productNo, memNo),
+   CONSTRAINT FK_ProductMyFavorite_productNo foreign key(productNo) REFERENCES Product(productNo),
    CONSTRAINT FK_ProductMyFavorite_memNo foreign key(memNo) REFERENCES Member(memNo)
 );
 
-INSERT INTO  ProductMyFavorite	(pNo, memNo) VALUES
+INSERT INTO  ProductMyFavorite	(productNo, memNo) VALUES
 (1,1),
 (2,4),
 (5,2),
@@ -575,15 +577,15 @@ INSERT INTO  ProductMyFavorite	(pNo, memNo) VALUES
 
 CREATE TABLE Cart
 (
-    pNo       INT NOT NULL,
-    memNo     INT NOT NULL,
-    pBuyQty   INT NOT NULL,
-    PRIMARY KEY (pNo, memNo),
-    FOREIGN KEY (pNo) REFERENCES Product(pNo) ,
+    productNo     INT NOT NULL,
+    memNo         INT NOT NULL,
+    productBuyQty INT NOT NULL,
+    PRIMARY KEY (productNo, memNo),
+    FOREIGN KEY (productNo) REFERENCES Product(productNo),
     FOREIGN KEY (memNo) REFERENCES Member(memNo)
 );
 
-INSERT INTO  Cart	 (pNo, memNo,pBuyQty) VALUES
+INSERT INTO  Cart (productNo, memNo, productBuyQty) VALUES
 (1,5,1),
 (2,4,3),
 (3,5,2),
@@ -597,15 +599,15 @@ INSERT INTO  Cart	 (pNo, memNo,pBuyQty) VALUES
 -- 租借品類別table
 CREATE TABLE RentalCategory
 (
-    rCatNo      INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    rCatName    VARCHAR(40) NOT NULL,
-    rStockQty   INT NOT NULL,
-    rRentedQty  INT NOT NULL,
-    rDesPrice   DECIMAL(6,0) NOT NULL
+    rentalCatNo      INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    rentalCatName    VARCHAR(40) NOT NULL,
+    rentalStockQty   INT NOT NULL,
+    rentalRentedQty  INT NOT NULL,
+    rentalDesPrice   DECIMAL(6,0) NOT NULL
 )
 AUTO_INCREMENT = 1;
 
-INSERT INTO RentalCategory(rCatNo, rCatName, rStockQty, rRentedQty, rDesPrice)
+INSERT INTO RentalCategory(rentalCatNo, rentalCatName, rentalStockQty, rentalRentedQty, rentalDesPrice)
 VALUES(1, '西裝', 3, 1, 2000),
       (2, '婚紗', 5, 1, 4000),
       (3, '禮服', 6, 4, 2000),
@@ -615,19 +617,19 @@ VALUES(1, '西裝', 3, 1, 2000),
 -- 租借品table
 CREATE TABLE Rental
 (
-    rNO         INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    rCatNo      INT NOT NULL,
-    rName       VARCHAR(40) NOT NULL,
-    rPrice      DECIMAL(6,0) NOT NULL,
-    rSize       INT NOT NULL,
-    rColor      VARCHAR(10) NOT NULL,
-    rInfo       VARCHAR(1000) NOT NULL,
-    rStat       TINYINT NOT NULL,
-    CONSTRAINT FK_Rental_rCatNo FOREIGN KEY (rCatNo) REFERENCES RentalCategory (rCatNo)
+    rentalNo         INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    rentalCatNo      INT NOT NULL,
+    rentalName       VARCHAR(40) NOT NULL,
+    rentalPrice      DECIMAL(6,0) NOT NULL,
+    rentalSize       INT NOT NULL,
+    rentalColor      VARCHAR(10) NOT NULL,
+    rentalInfo       VARCHAR(1000) NOT NULL,
+    rentalStat       TINYINT NOT NULL,
+    CONSTRAINT FK_Rental_rentalCatNo FOREIGN KEY (rentalCatNo) REFERENCES RentalCategory (rentalCatNo)
 )
 AUTO_INCREMENT = 5001;
 
-INSERT INTO Rental(rNO, rCatNo, rName, rPrice, rSize, rColor, rInfo, rStat)
+INSERT INTO Rental(rentalNo, rentalCatNo, rentalName, rentalPrice, rentalSize, rentalColor, rentalInfo, rentalStat)
 VALUES(5001, 1, '格紋成套西裝', 15500, '2', '黑色', '款式：劍領 單排釦。適用場合：婚攝 婚宴 宴客 求婚', 1),
       (5011, 5, '雙排扣格紋成套西裝', 12500, '3', '深卡其色', '款式：標準領 單排釦 雙扣。適用場合：婚攝 婚宴 求婚 日常', 2),
       (5038, 3, '時尚復古斜領緊身晚禮服', 12000, '4', '白色', '款式：斜頸、高腰、泡泡袖。適用場合：婚攝 婚宴 宴客', 0),
@@ -637,14 +639,14 @@ VALUES(5001, 1, '格紋成套西裝', 15500, '2', '黑色', '款式：劍領 單
 -- 租借品照片
 CREATE TABLE RentalPic
 (
-    rPicNo      INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    rNo	        INT NOT NULL,
-    rPic        LONGBLOB,
-    CONSTRAINT FK_RentalPic_rNo FOREIGN KEY (rNo) REFERENCES Rental (rNo)
+    rentalPicNo      INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    rentalNo	        INT NOT NULL,
+    rentalPic        LONGBLOB,
+    CONSTRAINT FK_RentalPic_rentalNo FOREIGN KEY (rentalNo) REFERENCES Rental (rentalNo)
 )
 AUTO_INCREMENT = 1;
 
-INSERT INTO RentalPic(rPicNo, rNo, rPic) VALUES
+INSERT INTO RentalPic(rentalPicNo, rentalNo, rentalPic) VALUES
 (1, 5001, 'null'),
 (2, 5011, 'null'),
 (3, 5038, 'null'),
@@ -654,31 +656,31 @@ INSERT INTO RentalPic(rPicNo, rNo, rPic) VALUES
 -- 創建租借品訂單表格
 CREATE TABLE RentalOrder
 (
-    rOrdNo  INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    rentalOrdNo  INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     memNo   INT NOT NULL,
-    rByrName    VARCHAR(20) NOT NULL,
-    rByrPhone   VARCHAR(10) NOT NULL,
-    rByrEmail   VARCHAR(40) NOT NULL,
-    rRcvName    VARCHAR(20),
-    rRcvPhone   VARCHAR(10),
-    rTakeMethod TINYINT     NOT NULL,
-    rAddr       VARCHAR(100),
-    rPayMethod  TINYINT     NOT NULL,
-    rAllPrice   DECIMAL(6,0)    NOT NULL,
-    rAllDepPrice    DECIMAL(6,0)    NOT NULL,
-    rOrdTime    DATETIME    NOT NULL,
-    rDate       DATETIME    NOT NULL,
-    rBackDate   DATETIME    NOT NULL,
-    rRealBackDate   DATETIME    NOT NULL,
-    rPayStat    TINYINT     NOT NULL,
-    rOrdStat    TINYINT     NOT NULL,
+    rentalByrName    VARCHAR(20) NOT NULL,
+    rentalByrPhone   VARCHAR(10) NOT NULL,
+    rentalByrEmail   VARCHAR(40) NOT NULL,
+    rentalRcvName    VARCHAR(20),
+    rentalRcvPhone   VARCHAR(10),
+    rentalTakeMethod TINYINT     NOT NULL,
+    rentalAddr       VARCHAR(100),
+    rentalPayMethod  TINYINT     NOT NULL,
+    rentalAllPrice   DECIMAL(6,0)    NOT NULL,
+    rentalAllDepPrice    DECIMAL(6,0)    NOT NULL,
+    rentalOrdTime    DATETIME    NOT NULL,
+    rentalDate       DATETIME    NOT NULL,
+    rentalBackDate   DATETIME    NOT NULL,
+    rentalRealBackDate   DATETIME    NOT NULL,
+    rentalPayStat    TINYINT     NOT NULL,
+    rentalOrdStat    TINYINT     NOT NULL,
     rtnStat     TINYINT     NOT NULL,
     rtnRemark   VARCHAR(300)    NOT NULL,
     rtnCompensation DECIMAL(6,0),
     CONSTRAINT FK_RentalOrder_memNo FOREIGN KEY(memNo) REFERENCES Member (memNo)
 );
-INSERT INTO RentalOrder (memNo, rByrName, rByrPhone, rByrEmail, rRcvName, rRcvPhone, rTakeMethod, rAddr, rPayMethod,
-                         rAllPrice, rAllDepPrice, rOrdTime, rDate, rBackDate, rRealBackDate, rPayStat, rOrdStat,
+INSERT INTO RentalOrder (memNo, rentalByrName, rentalByrPhone, rentalByrEmail, rentalRcvName, rentalRcvPhone, rentalTakeMethod, rentalAddr, rentalPayMethod,
+                         rentalAllPrice, rentalAllDepPrice, rentalOrdTime, rentalDate, rentalBackDate, rentalRealBackDate, rentalPayStat, rentalOrdStat,
                          rtnStat, rtnRemark, rtnCompensation)
 VALUES(1, 'John', '0912345678', 'John123@gmail.com', 'John', '0912345678', 2, '台北市大安區忠孝東路四段100號', 1,
        3000, 4000, '2024-01-02 11:11:00', '2024-01-06 11:11:00', '2024-01-20 11:11:00', '2024-01-20 11:11:00',
@@ -701,15 +703,15 @@ VALUES(1, 'John', '0912345678', 'John123@gmail.com', 'John', '0912345678', 2, '�
 
 CREATE TABLE RentalOrderDetails
 (
-    rOrdNo  INT NOT NULL,
-    rNo     INT NOT NULL,
-    rPrice  DECIMAL(6,0)    NOT NULL,
-    rDesPrice   DECIMAL(6,0)    NOT NULL,
-    CONSTRAINT PK_RentalOrderDetails_rOrdNo_rNo PRIMARY KEY(rOrdNo, rNo),
-    CONSTRAINT FK_RentalOrderDetails_rOrdNo FOREIGN KEY(rOrdNo) REFERENCES RentalOrder(rOrdNo) ,
-    CONSTRAINT FK_RentalOrderDetails_rNo FOREIGN KEY(rNo) REFERENCES Rental(rNo)
+    rentalOrdNo  INT NOT NULL,
+    rentalNo     INT NOT NULL,
+    rentalPrice  DECIMAL(6,0)    NOT NULL,
+    rentalDesPrice   DECIMAL(6,0)    NOT NULL,
+    CONSTRAINT PK_RentalOrderDetails_rentalOrdNo_rentalNo PRIMARY KEY(rentalOrdNo, rentalNo),
+    CONSTRAINT FK_RentalOrderDetails_rentalOrdNo FOREIGN KEY(rentalOrdNo) REFERENCES RentalOrder(rentalOrdNo) ,
+    CONSTRAINT FK_RentalOrderDetails_rentalNo FOREIGN KEY(rentalNo) REFERENCES Rental(rentalNo)
 );
-INSERT INTO RentalOrderDetails (rOrdNo, rNo, rPrice, rDesPrice)
+INSERT INTO RentalOrderDetails (rentalOrdNo, rentalNo, rentalPrice, rentalDesPrice)
 VALUES (1, 5001, 1500, 1500),
        (5, 5038, 1500, 1500),
        (2, 5011, 1500, 2000),
@@ -719,14 +721,14 @@ VALUES (1, 5001, 1500, 1500),
 -- 租借方案
 CREATE TABLE RentSet
 (
-    rOrdNo      INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    rSetName    VARCHAR(20) NOT NULL,
-    rSetDays    TINYINT NOT NULL,
-    CONSTRAINT FK_RentSet_rOrdNo FOREIGN KEY (rOrdNo) REFERENCES RentalOrder (rOrdNo)
+    rentalOrdNo      INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    rentalSetName    VARCHAR(20) NOT NULL,
+    rentalSetDays    TINYINT NOT NULL,
+    CONSTRAINT FK_RentSet_rentalOrdNo FOREIGN KEY (rentalOrdNo) REFERENCES RentalOrder (rentalOrdNo)
 )
 AUTO_INCREMENT = 0;
 
-INSERT INTO RentSet(rOrdNo, rSetName, rSetDays)
+INSERT INTO RentSet(rentalOrdNo, rentalSetName, rentalSetDays)
 VALUES(2, '租借7日', 0),
       (3, '租借14日', 1),
       (1, '租借14日', 1),
@@ -737,16 +739,16 @@ VALUES(2, '租借7日', 0),
 
 CREATE TABLE RentalMyTrack
 (
-    rNo INT NOT NULL,
+    rentalNo INT NOT NULL,
     memNo   INT NOT NULL,
-    rTrackTime  DATETIME   NOT NULL,
+    rentalTrackTime  DATETIME   NOT NULL,
     expRentalDate   DATE,
-    CONSTRAINT PK_RentalMyTrack_rNo_memNo PRIMARY KEY(rNo, memNo),
-    CONSTRAINT FK_RentalMyTrack_rNo foreign key(rNo) REFERENCES Rental(rNo) ,
+    CONSTRAINT PK_RentalMyTrack_rentalNo_memNo PRIMARY KEY(rentalNo, memNo),
+    CONSTRAINT FK_RentalMyTrack_rentalNo foreign key(rentalNo) REFERENCES Rental(rentalNo) ,
     CONSTRAINT FK_RentalMyTrack_memNo foreign key(memNo) REFERENCES Member (memNo)
 );
 
-INSERT INTO RentalMyTrack (rNo, memNo, rTrackTime, expRentalDate)
+INSERT INTO RentalMyTrack (rentalNo, memNo, rentalTrackTime, expRentalDate)
 VALUES (5001, 5, '2023-12-31 20:30:00', '2024-01-06'),
        (5201, 1, '2024-01-02 20:31:30', '2024-01-06'),
        (5011, 3, '2024-03-25 11:09:40', '2024-04-09'),
@@ -756,15 +758,15 @@ VALUES (5001, 5, '2023-12-31 20:30:00', '2024-01-06'),
 -- 租借品我的最愛
 CREATE TABLE RentalMyFavorite
 (
-    rNo         INT NOT NULL,
+    rentalNo         INT NOT NULL,
     memNo       INT NOT NULL,
-    rFavTime    DATETIME NOT NULL,
-    CONSTRAINT PK_RentalOrderDetails_rNo_memNo PRIMARY KEY(rNo, memNo),
-    CONSTRAINT FK_RentalMyFavorite_rNo FOREIGN KEY (rNo) REFERENCES Rental (rNo) ,
+    rentalFavTime    DATETIME NOT NULL,
+    CONSTRAINT PK_RentalOrderDetails_rentalNo_memNo PRIMARY KEY(rentalNo, memNo),
+    CONSTRAINT FK_RentalMyFavorite_rentalNo FOREIGN KEY (rentalNo) REFERENCES Rental (rentalNo) ,
     CONSTRAINT FK_RentalMyFavorite_memNo FOREIGN KEY (memNo) REFERENCES `Member` (memNo)
 );
 
-INSERT INTO RentalMyFavorite(rNO, memNo, rFavTime)
+INSERT INTO RentalMyFavorite(rentalNo, memNo, rentalFavTime)
 VALUES(5001, 5, '1996-01-01 12:30:10'),
       (5011, 4, '2021-06-18 08:17:00'),
       (5038, 3, '2024-03-13 16:55:50'),
@@ -773,44 +775,44 @@ VALUES(5001, 5, '1996-01-01 12:30:10'),
 
 -- 創建場地資訊表格
 CREATE TABLE StudioInfo (
-  sNo INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
-  sName VARCHAR(10) NOT NULL,
-  sInfo VARCHAR(1000) NOT NULL,
-  sPrice DECIMAL(6,0) NOT NULL
+  studioNo INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  studioName VARCHAR(10) NOT NULL,
+  studioInfo VARCHAR(1000) NOT NULL,
+  studioPrice DECIMAL(6,0) NOT NULL
 )
 AUTO_INCREMENT = 8001;
 
-INSERT INTO StudioInfo (sNo, sName, sInfo, sPrice) VALUES (8001, 'fallElove', '地點：台北市信義區 電話：(02) 1234-5678 郵件：fallyilove@gmail.com 網站：www.fallElove.com 營業時間：週一至週日，上午9點至晚上9點 設施：主攝影棚：寬敞明亮，面積 100 平方米，配有專業燈光設備和各種背景布，可滿足各種攝影需求，如商業攝影、人像攝影等。專業燈光：提供多款燈光設備，包括柔光燈、反光傘燈等，以滿足不同拍攝場景的需求。背景布：提供多種顏色和紋理的背景布，包括純色布和印花布，客戶可根據需要選擇適合的背景。攝影設備：提供專業相機、鏡頭和三腳架等攝影設備租借服務。化妝桌：提供化妝桌和化妝鏡，方便模特兒和客戶進行化妝和換裝。休息區：設有舒適的沙發和茶水，供客戶休息和等待。更衣室：提供獨立的更衣室，保證客戶的隱私。空調系統：全棚配備冷暖空調系統，確保舒適的工作環境。服務：專業攝影師：提供專業攝影師服務，協助客戶完成各類攝影作品。', 3000);
+INSERT INTO StudioInfo (studioNo, studioName, studioInfo, studioPrice) VALUES (8001, 'fallElove', '地點：台北市信義區 電話：(02) 1234-5678 郵件：fallyilove@gmail.com 網站：www.fallElove.com 營業時間：週一至週日，上午9點至晚上9點 設施：主攝影棚：寬敞明亮，面積 100 平方米，配有專業燈光設備和各種背景布，可滿足各種攝影需求，如商業攝影、人像攝影等。專業燈光：提供多款燈光設備，包括柔光燈、反光傘燈等，以滿足不同拍攝場景的需求。背景布：提供多種顏色和紋理的背景布，包括純色布和印花布，客戶可根據需要選擇適合的背景。攝影設備：提供專業相機、鏡頭和三腳架等攝影設備租借服務。化妝桌：提供化妝桌和化妝鏡，方便模特兒和客戶進行化妝和換裝。休息區：設有舒適的沙發和茶水，供客戶休息和等待。更衣室：提供獨立的更衣室，保證客戶的隱私。空調系統：全棚配備冷暖空調系統，確保舒適的工作環境。服務：專業攝影師：提供專業攝影師服務，協助客戶完成各類攝影作品。', 3000);
 
 -- 創建場地預約訂單表格
 CREATE TABLE StudioOrder
 (
-  sOrdNo INT NOT NULL PRIMARY KEY,
+  studioOrdNo INT NOT NULL PRIMARY KEY,
   memNo INT NOT NULL,
-  sNo INT NOT NULL,
+  studioNo INT NOT NULL,
   admNo INT NOT NULL,
   bookedDate DATE NOT NULL,
   bookedTimeMorning TINYINT NOT NULL,
   bookedTimeAfternoon TINYINT NOT NULL,
   bookedTimeNight TINYINT NOT NULL,
-  sOrdTime DATETIME NOT NULL,
-  sOrdStat TINYINT NOT NULL,
-  sTtlPrice DECIMAL(6,0) NOT NULL,
-  sByrName VARCHAR(20) NOT NULL,
-  sDepPrice DECIMAL(6,0) NOT NULL,
-  sByrPhone VARCHAR(10) NOT NULL,
-  sByrEmail VARCHAR(40) NOT NULL,
-  sPayMethod TINYINT NOT NULL,
-  sPayStat TINYINT NOT NULL,
+  studioOrdTime DATETIME NOT NULL,
+  studioOrdStat TINYINT NOT NULL,
+  studioTtlPrice DECIMAL(6,0) NOT NULL,
+  studioByrName VARCHAR(20) NOT NULL,
+  studioDepPrice DECIMAL(6,0) NOT NULL,
+  studioByrPhone VARCHAR(10) NOT NULL,
+  studioByrEmail VARCHAR(40) NOT NULL,
+  studioPayMethod TINYINT NOT NULL,
+  studioPayStat TINYINT NOT NULL,
   checkInStat TINYINT NOT NULL,
-  sReturnMark VARCHAR(100) DEFAULT NULL,
-  sCompensation DECIMAL(6,0) DEFAULT NULL,
+  studioReturnMark VARCHAR(100) DEFAULT NULL,
+  studioCompensation DECIMAL(6,0) DEFAULT NULL,
   FOREIGN KEY (memNo) REFERENCES `Member`(memNo) ,
   FOREIGN KEY (admNo) REFERENCES Administrator(admNo) ,
-  FOREIGN KEY (sNo) REFERENCES StudioInfo(sNo)
+  FOREIGN KEY (studioNo) REFERENCES StudioInfo(studioNo)
   );
 
-INSERT INTO StudioOrder (sOrdNo, memNo, sNo, admNo, bookedDate, bookedTimeMorning, bookedTimeAfternoon, bookedTimeNight, sOrdTime, sOrdStat, sTtlPrice, sByrName, sDepPrice, sByrPhone, sByrEmail, sPayMethod, sPayStat, checkInStat, sReturnMark, sCompensation) VALUES
+INSERT INTO StudioOrder (studioOrdNo, memNo, studioNo, admNo, bookedDate, bookedTimeMorning, bookedTimeAfternoon, bookedTimeNight, studioOrdTime, studioOrdStat, studioTtlPrice, studioByrName, studioDepPrice, studioByrPhone, studioByrEmail, studioPayMethod, studioPayStat, checkInStat, studioReturnMark, studioCompensation) VALUES
 (1, 2, 8001, 1, '2024-6-6', 1, 1, 0, '2024-05-31 11:30:00', 50, 6000, 'Emma', 3000, '0987654321', 'Emma456@gmail.com', 1, 1, 1, '場地已歸還，無任何設備損壞', 0),
 (2, 3, 8001, 1, '2024-6-7', 0, 1, 1, '2024-05-31 13:30:00', 40, 6000, 'Michael', 3000, '0965412378', 'Michael789@gmail.com', 1, 0, 0, NULL, NULL),
 (3, 4, 8001, 2, '2024-6-8', 1, 1, 0, '2024-05-31 15:30:00', 0, 0, 'Emily', 0, '0945678912', 'Emily987@gmail.com', 1, 0, 0, NULL, NULL),
@@ -820,19 +822,20 @@ INSERT INTO StudioOrder (sOrdNo, memNo, sNo, admNo, bookedDate, bookedTimeMornin
   -- 創建場地時段預約表格
 CREATE TABLE StudioTimeBooking
 (
-  sTimeNo INT NOT NULL PRIMARY KEY,
-  sOrdNo INT NULL,
-  sNo INT NULL,
+  studioTimeNo INT NOT NULL PRIMARY KEY,
+  studioOrdNo INT NULL,
+  studioNo INT NULL,
   closeDate DATE NULL,
   closeTimeMorning TINYINT NOT NULL,
   closeTimeAfternoon TINYINT NOT NULL,
   closeTimeNight TINYINT NOT NULL,
-  FOREIGN KEY (sOrdNo) REFERENCES StudioOrder(sOrdNo) ,
-  FOREIGN KEY (sNo) REFERENCES StudioInfo(sNo)
+  FOREIGN KEY (studioOrdNo) REFERENCES StudioOrder(studioOrdNo) ,
+  FOREIGN KEY (studioNo) REFERENCES StudioInfo(studioNo)
 );
 
-INSERT INTO StudioTimeBooking (sTimeNo, sOrdNo, sNo, closeDate, closeTimeMorning, closeTimeAfternoon, closeTimeNight) VALUES (1, NULL, 8001, '2025-01-29', 0, 0, 0);
-INSERT INTO StudioTimeBooking (sTimeNo, sOrdNo, sNo, closeDate, closeTimeMorning, closeTimeAfternoon, closeTimeNight) VALUES (2, NULL, 8001, '2025-01-30', 0, 0, 0);
-INSERT INTO StudioTimeBooking (sTimeNo, sOrdNo, sNo, closeDate, closeTimeMorning, closeTimeAfternoon, closeTimeNight) VALUES (3, NULL, 8001, '2025-01-31', 0, 0, 0);
-INSERT INTO StudioTimeBooking (sTimeNo, sOrdNo, sNo, closeDate, closeTimeMorning, closeTimeAfternoon, closeTimeNight) VALUES (4, NULL, 8001, '2025-02-01', 0, 0, 0);
-INSERT INTO StudioTimeBooking (sTimeNo, sOrdNo, sNo, closeDate, closeTimeMorning, closeTimeAfternoon, closeTimeNight) VALUES (5, NULL, 8001, '2025-02-02', 0, 0, 0);
+INSERT INTO StudioTimeBooking (studioTimeNo, studioOrdNo, studioNo, closeDate, closeTimeMorning, closeTimeAfternoon, closeTimeNight) VALUES
+(1, NULL, 8001, '2025-01-29', 0, 0, 0),
+(2, NULL, 8001, '2025-01-30', 0, 0, 0),
+(3, NULL, 8001, '2025-01-31', 0, 0, 0),
+(4, NULL, 8001, '2025-02-01', 0, 0, 0),
+(5, NULL, 8001, '2025-02-02', 0, 0, 0);

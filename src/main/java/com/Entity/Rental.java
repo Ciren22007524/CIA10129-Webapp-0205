@@ -14,24 +14,24 @@ import java.util.Set;
 public class Rental {
 
     @Id //標示為PK
-    @Column(name="rno")
-    private Integer rNo;
+    @Column(name="rentalno")
+    private Integer rentalNo;
     @ManyToOne
     @JsonManagedReference
-    @JoinColumn(name = "rcatno", referencedColumnName = "rcatno") //對應rental的rCatNo
+    @JoinColumn(name = "rentalcatno", referencedColumnName = "rentalcatno") //對應rental的rCatNo
     private RentalCategory rentalCategory;
-    @Column(name="rname", length=40)
-    private String rName;
-    @Column(name="rprice",columnDefinition="BigDecimal")
-    private BigDecimal rPrice;
-    @Column(name="rsize")
-    private Integer rSize;
-    @Column(name="rcolor", length=10)
-    private String rColor;
-    @Column(name="rinfo", length=1000)
-    private String rInfo;
-    @Column(name="rstat",columnDefinition = "TINYINT")
-    private Byte rStat;
+    @Column(name="rentalname", length=40)
+    private String rentalName;
+    @Column(name="rentalprice",columnDefinition="BigDecimal")
+    private BigDecimal rentalPrice;
+    @Column(name="rentalsize")
+    private Integer rentalSize;
+    @Column(name="rentalcolor", length=10)
+    private String rentalColor;
+    @Column(name="rentalinfo", length=1000)
+    private String rentalInfo;
+    @Column(name="rentalstat",columnDefinition = "TINYINT")
+    private Byte rentalStat;
 
     @JsonBackReference
     @OneToMany(mappedBy = "rental", cascade = CascadeType.ALL)
@@ -46,12 +46,40 @@ public class Rental {
     @OneToMany(mappedBy = "rental", cascade = CascadeType.ALL)
     private Set<RentalMyTrack> rentalMyTracks;
 
-    public Integer getrNo() {
-        return rNo;
+    public Rental() {
     }
 
-    public void setrNo(Integer rNo) {
-        this.rNo = rNo;
+    public Rental(Integer rentalNo) {
+        this.rentalNo = rentalNo;
+    }
+
+    public Rental(RentalCategory rentalCategory, String rentalName, BigDecimal rentalPrice, Integer rentalSize, String rentalColor, String rentalInfo, Byte rentalStat) {
+        this.rentalCategory = rentalCategory;
+        this.rentalName = rentalName;
+        this.rentalPrice = rentalPrice;
+        this.rentalSize = rentalSize;
+        this.rentalColor = rentalColor;
+        this.rentalInfo = rentalInfo;
+        this.rentalStat = rentalStat;
+    }
+
+    public Rental(Integer rentalNo, RentalCategory rentalCategory, String rentalName, BigDecimal rentalPrice, Integer rentalSize, String rentalColor, String rentalInfo, Byte rentalStat) {
+        this.rentalNo = rentalNo;
+        this.rentalCategory = rentalCategory;
+        this.rentalName = rentalName;
+        this.rentalPrice = rentalPrice;
+        this.rentalSize = rentalSize;
+        this.rentalColor = rentalColor;
+        this.rentalInfo = rentalInfo;
+        this.rentalStat = rentalStat;
+    }
+
+    public Integer getRentalNo() {
+        return rentalNo;
+    }
+
+    public void setRentalNo(Integer rentalNo) {
+        this.rentalNo = rentalNo;
     }
 
     public RentalCategory getRentalCategory() {
@@ -62,52 +90,52 @@ public class Rental {
         this.rentalCategory = rentalCategory;
     }
 
-    public String getrName() {
-        return rName;
+    public String getRentalName() {
+        return rentalName;
     }
 
-    public void setrName(String rName) {
-        this.rName = rName;
+    public void setRentalName(String rentalName) {
+        this.rentalName = rentalName;
     }
 
-    public BigDecimal getrPrice() {
-        return rPrice;
+    public BigDecimal getRentalPrice() {
+        return rentalPrice;
     }
 
-    public void setrPrice(BigDecimal rPrice) {
-        this.rPrice = rPrice;
+    public void setRentalPrice(BigDecimal rentalPrice) {
+        this.rentalPrice = rentalPrice;
     }
 
-    public Integer getrSize() {
-        return rSize;
+    public Integer getRentalSize() {
+        return rentalSize;
     }
 
-    public void setrSize(Integer rSize) {
-        this.rSize = rSize;
+    public void setRentalSize(Integer rentalSize) {
+        this.rentalSize = rentalSize;
     }
 
-    public String getrColor() {
-        return rColor;
+    public String getRentalColor() {
+        return rentalColor;
     }
 
-    public void setrColor(String rColor) {
-        this.rColor = rColor;
+    public void setRentalColor(String rentalColor) {
+        this.rentalColor = rentalColor;
     }
 
-    public String getrInfo() {
-        return rInfo;
+    public String getRentalInfo() {
+        return rentalInfo;
     }
 
-    public void setrInfo(String rInfo) {
-        this.rInfo = rInfo;
+    public void setRentalInfo(String rentalInfo) {
+        this.rentalInfo = rentalInfo;
     }
 
-    public Byte getrStat() {
-        return rStat;
+    public Byte getRentalStat() {
+        return rentalStat;
     }
 
-    public void setrStat(Byte rStat) {
-        this.rStat = rStat;
+    public void setRentalStat(Byte rentalStat) {
+        this.rentalStat = rentalStat;
     }
 
     public Set<RentalOrderDetails> getRentalOrderDetails() {
@@ -132,5 +160,13 @@ public class Rental {
 
     public void setRentalPics(Set<RentalPic> rentalPics) {
         this.rentalPics = rentalPics;
+    }
+
+    public Set<RentalMyTrack> getRentalMyTracks() {
+        return rentalMyTracks;
+    }
+
+    public void setRentalMyTracks(Set<RentalMyTrack> rentalMyTracks) {
+        this.rentalMyTracks = rentalMyTracks;
     }
 }

@@ -6,9 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/backend/product")
@@ -17,22 +20,27 @@ public class ProductBackEndController {
     @Autowired
     private ProductServiceImpl productSvc;
 
+    @GetMapping("/selectProduct")
+    public String showSelect() {
+        return "/backend/product/selectProduct";
+    }
+
     @GetMapping("/listOneProduct")
-    public Product getProduct(@PathVariable Integer pNo) {
+    public Product getProduct(@PathVariable Integer pNo, HttpSession session) {
         return productSvc.getOneProduct(pNo);
     }
 
-//    @GetMapping("/listAllProduct")
-//    public List<Product> getAllProducts() {
-//        return productSvc.getAll();
-//    }
-
-    // 全部json到前端
     @GetMapping("/listAllProducts")
-    public ResponseEntity<List<Product>> getAllProducts() {
-        List<Product> products = productSvc.getAll();
-        return ResponseEntity.status(HttpStatus.OK).body(products);
+    public String getAllProducts(ModelMap modelMap) {
+        return "/backend/product/listAllProducts";
     }
+
+//    // 全部json到前端
+//    @GetMapping("/listAllProducts")
+//    public ResponseEntity<List<Product>> getAllProducts() {
+//        List<Product> products = productSvc.getAll();
+//        return ResponseEntity.status(HttpStatus.OK).body(products);
+//    }
 
     @PostMapping("/addProduct")
     public Product addProduct(@RequestBody Product product) {
@@ -40,9 +48,9 @@ public class ProductBackEndController {
     }
 
     @PutMapping("/updateProduct")
-    public Product updateProduct(@PathVariable Integer pNo, @RequestBody Product product) {
+    public Product updateProduct(@PathVariable Integer productNo, @RequestBody Product product) {
         // Ensure the productNo in the path matches the productNo in the request body
-        if (!pNo.equals(product.getpNo())) {
+        if (!productNo.equals(product.getProductNo())) {
             throw new IllegalArgumentException("Path variable productNo must match the productNo in the request body");
         }
         return productSvc.updateProduct(product);
@@ -52,5 +60,11 @@ public class ProductBackEndController {
 //    public void deleteProduct(@PathVariable Integer pNo) {
 //        productSvc.deleteProduct(pNo);
 //    }
+
+    @ModelAttribute("productList")
+    protected List<Product> getAllData() {
+        List<Product> list =productSvc.getAll();
+        return list;
+    }
 
 }
