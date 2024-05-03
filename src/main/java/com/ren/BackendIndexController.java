@@ -41,8 +41,9 @@ public class BackendIndexController {
     }
 
     // 最新消息推播
-    public
-
-
+    @GetMapping("/")
+    public String news() {
+        return "";
+    }
 
 }
