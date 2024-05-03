@@ -1,12 +1,11 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
+<head th:insert="~{backend/component/plugin/backendplugin.html :: css}">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>後台商品</title>
-    <th:block th:include="~{backend/component/plugin/backendplugin.html :: css}"></th:block>
+    <title>新增商品</title>
     <!-- Custom styles for this page -->
-    <link th:href="@{/backend/vendor/datatables/dataTables.bootstrap4.min.css}" rel="stylesheet" />
+    <link th:href="@{/backend/vendor/datatables/dataTables.bootstrap4.min.css}" rel="stylesheet"/>
 
 </head>
 <body id="page-top">
@@ -26,7 +25,17 @@
             <div class="container-fluid">
                 <div th:replace="backend/component/breadcrumb :: breadcrumb"></div>
                 <!-- 內容請填這裡~~~~~~~~~~~~~~~ -->
-                <li><a th:href="@{listAllProducts}">List</a> all Products. <br> <br></li>
+                <div class="row g-3 align-items-center">
+                    <div class="col-auto">
+                        <label for="inputPassword6" class="col-form-label">Password</label>
+                    </div>
+                    <div class="col-auto">
+                        <input type="password" id="inputPassword6" class="form-control" aria-describedby="passwordHelpInline">
+						<span id="passwordHelpInline" class="form-text">
+						  Must be 8-20 characters long.
+						</span>
+                    </div>
+                </div>
             </div>
             <!-- /.container-fluid -->
         </div>

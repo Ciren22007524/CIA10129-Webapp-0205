@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
+import javax.validation.constraints.*;
 import java.math.BigDecimal;
 import java.util.Set;
 
@@ -18,14 +19,22 @@ public class Product {
     @JsonManagedReference
     @JoinColumn(name = "productcatno", referencedColumnName = "productcatno")
     private ProductCategory productCategory;
+    @NotEmpty(message="商品名稱: 請勿空白")
+    @Pattern(regexp = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_)]{2,10}$", message = "商品名稱: 只能是中、英文字母、數字和_ , 且長度必需在2到10之間")
     @Column(name = "productname")
     private String productName;
+    @NotEmpty(message="商品資訊: 請勿空白")
     @Column(name = "productinfo")
     private String productInfo;
     @Column(name = "productsize")
     private Integer productSize;
+    @NotEmpty(message="商品顏色: 請勿空白")
+    @Pattern(regexp = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_)]{2,10}$", message = "商品顏色: 只能是中、英文字母、數字和_ , 且長度必需在2到10之間")
     @Column(name = "productcolor")
     private String productColor;
+    @NotNull(message="商品價格: 請勿空白")
+    @DecimalMin(value = "100.00", message = "商品價格: 不能小於{value}")
+    @DecimalMax(value = "99999.99", message = "商品價格: 不能超過{value}")
     @Column(name = "productprice")
     private BigDecimal productPrice;
     @Column(name = "productstat")
