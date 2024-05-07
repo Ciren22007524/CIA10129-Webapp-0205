@@ -4,9 +4,8 @@ import com.Entity.Product;
 import com.Entity.ProductCategory;
 import com.ren.product.service.ProductServiceImpl;
 import com.ren.productcategory.service.ProductCategoryServiceImpl;
-import oracle.jdbc.proxy.annotation.Post;
+import com.ren.productpicture.service.ProductPictureServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,9 +15,10 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+
+import static com.ren.util.Constants.FIRST;
 
 @Controller
 @RequestMapping("/backend/product")
@@ -30,39 +30,65 @@ public class ProductBackEndController {
     @Autowired
     private ProductCategoryServiceImpl productCategorySvc;
 
-    // 前往商品管理頁面
+    @Autowired
+    private ProductPictureServiceImpl productPictureSvc;
+
+//    @Autowired
+//    private ProductOrderServiceImpl productOrderSvc;
+
+    /**
+     * 前往商品管理頁面
+     *
+     * @return forward to selectProduct.html
+     */
     @GetMapping("/selectProduct")
     public String toSelect() {
-        return "/backend/product/selectProduct";
+        return "backend/product/selectProduct";
     }
 
-    // 列出商品詳情
     @GetMapping("/listOneProduct")
     public String getProduct(@PathVariable Integer productNo, HttpSession session) {
-        return "/backend/product/listOneProduct";
+        return "backend/product/listOneProduct";
     }
 
-    // 列出所有商品
+    /**
+     * 前往商品列表
+     *
+     * @return forward to listAllProducts.html
+     */
     @GetMapping("/listAllProducts")
     public String getAllProducts() {
-        return "/backend/product/listAllProducts";
+        return "backend/product/listAllProducts";
     }
 
-    // 前往增加商品頁面
+    /**
+     * 前往增加商品頁面
+     *
+     * @param model add null Product and productCategoryList to model
+     * @return forward to addProduct.html
+     */
     @GetMapping("/addProduct")
     public String toAddProduct(Model model) {
         model.addAttribute("product", new Product());
         model.addAttribute("productCategoryList", productCategorySvc.getAll());
-        return "/backend/product/addProduct";
+        return "backend/product/addProduct";
     }
 
-    // 處理新增資料
-    @PostMapping("/addProduct/add")
+    /**
+     * 將前端輸入資料新增置資料庫
+     *
+     * @param product 如果輸入格式錯誤時，將返回前端輸入值，不讓使用者再次輸入相同內容
+     * @param result
+     * @param model
+     * @return
+     */
+    @PostMapping("addProduct/add")
     public String addProduct(@Valid Product product, BindingResult result, ModelMap model) {
         if (result.hasErrors()) {
             model.addAttribute("product", product);
+            model.addAttribute("productCategoryList", productCategorySvc.getAll());
             model.addAttribute("errors", result.getAllErrors());
-            return"/backend/product/addProduct";
+            return"backend/product/addProduct";
         } else {
             System.out.println("新增成功");
         }
@@ -70,31 +96,59 @@ public class ProductBackEndController {
         return "redirect:/backend/product/listAllProducts";
     }
 
-    // 前往更新商品頁面
+    /**
+     * 從listAll前往更新頁面
+     *
+     * @param model
+     * @param productNo
+     * @return
+     */
+    @GetMapping("/updateProduct/{productNo}")
+    public String toUpdateProduct(ModelMap model, @PathVariable Integer productNo) {
+
+        model.addAttribute("product", productSvc.getOneProduct(productNo));
+        if (model.getAttribute("productCategoryList") == null) {
+            model.addAttribute("productCategoryList", productCategorySvc.getAll());
+        }
+        return "backend/product/updateProduct";
+    }
+
+    /**
+     * 點選側邊欄連結前往更新頁面
+     *
+     * @param model
+     * @return
+     */
     @GetMapping("/updateProduct")
-    public String toUpdateProduct(Model model) {
+    public String toUpdateProduct(ModelMap model) {
         List<Product> list = productSvc.getAll();
         model.addAttribute("productList", list);
         model.addAttribute("productCategoryList", productCategorySvc.getAll());
-        model.addAttribute("product", list.get(0));
-        return "/backend/product/updateProduct";
+        model.addAttribute("product", list.get(FIRST));
+        return "backend/product/updateProduct";
     }
 
     // 處理修改資料
-    @PostMapping("/updateProduct/update")
+    @PostMapping("updateProduct/update")
     public String updateProduct(@Valid Product product, BindingResult result, ModelMap model) {
         if (result.hasErrors()) {
             model.addAttribute("product", product);
             model.addAttribute("errors", result.getAllErrors());
-            return"/backend/product/updateProduct";
+            model.addAttribute("productCategoryList", productCategorySvc.getAll());
+            return "backend/product/updateProduct";
         } else {
             System.out.println("新增成功");
         }
-        productSvc.addProduct(product);
+        productSvc.updateProduct(product);
         return "redirect:/backend/product/listAllProducts";
     }
 
-    // 商品下架功能
+    // 商品上下架功能
+    @PostMapping()
+    public String changeProductStat() {
+
+        return "";
+    }
 
 //    @DeleteMapping("/products/{pNo}")
 //    public void deleteProduct(@PathVariable Integer pNo) {
@@ -120,13 +174,20 @@ public class ProductBackEndController {
      * @param productNo 傳入主鍵搜尋
      * @return 返回到前端顯示
      */
-    @PostMapping("/getProductDetails")
+    @PostMapping("/getProductInstantly")
     @ResponseBody
-    public ResponseEntity<Product> getProductDetails(@RequestParam Integer productNo) {
+    public ResponseEntity<Product> getProductInstantly(@RequestParam Integer productNo) {
         // 根據商品編號查詢商品詳情
         Product product = productSvc.getOneProduct(productNo);
         // 返回查詢結果
         return ResponseEntity.ok().body(product);
     }
 
+    // 首頁更新營業額等Daily資料
+    // 1.每日營業額
+    // 2.賣出數量
+    // 3.最熱賣商品
+
+
+    // 更新
 }

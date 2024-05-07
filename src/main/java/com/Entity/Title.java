@@ -24,11 +24,17 @@ public class Title {
 
     }
 
-    public Title(Integer titleNo, String titleName, Set<AdmAuthority> admAuthorities, Set<Administrator> administrators) {
+    public Title(Integer titleNo) {
+        this.titleNo = titleNo;
+    }
+
+    public Title(String titleName) {
+        this.titleName = titleName;
+    }
+
+    public Title(Integer titleNo, String titleName) {
         this.titleNo = titleNo;
         this.titleName = titleName;
-        this.admAuthorities = admAuthorities;
-        this.administrators = administrators;
     }
 
     public Integer getTitleNo() {

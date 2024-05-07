@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" data-bs-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -68,8 +68,8 @@
                                         <td th:text="${product.productColor}"></td>
                                         <td th:text="${product.productPrice}"></td>
                                         <td>
-                                            <span th:if="${product.productStat == 0}" th:text="上架"></span>
-                                            <span th:if="${product.productStat == 1}" th:text="下架"></span>
+                                            <span th:if="${product.productStat == 0}" th:text="下架"></span>
+                                            <span th:if="${product.productStat == 1}" th:text="上架"></span>
                                         </td>
                                         <td th:text="${product.productSalQty}"></td>
                                         <td th:text="${product.productComPeople}"></td>
