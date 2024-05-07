@@ -17,11 +17,11 @@ public class FrontendIndexController {
      */
     @GetMapping("/index")
     public String toFrontendIndex() {
-        return "/frontend/index";
+        return "frontend/index";
     }
 
     @GetMapping("/member/loginMember")
     public String login() {
-        return "/frontend/member/loginMember";
+        return "frontend/member/loginMember";
     }
 }

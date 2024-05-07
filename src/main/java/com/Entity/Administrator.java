@@ -4,7 +4,9 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
 import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.Set;
 
 @Entity
@@ -20,6 +22,7 @@ public class Administrator {
     private String admName;
     @Column(name = "admstat")
     private Byte admStat;
+    @Email(message = "不符合信箱格式!")
     @Column(name = "admemail")
     private String admEmail;
     @ManyToOne
@@ -32,6 +35,12 @@ public class Administrator {
     private byte[] admPhoto;
     @Column(name = "admsalt")
     private String admSalt;
+    @Column(name = "admlogin")
+    private Byte admLogin;
+    @Column(name = "admlogout")
+    private Byte admLogout;
+    @Column(name = "admactivetime")
+    private Timestamp admActiveTime;
 
     @JsonBackReference
     @OneToMany(mappedBy = "administrator", cascade = CascadeType.ALL)
@@ -47,10 +56,27 @@ public class Administrator {
     private Set<ColumnArticle> columnArticles;
 
     public Administrator() {
-
     }
 
-    public Administrator(Integer admNo, String admPwd, String admName, Byte admStat, String admEmail, Title title, Date admHireDate, byte[] admPhoto, String admSalt, Set<StudioOrder> studioOrders, Set<Report> reports, Set<ServiceRecord> serviceRecords, Set<ColumnArticle> columnArticles) {
+    public Administrator(Integer admNo) {
+        this.admNo = admNo;
+    }
+
+    public Administrator(String admPwd, String admName, Byte admStat, String admEmail, Title title, Date admHireDate, byte[] admPhoto, String admSalt, Byte admLogin, Byte admLogout, Timestamp admActiveTime) {
+        this.admPwd = admPwd;
+        this.admName = admName;
+        this.admStat = admStat;
+        this.admEmail = admEmail;
+        this.title = title;
+        this.admHireDate = admHireDate;
+        this.admPhoto = admPhoto;
+        this.admSalt = admSalt;
+        this.admLogin = admLogin;
+        this.admLogout = admLogout;
+        this.admActiveTime = admActiveTime;
+    }
+
+    public Administrator(Integer admNo, String admPwd, String admName, Byte admStat, String admEmail, Title title, Date admHireDate, byte[] admPhoto, String admSalt, Byte admLogin, Byte admLogout, Timestamp admActiveTime) {
         this.admNo = admNo;
         this.admPwd = admPwd;
         this.admName = admName;
@@ -60,10 +86,9 @@ public class Administrator {
         this.admHireDate = admHireDate;
         this.admPhoto = admPhoto;
         this.admSalt = admSalt;
-        this.studioOrders = studioOrders;
-        this.reports = reports;
-        this.serviceRecords = serviceRecords;
-        this.columnArticles = columnArticles;
+        this.admLogin = admLogin;
+        this.admLogout = admLogout;
+        this.admActiveTime = admActiveTime;
     }
 
     public Integer getAdmNo() {
@@ -136,6 +161,30 @@ public class Administrator {
 
     public void setAdmSalt(String admSalt) {
         this.admSalt = admSalt;
+    }
+
+    public Byte getAdmLogin() {
+        return admLogin;
+    }
+
+    public void setAdmLogin(Byte admLogin) {
+        this.admLogin = admLogin;
+    }
+
+    public Byte getAdmLogout() {
+        return admLogout;
+    }
+
+    public void setAdmLogout(Byte admLogout) {
+        this.admLogout = admLogout;
+    }
+
+    public Timestamp getAdmActiveTime() {
+        return admActiveTime;
+    }
+
+    public void setAdmActiveTime(Timestamp admActiveTime) {
+        this.admActiveTime = admActiveTime;
     }
 
     public Set<StudioOrder> getStudioOrders() {

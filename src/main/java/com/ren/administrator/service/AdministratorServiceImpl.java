@@ -1,6 +1,7 @@
 package com.ren.administrator.service;
 
 import com.Entity.Administrator;
+import com.Entity.Title;
 import com.ren.administrator.dao.AdministratorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,6 +28,11 @@ public class AdministratorServiceImpl implements AdministratorService_interface 
     }
 
     @Override
+    public Administrator getOneAdministrator(String admEmail) {
+        return administratorRepository.findByAdmEmail(admEmail).orElse(null);
+    }
+
+    @Override
     public List<Administrator> getAll() {
         return administratorRepository.findAll();
     }
@@ -41,6 +47,17 @@ public class AdministratorServiceImpl implements AdministratorService_interface 
         administratorRepository.deleteById(admNo);
     }
 
+    @Override
+    public Administrator register(Administrator administrator) {
+        // 填入預設的資料
+        administrator.setAdmStat(Byte.valueOf("1"));
+        administrator.getTitle().setTitleNo(4);
+        administrator.setAdmHireDate(new Date(new java.util.Date().getTime()));
+        administrator.setAdmSalt("1");
+        administrator.setAdmLogin(Byte.valueOf("0"));
+        administrator.setAdmLogout(Byte.valueOf("1"));
+        return administratorRepository.save(administrator);
+    }
 //    @Override
 //    public void uploadPhoto(Integer admNo,byte[] admPhoto) {
 //        administratorRepository.upload(admNo, admPhoto);

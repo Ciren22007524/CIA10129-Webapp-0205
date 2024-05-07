@@ -14,7 +14,7 @@ public class MyCoupon {
     @ManyToOne
     @JsonManagedReference
     @JoinColumn(name = "coupno", referencedColumnName = "coupno", insertable = false, updatable = false)
-    private Coupon coupon ;
+    private Coupon coupon;
     @ManyToOne
     @JsonManagedReference
     @JoinColumn(name = "memno", referencedColumnName = "memno", insertable = false, updatable = false)
@@ -34,19 +34,19 @@ public class MyCoupon {
         @Column(name = "memno")
         private Integer memNo;
 
-        public Integer getTitleNo() {
+        public Integer getCoupNo() {
             return coupNo;
         }
 
-        public void setTitleNo(Integer coupNo) {
+        public void setCoupNo(Integer coupNo) {
             this.coupNo = coupNo;
         }
 
-        public Integer getAuthFuncNo() {
+        public Integer getMemNo() {
             return memNo;
         }
 
-        public void setAuthFuncNo(Integer memNo) {
+        public void setMemNo(Integer memNo) {
             this.memNo = memNo;
         }
 
@@ -123,4 +123,5 @@ public class MyCoupon {
     public void setCoupExpDate(Timestamp coupExpDate) {
         this.coupExpDate = coupExpDate;
     }
+
 }

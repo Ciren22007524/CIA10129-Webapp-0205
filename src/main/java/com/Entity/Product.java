@@ -45,6 +45,7 @@ public class Product {
     private Integer productComPeople;
     @Column(name = "productcomscore")
     private Integer productComScore;
+
     @JsonBackReference
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
     private Set<ProductOrderDetail> productOrderDetails;
