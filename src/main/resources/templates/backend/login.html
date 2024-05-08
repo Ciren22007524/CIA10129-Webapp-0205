@@ -8,6 +8,7 @@
     <meta name="author" content="">
     <title>Backend - Login</title>
     <th:block th:include="~{backend/component/plugin/backendplugin.html :: css}"></th:block>
+
 </head>
 <body class="bg-body-tertiary">
     <div class="container">
@@ -24,15 +25,15 @@
                                     <div class="text-center">
                                         <h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>
                                     </div>
-                                    <form class="user">
+                                    <form method="post" th:action="@{/backend/login/login}" th:object="${administrator}" class="user">
                                         <div class="form-group">
-                                            <input type="email" class="form-control form-control-user"
-                                                id="exampleInputEmail" aria-describedby="emailHelp"
-                                                placeholder="請輸入信箱">
+                                            <input type="text" name="userId" th:value="${userId}" class="form-control form-control-user"
+                                                id="userId" aria-describedby="emailHelp"
+                                                placeholder="請輸入用戶名或信箱">
                                         </div>
                                         <div class="form-group">
-                                            <input type="password" class="form-control form-control-user"
-                                                id="exampleInputPassword" placeholder="請輸入密碼">
+                                            <input type="password" name="admPwd" class="form-control form-control-user"
+                                                id="admPwd" placeholder="請輸入密碼">
                                         </div>
                                         <div class="form-group">
                                             <div class="custom-control custom-checkbox small">
@@ -41,9 +42,12 @@
                                                     Me</label>
                                             </div>
                                         </div>
-                                        <a th:href="@{/backend/index}" class="btn btn-primary btn-user btn-block">
+                                        <button type="submit" class="btn btn-primary btn-user btn-block">
                                             Login
-                                        </a>
+                                        </button>
+<!--                                        <a th:href="@{/backend/login/login}" >-->
+<!--                                            Login-->
+<!--                                        </a>-->
                                         <hr>
                                         <a th:href="@{/backend/index}" class="btn btn-google btn-user btn-block">
                                             <i class="fab fa-google fa-fw"></i> Login with Google

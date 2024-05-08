@@ -2,7 +2,9 @@ package com.ren.administrator.service;
 
 import com.Entity.Administrator;
 import com.Entity.ServicePicture;
+import com.ren.administrator.dto.LoginState;
 
+import javax.servlet.http.HttpSession;
 import java.sql.Date;
 import java.util.List;
 
@@ -60,6 +62,15 @@ public interface AdministratorService_interface {
      * @return 返回修改後的Entity，後續可用於渲染View
      */
     Administrator updateAdministrator(Administrator administrator);
+
+    /**
+     * U:
+     * 登入成功，修改管理員登入狀態
+     *
+     * @param administrator 使用查詢方法取得Entity，身分核對後將Entity傳入方法內修改登入狀態
+     * @return 返回帳號登入狀態DTO
+     */
+    LoginState login(Administrator administrator, HttpSession session);
 
     /**
      * D:

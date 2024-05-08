@@ -3,9 +3,11 @@ package com.ren.administrator.service;
 import com.Entity.Administrator;
 import com.Entity.Title;
 import com.ren.administrator.dao.AdministratorRepository;
+import com.ren.administrator.dto.LoginState;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpSession;
 import java.sql.Date;
 import java.util.Base64;
 import java.util.LinkedList;
@@ -19,6 +21,18 @@ public class AdministratorServiceImpl implements AdministratorService_interface 
 
     @Override
     public Administrator addAdministrator(Administrator administrator) {
+        return administratorRepository.save(administrator);
+    }
+
+    @Override
+    public Administrator register(Administrator administrator) {
+        // 填入預設的資料
+        administrator.setAdmStat(Byte.valueOf("1"));
+        administrator.getTitle().setTitleNo(4);
+        administrator.setAdmHireDate(new Date(new java.util.Date().getTime()));
+        administrator.setAdmSalt("1");
+        administrator.setAdmLogin(Byte.valueOf("0"));
+        administrator.setAdmLogout(Byte.valueOf("1"));
         return administratorRepository.save(administrator);
     }
 
@@ -43,22 +57,30 @@ public class AdministratorServiceImpl implements AdministratorService_interface 
     }
 
     @Override
+    public LoginState login(Administrator administrator, HttpSession session) {
+        // Login 1:登入 0:登出 , Logout 1:登出 0:登入
+        // 四種情況 1.已登入未登出(帳號使用中) 2.已登入已登出(異常) 3.未登入已登出(帳號未登入) 4.未登入未登出(異常)
+        if (administrator.getAdmLogin() == 0 || administrator.getAdmLogout() == 1) {
+            administrator.setAdmLogin(Byte.valueOf("1"));
+            administrator.setAdmLogout(Byte.valueOf("0"));
+            // 返回更新後的administrator
+            administrator = administratorRepository.save(administrator);
+        }
+        LoginState loginState = new LoginState();
+        loginState.setJsessionid(session.getId());
+        loginState.setAdmLogin(administrator.getAdmLogin());
+        loginState.setAdmLogout(administrator.getAdmLogout());
+        loginState.setAdmActiveTime(administrator.getAdmActiveTime());
+
+        return loginState;
+    }
+
+    @Override
     public void deleteAdministrator(Integer admNo) {
         administratorRepository.deleteById(admNo);
     }
 
-    @Override
-    public Administrator register(Administrator administrator) {
-        // 填入預設的資料
-        administrator.setAdmStat(Byte.valueOf("1"));
-        administrator.getTitle().setTitleNo(4);
-        administrator.setAdmHireDate(new Date(new java.util.Date().getTime()));
-        administrator.setAdmSalt("1");
-        administrator.setAdmLogin(Byte.valueOf("0"));
-        administrator.setAdmLogout(Byte.valueOf("1"));
-        return administratorRepository.save(administrator);
-    }
-//    @Override
+    //    @Override
 //    public void uploadPhoto(Integer admNo,byte[] admPhoto) {
 //        administratorRepository.upload(admNo, admPhoto);
 //    }

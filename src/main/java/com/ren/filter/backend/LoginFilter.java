@@ -10,6 +10,7 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.Optional;
 import java.util.regex.Pattern;
@@ -22,9 +23,8 @@ import static com.ren.util.Constants.YES;
  * 主要有三功能:
  * 1.確認Session，防止重複登入
  * 2.自動登入功能
- * 3.權限驗證
  */
-@WebFilter("/backend/*")
+@WebFilter(urlPatterns = {"/backend/*"})
 @Component
 public class LoginFilter implements Filter {
 
@@ -35,61 +35,35 @@ public class LoginFilter implements Filter {
     public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain) throws IOException, ServletException {
         HttpServletRequest httpRequest = (HttpServletRequest) req;
         HttpServletResponse httpResponse = (HttpServletResponse) res;
-
+        System.out.println("LoginFilter有在嗎");
         String requestURI = ((HttpServletRequest) req).getRequestURI();
-        String resourceURI = ((HttpServletRequest) req).getServletPath();
 
-        if (checkURL(requestURI)) {
-            System.out.println("3");
-        } else {
-            // 因登入會將administrator物件放入Session，如果沒有，則代表還沒登入，將導向登入畫面
-            // 補充:若Session不存在時也會得到null(第一次造訪網頁)，並導向登入頁面
-            Administrator administrator = null;
-            administrator = (Administrator) ((HttpServletRequest) req).getSession().getAttribute("administrator");
-            if (administrator == null) {
-                ((HttpServletResponse) res).sendRedirect(loginPage);
-                return;
-            }
-
+        if (!validateURL(requestURI)) {
+            System.out.println("LoginFilter過濾開始");
             // 搜尋使用者cookie確認是否有管理員相關資訊
             Optional<Cookie> userCookie = Optional.ofNullable(((HttpServletRequest) req)
                             .getCookies())
                     .flatMap(this::userCookie);
 
-            // 如果沒有cookie則回到登入頁面
-            if(!userCookie.isPresent()) {
+            HttpSession session = ((HttpServletRequest) req).getSession(false);
+            Administrator administrator = null;
+
+            /**
+             * ((有無造訪網頁(有無session) && 有無登入(有無administrator)) || 有無設定自動登入(有無cookie))
+             * 未造訪網頁(false) || 確認有無 cookie
+             * 已造訪網頁(true) && 還未登入(false) || 確認有無 cookie
+             * 因考慮使用者可能會選擇關掉cookie or 不使用自動登入功能，將cookie的確認放在 or 判斷式的後面
+             * 優先確認使用者登入狀態
+             */
+            if (session != null && (administrator = (Administrator) session.getAttribute("administrator")) == null ||!userCookie.isPresent()) {
+                administrator = (Administrator) session.getAttribute("administrator");
                 ((HttpServletResponse) res).sendRedirect(loginPage);
                 return;
             }
 
-            // 前端輸入用戶名或Email
-            String userId = req.getParameter("userId");
-            // 確認是否為信箱格式，true則透過信箱搜尋使用者資訊，false則透過管理員編號搜尋使用者資訊
-            if (validateEmail(userId)) {
-                administrator = administratorSvc.getOneAdministrator(userId);
-            } else {
-                administrator = administratorSvc.getOneAdministrator(Integer.valueOf(userId));
-            }
-
-            Cookie cookie = null;
-            // 確認使用者是否要自動登入
-            String autoLogin = req.getParameter("autoLogin");
-            // 如果使用者選擇自動登入，將管理員編號與管理員職位放入Cookie
-            if (autoLogin.equals(YES) ) {
-                String cookieName = administrator.getAdmNo().toString();
-                String cookieValue = administrator.getTitle().getTitleNo().toString();
-                cookie = new Cookie(cookieName, cookieValue);
-                cookie.setMaxAge(864000);
-                ((HttpServletResponse) res).addCookie(cookie);
-            }
-            System.out.println("1");
         }
-
-        // 已登入，允許訪問
-        if (resourceURI.endsWith(".css") || resourceURI.endsWith(".js")) {
-            System.out.println("2");
-            chain.doFilter(req, res);
-        }
+        System.out.println("LoginFilter結束");
+        chain.doFilter(req, res);
     }
 
     @Override
@@ -148,21 +122,19 @@ public class LoginFilter implements Filter {
     }
 
     /**
-     * Email格式的正則表達式
+     * 靜態資源的正則表達式(含登入、註冊、忘記密碼)
      */
-    private final Pattern emailRegex = Pattern.compile("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$");
+    private final Pattern resoucesRegex =
+            Pattern.compile(".*\\.(css|js|png|jpg|jpeg|gif|svg|woff|ttf)$|/register|/login|/forgotPassword");
 
     /**
-     * 驗證是否為信箱格式
+     * 驗證請求的url是否為靜態資源或為登入、註冊、忘記密碼等網頁
      *
-     * @param email 在登入頁面輸入用戶名或Email時傳入方法內判斷格式
-     * @return 返回布林值，如果符合Email格式則返回true，不符合則返回false
+     * @param url 發出請求的網址 request url
+     * @return True為靜態資源或登入相關網頁(無須過濾)，False為需過濾頁面
      */
-    private Boolean validateEmail(String email) {
-        return emailRegex.matcher(email).find();
+    private Boolean validateURL(String url) {
+        return resoucesRegex.matcher(url).find();
     }
 
-    private Boolean checkURL(String url) {
-        return url.equals(loginPage) || url.equals(registerPage) || url.equals(forgotPasswordPage);
-    }
 }
