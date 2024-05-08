@@ -5,6 +5,6 @@ public interface Constants {
     int FIRST = 0;
     int SUCCESS = 1;
     int FAILURE = 0;
-    String YES = "1";
-    String NO = "0";
+    int YES = 1;
+    int NO = 0;
 }

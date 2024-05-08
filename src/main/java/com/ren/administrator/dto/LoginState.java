@@ -1,16 +1,13 @@
 package com.ren.administrator.dto;
 
+import java.io.Serializable;
 import java.sql.Timestamp;
 
-public class LoginState {
+public class LoginState implements Serializable {
 
     // 管理員登入狀態DTO，用於確認登入狀態
     // 將Service查詢單項資料封包進這個DTO內
-    private Integer admNo;
-
-    private String admName;
-
-    private Integer titleNo;
+    private String jsessionid;
 
     private Byte admLogin;
 
@@ -21,41 +18,29 @@ public class LoginState {
     public LoginState() {
     }
 
-    public LoginState(Integer admNo) {
-        this.admNo = admNo;
+    public LoginState(String jsessionid) {
+        this.jsessionid = jsessionid;
     }
 
-    public LoginState(Integer admNo, String admName, Integer titleNo, Byte admLogin, Byte admLogout, Timestamp admActiveTime) {
-        this.admNo = admNo;
-        this.admName = admName;
-        this.titleNo = titleNo;
+    public LoginState(Byte admLogin, Byte admLogout, Timestamp admActiveTime) {
         this.admLogin = admLogin;
         this.admLogout = admLogout;
         this.admActiveTime = admActiveTime;
     }
 
-    public Integer getAdmNo() {
-        return admNo;
+    public LoginState(String jsessionid, Byte admLogin, Byte admLogout, Timestamp admActiveTime) {
+        this.jsessionid = jsessionid;
+        this.admLogin = admLogin;
+        this.admLogout = admLogout;
+        this.admActiveTime = admActiveTime;
     }
 
-    public void setAdmNo(Integer admNo) {
-        this.admNo = admNo;
+    public String getJsessionid() {
+        return jsessionid;
     }
 
-    public String getAdmName() {
-        return admName;
-    }
-
-    public void setAdmName(String admName) {
-        this.admName = admName;
-    }
-
-    public Integer getTitleNo() {
-        return titleNo;
-    }
-
-    public void setTitleNo(Integer titleNo) {
-        this.titleNo = titleNo;
+    public void setJsessionid(String jsessionid) {
+        this.jsessionid = jsessionid;
     }
 
     public Byte getAdmLogin() {
@@ -81,5 +66,4 @@ public class LoginState {
     public void setAdmActiveTime(Timestamp admActiveTime) {
         this.admActiveTime = admActiveTime;
     }
-
 }
