@@ -37,17 +37,13 @@
                                         </div>
                                         <div class="form-group">
                                             <div class="custom-control custom-checkbox small">
-                                                <input type="checkbox" class="custom-control-input" id="customCheck">
-                                                <label class="custom-control-label" for="customCheck">Remember
-                                                    Me</label>
+                                                <input type="checkbox" name="autoLogin" class="custom-control-input" id="customCheck" value="0">
+                                                <label class="custom-control-label" for="customCheck">Remember Me</label>
                                             </div>
                                         </div>
                                         <button type="submit" class="btn btn-primary btn-user btn-block">
                                             Login
                                         </button>
-<!--                                        <a th:href="@{/backend/login/login}" >-->
-<!--                                            Login-->
-<!--                                        </a>-->
                                         <hr>
                                         <a th:href="@{/backend/index}" class="btn btn-google btn-user btn-block">
                                             <i class="fab fa-google fa-fw"></i> Login with Google
@@ -72,6 +68,18 @@
         </div>
     </div>
     <th:block th:insert="~{backend/component/plugin/backendplugin.html :: js}"></th:block>
+    <!-- jQuery code -->
+    <script>
+        $(document).ready(function() {
+            $('#customCheck').change(function() {
+                if (this.checked) {
+                    $(this).val("1");
+                } else {
+                    $(this).val("0");
+                }
+            });
+        });
+    </script>
 </body>
 
 </html>
