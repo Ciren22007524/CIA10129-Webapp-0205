@@ -17,12 +17,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.time.Duration;
-import java.util.regex.Pattern;
+
 
 import static com.ren.util.Constants.YES;
+import static com.ren.util.RandomStringGenerator.generateRandomString;
+import static com.ren.util.Validator.validateEmail;
 
-@Validated
 @Controller
 @RequestMapping("/backend")
 public class BackendIndexController {
@@ -75,11 +75,15 @@ public class BackendIndexController {
     @PostMapping("/login/login")
     public String login(@RequestParam String userId,
                         @RequestParam String admPwd,
-                        @RequestParam Integer autoLogin,
+                        @RequestParam Byte autoLogin,
                         HttpSession session,
+                        HttpServletResponse res,
                         ModelMap model) {
+
+        // 宣告管理員與管理員編號，於後續參數驗證後賦值
         Administrator administrator = null;
         Integer admNo = null;
+
         // 確認是否為信箱格式，true則透過信箱搜尋使用者資訊，false則透過管理員編號搜尋使用者資訊
         if (validateEmail(userId)) {
             administrator = administratorSvc.getOneAdministrator(userId);
@@ -87,43 +91,52 @@ public class BackendIndexController {
             admNo = Integer.valueOf(userId);
             administrator = administratorSvc.getOneAdministrator(admNo);
         }
+
         // 在驗證前將使用者Id放入model，如果使用者輸入錯誤，返回給使用者而不用重新輸入
         model.addAttribute("userId" ,userId);
+
         // 判斷是否有無這個帳號
         if (administrator == null) {
             model.addAttribute("message", "不存在此用戶");
             return "backend/login";
         }
+
         // 判斷密碼是否正確
         if (!admPwd.equals(administrator.getAdmPwd())) {
             model.addAttribute("message", "密碼錯誤!");
             return "backend/login";
         }
+
         // 確認帳號是否已被登入
         if (administrator.getAdmLogin() == 1) {
             System.out.println("帳號已被登入");
         }
+
         // 使用Service的登入方法，更改administrator的登入狀態，並傳回登入狀態DTO，
         // 於後續在LoginStateFilter內做登入狀態驗證
         LoginState loginState = administratorSvc.login(administrator, session);
+
         // 確認密碼正確後，回傳登入成功訊息，並將administrator存入session
         model.addAttribute("message", "登入成功!");
+
         // 將使用者資訊放入session，供後續權限驗證使用
         session.setAttribute("administrator", administrator);
-        // 將登入狀態放入Redis資料庫，供LoginStateFilter於每次發出請求時做登入狀態驗證
-        storeLoginstateInRedis(admNo, loginState);
 
-        Cookie cookie = null;
         // 確認使用者是否要自動登入
         if (autoLogin == YES) {
-            String cookieName = administrator.getAdmNo().toString();
-            String cookieValue = administrator.getTitle().getTitleNo().toString();
-            cookie = new Cookie(cookieName, cookieValue);
-            cookie.setMaxAge(864000);
+            // 生成名為autoLogin的cookie，其值設置為一個亂數生成的字符串，分別存入給使用者與redis資料庫，做身分核對
+            String random = generateRandomString(16);
+            Cookie cookie = new Cookie("autoLogin", random);
+            // 設置存活7天
+            cookie.setMaxAge(604800);
             ((HttpServletResponse) res).addCookie(cookie);
-            System.out.println("我要Cookie");
+            redisTemplate.opsForValue().set(random, "autoLogin");
         }
-        System.out.println("5");
+
+        // 將登入狀態放入Redis資料庫，供LoginStateFilter於每次發出請求時做登入狀態驗證
+        storeLoginstateInRedis(admNo, loginState);
+        System.out.println("登入成功!!!");
+
         return "redirect:/backend/index";
     }
 
@@ -140,9 +153,6 @@ public class BackendIndexController {
      */
     @GetMapping("logout")
     public String logout(HttpSession session) {
-        // 獲取管理員編號，刪除該登入狀態
-        Integer admNo = ((Administrator) session.getAttribute("administrator")).getAdmNo();
-        deleteRedisData(admNo);
         // 註銷session，會觸發SessionListener的登入狀態確認
         session.invalidate();
 
@@ -162,28 +172,14 @@ public class BackendIndexController {
     }
 
     /**
-     * Email格式的正則表達式
-     */
-    private final Pattern emailRegex = Pattern.compile("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$");
-
-    /**
-     * 驗證是否為信箱格式
-     *
-     * @param email 在登入頁面輸入用戶名或Email時傳入方法內判斷格式
-     * @return 返回布林值，如果符合Email格式則返回true，不符合則返回false
-     */
-    private Boolean validateEmail(String email) {
-        return emailRegex.matcher(email).find();
-    }
-
-    /**
      * 從Redis資料庫內查詢資料
      *
      * @param key 傳入管理員編號
      * @return 返回登入狀態DTO
      */
     private LoginState getFromRedis(Integer key) {
-        return (LoginState) redisTemplate.opsForValue().get(key);
+        String redisKey = key.toString();
+        return (LoginState) redisTemplate.opsForValue().get(redisKey);
     }
 
     /**
@@ -193,7 +189,8 @@ public class BackendIndexController {
      * @param loginState
      */
     private void storeLoginstateInRedis(Integer key, LoginState loginState) {
-        redisTemplate.opsForValue().set(key, loginState);
+        String redisKey = key.toString();
+        redisTemplate.opsForValue().set(redisKey, loginState);
     }
 
     /**
@@ -202,8 +199,9 @@ public class BackendIndexController {
      * @param key 傳入管理員編號
      */
     private void deleteRedisData(Integer key) {
-        if (redisTemplate.hasKey(key)) {
-            redisTemplate.delete(key);
+        String redisKey = key.toString();
+        if (redisTemplate.hasKey(redisKey)) {
+            redisTemplate.delete(redisKey);
         }
     }
 

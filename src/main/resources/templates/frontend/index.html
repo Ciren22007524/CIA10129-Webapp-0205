@@ -14,20 +14,11 @@
 </head>
 
 <body>
-<!-- Skippy & Prload -->
-<!-- skippy -->
-<a id="skippy" class="skippy visually-hidden-focusable overflow-hidden" href="#content">
-        <div class="container"><span class="u-skiplink-text">Skip to main content</span></div>
-    </a>
-<!-- End skippy -->
-<!-- Preload -->
-    <div id="loading" class="loading-preloader d-none" style="display: none;">
-        <div class="spinner-border text-primary" role="status"><span class="visually-hidden">Loading...</span></div>
-    </div>
-<!-- End Preload -->
-<!-- Edn Skippy & Prload -->
-<!-- Size Chart  -->
-<!-- Ask Form -->
+    <!-- Skippy & Prload -->
+    <th:block th:replace="frontend/component/skippypreload :: skippypreload"></th:block>
+    <!-- Edn Skippy & Prload -->
+    <!-- Size Chart  -->
+    <!-- Ask Form -->
     <div class="modal-askform-view modal fade" id="px_ask_modal" tabindex="-1">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
@@ -48,7 +39,8 @@
                             </div>
                             <div class="col-md-12">
                                 <div class="mb-3"><label class="form-label" for="exampleInputEmail1">Subject</label>
-                                    <input type="text" class="form-control" placeholder="Subject"></div>
+                                    <input type="text" class="form-control" placeholder="Subject">
+                                </div>
                             </div>
                             <div class="col-md-12">
                                 <div class="mb-3"><label class="form-label" for="exampleInputEmail1">Your
@@ -62,8 +54,8 @@
             </div>
         </div>
     </div>
-<!-- End Ask Form -->
-<!-- Header Search -->
+    <!-- End Ask Form -->
+    <!-- Header Search -->
     <div class="px-search-full collapse bg-body p-3 position-fixed w-100 top-0" id="search-open">
         <div class="container position-relative">
             <div class="row vh-100 justify-content-center">
@@ -97,8 +89,8 @@
             </div>
         </div>
     </div>
-<!-- End Header Search -->
-<!-- Header Side Search -->
+    <!-- End Header Search -->
+    <!-- Header Side Search -->
     <div class="offcanvas offcanvas-end" tabindex="-1" id="header_search_popup"
         aria-labelledby="header_search_popupLabel">
         <div class="offcanvas-header border-bottom">
@@ -129,8 +121,8 @@
             </div>
         </div>
     </div>
-<!-- End Header Side Search -->
-<!-- Login Popup  -->
+    <!-- End Header Side Search -->
+    <!-- Login Popup  -->
     <div class="modal fade" id="topbarlogin">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
@@ -148,7 +140,8 @@
                             </div>
                             <div class="mb-3"><label class="form-label" for="exampleInputPassword1">Password</label>
                                 <input type="password" class="form-control" id="exampleInputPassword1"
-                                    placeholder="*********"></div>
+                                    placeholder="*********">
+                            </div>
                             <div class="mb-3 form-check"><input type="checkbox" class="form-check-input"
                                     id="exampleCheck1"> <label class="form-check-label" for="exampleCheck1">keep me
                                     signed in</label></div>
@@ -163,8 +156,8 @@
             </div>
         </div>
     </div>
-<!-- End Login Popup  -->
-<!-- Mini Cart  -->
+    <!-- End Login Popup  -->
+    <!-- Mini Cart  -->
     <div class="offcanvas offcanvas-end" tabindex="-1" id="modalMiniCart" aria-labelledby="modalMiniCartLabel">
         <div class="offcanvas-header border-bottom">
             <h6 class="offcanvas-title" id="modalMiniCartLabel">Your Cart (2)</h6><button type="button"
@@ -225,8 +218,8 @@
                     class="btn btn-block btn-outline-mode w-100" href="#">View Cart</a></div>
         </div>
     </div>
-<!-- End Mini Cart  -->
-<!-- Quick View  -->
+    <!-- End Mini Cart  -->
+    <!-- Quick View  -->
     <div class="modal-quick-view modal fade" id="px-quick-view" tabindex="-1">
         <div class="modal-dialog modal-dialog-centered modal-xl">
             <div class="modal-content"><button class="btn-close position-absolute end-0 top-0 me-2 mt-2 z-index-1"
@@ -234,7 +227,8 @@
                 <div class="modal-body p-3">
                     <div class="row"><!-- Product Gallery -->
                         <div class="col-lg-6 lightbox-gallery product-gallery"><img
-                                th:src="@{/frontend/assets/img/fashion/product-x-1.jpg}" class="img-fluid" title="" alt=""></div>
+                                th:src="@{/frontend/assets/img/fashion/product-x-1.jpg}" class="img-fluid" title=""
+                                alt=""></div>
                         <!-- End Product Gallery --><!-- Product Details -->
                         <div class="col-lg-6">
                             <div class="product-detail pt-4">
@@ -255,7 +249,8 @@
                                     <div class="nav-thumbs nav mb-3">
                                         <div class="form-check radio-text form-check-inline me-2"><input
                                                 class="form-check-input" type="radio" name="size3" id="xs2" checked="">
-                                            <label class="radio-text-label" for="xs2">XS</label></div>
+                                            <label class="radio-text-label" for="xs2">XS</label>
+                                        </div>
                                         <div class="form-check radio-text form-check-inline me-2"><input
                                                 class="form-check-input" type="radio" name="size3" id="s2"> <label
                                                 class="radio-text-label" for="s2">S</label></div>
@@ -297,7 +292,8 @@
                                     <div class="cart-button mb-3 d-flex"><button class="btn btn-mode me-3"><i
                                                 class="fi-shopping-cart"></i> Add to cart</button> <button
                                             class="btn btn-outline-primary me-3"><i class="fi-heart"></i></button>
-                                        <button class="btn btn-outline-primary"><i class="fi-repeat"></i></button></div>
+                                        <button class="btn btn-outline-primary"><i class="fi-repeat"></i></button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -307,8 +303,8 @@
             </div>
         </div>
     </div>
-<!-- End Quick View  -->
-<!-- Sipping Popup  -->
+    <!-- End Quick View  -->
+    <!-- Sipping Popup  -->
     <div class="modal-shipping-view modal fade" id="px_shipping_modal" tabindex="-1">
         <div class="modal-dialog modal-dialog-centered modal-xl">
             <div class="modal-content">
@@ -359,8 +355,8 @@
             </div>
         </div>
     </div>
-<!-- End Sipping Popup  -->
-<!-- Size Chart  -->
+    <!-- End Sipping Popup  -->
+    <!-- Size Chart  -->
     <div class="modal-size-chart modal fade" id="px_size_chart_modal" tabindex="-1">
         <div class="modal-dialog modal-dialog-centered modal-xl">
             <div class="modal-content">
@@ -505,8 +501,8 @@
             </div>
         </div>
     </div>
-<!-- End Size Chart  -->
-<!-- End Size Chart  --><!--
+    <!-- End Size Chart  -->
+    <!-- End Size Chart  --><!--
     ========================
         Wrapper 
     ========================
@@ -584,8 +580,8 @@
                     class="swiper-pagination swiper-pagination-white swiper-pagination-clickable swiper-pagination-bullets swiper-pagination-horizontal">
                     <span class="swiper-pagination-bullet swiper-pagination-bullet-active" tabindex="0" role="button"
                         aria-label="Go to slide 1" aria-current="true"></span><span class="swiper-pagination-bullet"
-                        tabindex="0" role="button" aria-label="Go to slide 2"></span></div><span
-                    class="swiper-notification" aria-live="assertive" aria-atomic="true"></span>
+                        tabindex="0" role="button" aria-label="Go to slide 2"></span>
+                </div><span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span>
             </div>
             <!-- End Home Section -->
             <!-- section -->
@@ -656,7 +652,8 @@
                                             data-bs-target="#px-quick-view" href="javascript:void(0)"
                                             class="btn btn-outline-primary"><i class="fi-eye"></i></a></div>
                                     <div class="product-media"><a href="#"><img class="img-fluid"
-                                                th:src="@{/frontend/assets/img/fashion/product-1.jpg}" title="" alt=""></a>
+                                                th:src="@{/frontend/assets/img/fashion/product-1.jpg}" title=""
+                                                alt=""></a>
                                         <div class="product-cart-btn"><a href="#"
                                                 class="btn btn-primary btn-sm w-100"><i class="fi-shopping-cart"></i>
                                                 Add to cart</a></div>
@@ -669,7 +666,8 @@
                                             class="bi-star-fill active"></i> <i class="bi-star"></i></div>
                                     <h6 class="product-title"><a href="#">Fine-knit sweater</a></h6>
                                     <div class="product-price"><span class="text-primary">$28.<small>50</small></span>
-                                        <del class="fs-sm text-muted">$38.<small>50</small></del></div>
+                                        <del class="fs-sm text-muted">$38.<small>50</small></del>
+                                    </div>
                                     <div class="nav-thumbs">
                                         <div class="form-check radio-text form-check-inline"><input
                                                 class="form-check-input" type="radio" name="size3" id="btnradio1"
@@ -677,13 +675,16 @@
                                                 for="btnradio1">XS</label></div>
                                         <div class="form-check radio-text form-check-inline"><input
                                                 class="form-check-input" type="radio" name="size3" id="btnradio2">
-                                            <label class="radio-text-label" for="btnradio2">S</label></div>
+                                            <label class="radio-text-label" for="btnradio2">S</label>
+                                        </div>
                                         <div class="form-check radio-text form-check-inline"><input
                                                 class="form-check-input" type="radio" name="size3" id="btnradio3">
-                                            <label class="radio-text-label" for="btnradio3">M</label></div>
+                                            <label class="radio-text-label" for="btnradio3">M</label>
+                                        </div>
                                         <div class="form-check radio-text form-check-inline"><input
                                                 class="form-check-input" type="radio" name="size3" id="btnradio4">
-                                            <label class="radio-text-label" for="btnradio4">L</label></div>
+                                            <label class="radio-text-label" for="btnradio4">L</label>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -700,7 +701,8 @@
                                             data-bs-target="#px-quick-view" href="javascript:void(0)"
                                             class="btn btn-outline-primary"><i class="fi-eye"></i></a></div>
                                     <div class="product-media"><a href="#"><img class="img-fluid"
-                                                th:src="@{/frontend/assets/img/fashion/product-2.jpg}" title="" alt=""></a>
+                                                th:src="@{/frontend/assets/img/fashion/product-2.jpg}" title=""
+                                                alt=""></a>
                                         <div class="product-cart-btn"><a href="#"
                                                 class="btn btn-primary btn-sm w-100"><i class="fi-shopping-cart"></i>
                                                 Add to cart</a></div>
@@ -713,7 +715,8 @@
                                             class="bi-star-fill active"></i> <i class="bi-star"></i></div>
                                     <h6 class="product-title"><a href="#">Fine-knit sweater</a></h6>
                                     <div class="product-price"><span class="text-primary">$28.<small>50</small></span>
-                                        <del class="fs-sm text-muted">$38.<small>50</small></del></div>
+                                        <del class="fs-sm text-muted">$38.<small>50</small></del>
+                                    </div>
                                     <div class="nav-thumbs">
                                         <div class="form-check radio-color form-check-inline"><input
                                                 class="form-check-input" type="radio" name="color1" id="color_1"
@@ -747,7 +750,8 @@
                                             data-bs-target="#px-quick-view" href="javascript:void(0)"
                                             class="btn btn-outline-primary"><i class="fi-eye"></i></a></div>
                                     <div class="product-media"><a href="#"><img class="img-fluid"
-                                                th:src="@{/frontend/assets/img/fashion/product-3.jpg}" title="" alt=""></a>
+                                                th:src="@{/frontend/assets/img/fashion/product-3.jpg}" title=""
+                                                alt=""></a>
                                         <div class="product-cart-btn"><a href="#"
                                                 class="btn btn-primary btn-sm w-100"><i class="fi-shopping-cart"></i>
                                                 Add to cart</a></div>
@@ -760,7 +764,8 @@
                                             class="bi-star-fill active"></i> <i class="bi-star"></i></div>
                                     <h6 class="product-title"><a href="#">Fine-knit sweater</a></h6>
                                     <div class="product-price"><span class="text-primary">$28.<small>50</small></span>
-                                        <del class="fs-sm text-muted">$38.<small>50</small></del></div>
+                                        <del class="fs-sm text-muted">$38.<small>50</small></del>
+                                    </div>
                                     <div class="nav-thumbs">
                                         <div class="form-check radio-text form-check-inline"><input
                                                 class="form-check-input" type="radio" name="size4" id="btnradio_1"
@@ -768,13 +773,16 @@
                                                 for="btnradio_1">XS</label></div>
                                         <div class="form-check radio-text form-check-inline"><input
                                                 class="form-check-input" type="radio" name="size4" id="btnradi_o2">
-                                            <label class="radio-text-label" for="btnradi_o2">S</label></div>
+                                            <label class="radio-text-label" for="btnradi_o2">S</label>
+                                        </div>
                                         <div class="form-check radio-text form-check-inline"><input
                                                 class="form-check-input" type="radio" name="size4" id="btnradi_o3">
-                                            <label class="radio-text-label" for="btnradi_o3">M</label></div>
+                                            <label class="radio-text-label" for="btnradi_o3">M</label>
+                                        </div>
                                         <div class="form-check radio-text form-check-inline"><input
                                                 class="form-check-input" type="radio" name="size4" id="btnradi_o4">
-                                            <label class="radio-text-label" for="btnradi_o4">L</label></div>
+                                            <label class="radio-text-label" for="btnradi_o4">L</label>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -791,7 +799,8 @@
                                             data-bs-target="#px-quick-view" href="javascript:void(0)"
                                             class="btn btn-outline-primary"><i class="fi-eye"></i></a></div>
                                     <div class="product-media"><a href="#"><img class="img-fluid"
-                                                th:src="@{/frontend/assets/img/fashion/product-4.jpg}" title="" alt=""></a>
+                                                th:src="@{/frontend/assets/img/fashion/product-4.jpg}" title=""
+                                                alt=""></a>
                                         <div class="product-cart-btn"><a href="#"
                                                 class="btn btn-primary btn-sm w-100"><i class="fi-shopping-cart"></i>
                                                 Add to cart</a></div>
@@ -804,7 +813,8 @@
                                             class="bi-star-fill active"></i> <i class="bi-star"></i></div>
                                     <h6 class="product-title"><a href="#">Fine-knit sweater</a></h6>
                                     <div class="product-price"><span class="text-primary">$28.<small>50</small></span>
-                                        <del class="fs-sm text-muted">$38.<small>50</small></del></div>
+                                        <del class="fs-sm text-muted">$38.<small>50</small></del>
+                                    </div>
                                     <div class="nav-thumbs">
                                         <div class="form-check radio-color form-check-inline"><input
                                                 class="form-check-input" type="radio" name="color2" id="color_5"
@@ -838,7 +848,8 @@
                                             data-bs-target="#px-quick-view" href="javascript:void(0)"
                                             class="btn btn-outline-primary"><i class="fi-eye"></i></a></div>
                                     <div class="product-media"><a href="#"><img class="img-fluid"
-                                                th:src="@{/frontend/assets/img/fashion/product-5.jpg}" title="" alt=""></a>
+                                                th:src="@{/frontend/assets/img/fashion/product-5.jpg}" title=""
+                                                alt=""></a>
                                         <div class="product-cart-btn"><a href="#"
                                                 class="btn btn-primary btn-sm w-100"><i class="fi-shopping-cart"></i>
                                                 Add to cart</a></div>
@@ -851,7 +862,8 @@
                                             class="bi-star-fill active"></i> <i class="bi-star"></i></div>
                                     <h6 class="product-title"><a href="#">Fine-knit sweater</a></h6>
                                     <div class="product-price"><span class="text-primary">$28.<small>50</small></span>
-                                        <del class="fs-sm text-muted">$38.<small>50</small></del></div>
+                                        <del class="fs-sm text-muted">$38.<small>50</small></del>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -867,7 +879,8 @@
                                             data-bs-target="#px-quick-view" href="javascript:void(0)"
                                             class="btn btn-outline-primary"><i class="fi-eye"></i></a></div>
                                     <div class="product-media"><a href="#"><img class="img-fluid"
-                                                th:src="@{/frontend/assets/img/fashion/product-6.jpg}" title="" alt=""></a>
+                                                th:src="@{/frontend/assets/img/fashion/product-6.jpg}" title=""
+                                                alt=""></a>
                                         <div class="product-cart-btn"><a href="#"
                                                 class="btn btn-primary btn-sm w-100"><i class="fi-shopping-cart"></i>
                                                 Add to cart</a></div>
@@ -880,7 +893,8 @@
                                             class="bi-star-fill active"></i> <i class="bi-star"></i></div>
                                     <h6 class="product-title"><a href="#">Fine-knit sweater</a></h6>
                                     <div class="product-price"><span class="text-primary">$28.<small>50</small></span>
-                                        <del class="fs-sm text-muted">$38.<small>50</small></del></div>
+                                        <del class="fs-sm text-muted">$38.<small>50</small></del>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -896,7 +910,8 @@
                                             data-bs-target="#px-quick-view" href="javascript:void(0)"
                                             class="btn btn-outline-primary"><i class="fi-eye"></i></a></div>
                                     <div class="product-media"><a href="#"><img class="img-fluid"
-                                                th:src="@{/frontend/assets/img/fashion/product-7.jpg}" title="" alt=""></a>
+                                                th:src="@{/frontend/assets/img/fashion/product-7.jpg}" title=""
+                                                alt=""></a>
                                         <div class="product-cart-btn"><a href="#"
                                                 class="btn btn-primary btn-sm w-100"><i class="fi-shopping-cart"></i>
                                                 Add to cart</a></div>
@@ -909,7 +924,8 @@
                                             class="bi-star-fill active"></i> <i class="bi-star"></i></div>
                                     <h6 class="product-title"><a href="#">Fine-knit sweater</a></h6>
                                     <div class="product-price"><span class="text-primary">$28.<small>50</small></span>
-                                        <del class="fs-sm text-muted">$38.<small>50</small></del></div>
+                                        <del class="fs-sm text-muted">$38.<small>50</small></del>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -925,7 +941,8 @@
                                             data-bs-target="#px-quick-view" href="javascript:void(0)"
                                             class="btn btn-outline-primary"><i class="fi-eye"></i></a></div>
                                     <div class="product-media"><a href="#"><img class="img-fluid"
-                                                th:src="@{/frontend/assets/img/fashion/product-8.jpg}" title="" alt=""></a>
+                                                th:src="@{/frontend/assets/img/fashion/product-8.jpg}" title=""
+                                                alt=""></a>
                                         <div class="product-cart-btn"><a href="#"
                                                 class="btn btn-primary btn-sm w-100"><i class="fi-shopping-cart"></i>
                                                 Add to cart</a></div>
@@ -938,7 +955,8 @@
                                             class="bi-star-fill active"></i> <i class="bi-star"></i></div>
                                     <h6 class="product-title"><a href="#">Fine-knit sweater</a></h6>
                                     <div class="product-price"><span class="text-primary">$28.<small>50</small></span>
-                                        <del class="fs-sm text-muted">$38.<small>50</small></del></div>
+                                        <del class="fs-sm text-muted">$38.<small>50</small></del>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -1028,7 +1046,8 @@
                                                     href="#">Men</a></div>
                                             <div class="rating-star text"><i class="bi-star-fill active"></i> <i
                                                     class="bi-star-fill active"></i> <i class="bi-star-fill active"></i>
-                                                <i class="bi-star-fill active"></i> <i class="bi-star"></i></div>
+                                                <i class="bi-star-fill active"></i> <i class="bi-star"></i>
+                                            </div>
                                             <h6 class="product-title"><a href="#">Fine-knit sweater</a></h6>
                                             <div class="product-price"><span
                                                     class="text-primary">$28.<small>50</small></span> <del
@@ -1060,7 +1079,8 @@
                                                     href="#">Men</a></div>
                                             <div class="rating-star text"><i class="bi-star-fill active"></i> <i
                                                     class="bi-star-fill active"></i> <i class="bi-star-fill active"></i>
-                                                <i class="bi-star-fill active"></i> <i class="bi-star"></i></div>
+                                                <i class="bi-star-fill active"></i> <i class="bi-star"></i>
+                                            </div>
                                             <h6 class="product-title"><a href="#">Fine-knit sweater</a></h6>
                                             <div class="product-price"><span
                                                     class="text-primary">$28.<small>50</small></span> <del
@@ -1092,7 +1112,8 @@
                                                     href="#">Men</a></div>
                                             <div class="rating-star text"><i class="bi-star-fill active"></i> <i
                                                     class="bi-star-fill active"></i> <i class="bi-star-fill active"></i>
-                                                <i class="bi-star-fill active"></i> <i class="bi-star"></i></div>
+                                                <i class="bi-star-fill active"></i> <i class="bi-star"></i>
+                                            </div>
                                             <h6 class="product-title"><a href="#">Fine-knit sweater</a></h6>
                                             <div class="product-price"><span
                                                     class="text-primary">$28.<small>50</small></span> <del
@@ -1124,7 +1145,8 @@
                                                     href="#">Men</a></div>
                                             <div class="rating-star text"><i class="bi-star-fill active"></i> <i
                                                     class="bi-star-fill active"></i> <i class="bi-star-fill active"></i>
-                                                <i class="bi-star-fill active"></i> <i class="bi-star"></i></div>
+                                                <i class="bi-star-fill active"></i> <i class="bi-star"></i>
+                                            </div>
                                             <h6 class="product-title"><a href="#">Fine-knit sweater</a></h6>
                                             <div class="product-price"><span
                                                     class="text-primary">$28.<small>50</small></span> <del
@@ -1156,7 +1178,8 @@
                                                     href="#">Men</a></div>
                                             <div class="rating-star text"><i class="bi-star-fill active"></i> <i
                                                     class="bi-star-fill active"></i> <i class="bi-star-fill active"></i>
-                                                <i class="bi-star-fill active"></i> <i class="bi-star"></i></div>
+                                                <i class="bi-star-fill active"></i> <i class="bi-star"></i>
+                                            </div>
                                             <h6 class="product-title"><a href="#">Fine-knit sweater</a></h6>
                                             <div class="product-price"><span
                                                     class="text-primary">$28.<small>50</small></span> <del
@@ -1188,7 +1211,8 @@
                                                     href="#">Men</a></div>
                                             <div class="rating-star text"><i class="bi-star-fill active"></i> <i
                                                     class="bi-star-fill active"></i> <i class="bi-star-fill active"></i>
-                                                <i class="bi-star-fill active"></i> <i class="bi-star"></i></div>
+                                                <i class="bi-star-fill active"></i> <i class="bi-star"></i>
+                                            </div>
                                             <h6 class="product-title"><a href="#">Fine-knit sweater</a></h6>
                                             <div class="product-price"><span
                                                     class="text-primary">$28.<small>50</small></span> <del
@@ -1220,7 +1244,8 @@
                                                     href="#">Men</a></div>
                                             <div class="rating-star text"><i class="bi-star-fill active"></i> <i
                                                     class="bi-star-fill active"></i> <i class="bi-star-fill active"></i>
-                                                <i class="bi-star-fill active"></i> <i class="bi-star"></i></div>
+                                                <i class="bi-star-fill active"></i> <i class="bi-star"></i>
+                                            </div>
                                             <h6 class="product-title"><a href="#">Fine-knit sweater</a></h6>
                                             <div class="product-price"><span
                                                     class="text-primary">$28.<small>50</small></span> <del
@@ -1252,7 +1277,8 @@
                                                     href="#">Men</a></div>
                                             <div class="rating-star text"><i class="bi-star-fill active"></i> <i
                                                     class="bi-star-fill active"></i> <i class="bi-star-fill active"></i>
-                                                <i class="bi-star-fill active"></i> <i class="bi-star"></i></div>
+                                                <i class="bi-star-fill active"></i> <i class="bi-star"></i>
+                                            </div>
                                             <h6 class="product-title"><a href="#">Fine-knit sweater</a></h6>
                                             <div class="product-price"><span
                                                     class="text-primary">$28.<small>50</small></span> <del
@@ -1284,7 +1310,8 @@
                                                     href="#">Men</a></div>
                                             <div class="rating-star text"><i class="bi-star-fill active"></i> <i
                                                     class="bi-star-fill active"></i> <i class="bi-star-fill active"></i>
-                                                <i class="bi-star-fill active"></i> <i class="bi-star"></i></div>
+                                                <i class="bi-star-fill active"></i> <i class="bi-star"></i>
+                                            </div>
                                             <h6 class="product-title"><a href="#">Fine-knit sweater</a></h6>
                                             <div class="product-price"><span
                                                     class="text-primary">$28.<small>50</small></span> <del
@@ -1316,7 +1343,8 @@
                                                     href="#">Men</a></div>
                                             <div class="rating-star text"><i class="bi-star-fill active"></i> <i
                                                     class="bi-star-fill active"></i> <i class="bi-star-fill active"></i>
-                                                <i class="bi-star-fill active"></i> <i class="bi-star"></i></div>
+                                                <i class="bi-star-fill active"></i> <i class="bi-star"></i>
+                                            </div>
                                             <h6 class="product-title"><a href="#">Fine-knit sweater</a></h6>
                                             <div class="product-price"><span
                                                     class="text-primary">$28.<small>50</small></span> <del
@@ -1336,8 +1364,8 @@
                                     role="button" aria-label="Go to slide 4" aria-current="true"></span><span
                                     class="swiper-pagination-bullet" tabindex="0" role="button"
                                     aria-label="Go to slide 5"></span><span class="swiper-pagination-bullet"
-                                    tabindex="0" role="button" aria-label="Go to slide 6"></span></div><span
-                                class="swiper-notification" aria-live="assertive" aria-atomic="true"></span>
+                                    tabindex="0" role="button" aria-label="Go to slide 6"></span>
+                            </div><span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span>
                         </div>
                         <div class="swiper-arrow-style-02 swiper-next swiper-next-02" tabindex="0" role="button"
                             aria-label="Next slide" aria-controls="swiper-wrapper-ec7dedb7310851978"><i
@@ -1385,10 +1413,12 @@
                         <div class="col-lg-4 my-3">
                             <div class="hover-scale text-center">
                                 <div class="hover-scale-in position-relative"><a href="#"><img class="img-fluid"
-                                            th:src="@{/frontend/assets/img/fashion/blog-home-1.jpg}" title="" alt=""></a>
+                                            th:src="@{/frontend/assets/img/fashion/blog-home-1.jpg}" title=""
+                                            alt=""></a>
                                     <div
                                         class="position-absolute top-0 start-0 mt-3 ms-3 bg-body d-flex flex-column align-items-center px-3 py-2">
-                                        <span class="h4 m-0">25</span> <small>MAR</small></div>
+                                        <span class="h4 m-0">25</span> <small>MAR</small>
+                                    </div>
                                 </div>
                                 <div class="pt-3 px-3">
                                     <h5><a class="text-reset" href="#">Make your Marketing website</a></h5>
@@ -1400,10 +1430,12 @@
                         <div class="col-lg-4 my-3">
                             <div class="hover-scale text-center">
                                 <div class="hover-scale-in position-relative"><a href="#"><img class="img-fluid"
-                                            th:src="@{/frontend/assets/img/fashion/blog-home-2.jpg}" title="" alt=""></a>
+                                            th:src="@{/frontend/assets/img/fashion/blog-home-2.jpg}" title=""
+                                            alt=""></a>
                                     <div
                                         class="position-absolute top-0 start-0 mt-3 ms-3 bg-body d-flex flex-column align-items-center px-3 py-2">
-                                        <span class="h4 m-0">25</span> <small>MAR</small></div>
+                                        <span class="h4 m-0">25</span> <small>MAR</small>
+                                    </div>
                                 </div>
                                 <div class="pt-3 px-3">
                                     <h5><a class="text-reset" href="#">Make your Marketing website</a></h5>
@@ -1415,10 +1447,12 @@
                         <div class="col-lg-4 my-3">
                             <div class="hover-scale text-center">
                                 <div class="hover-scale-in position-relative"><a href="#"><img class="img-fluid"
-                                            th:src="@{/frontend/assets/img/fashion/blog-home-3.jpg}" title="" alt=""></a>
+                                            th:src="@{/frontend/assets/img/fashion/blog-home-3.jpg}" title=""
+                                            alt=""></a>
                                     <div
                                         class="position-absolute top-0 start-0 mt-3 ms-3 bg-body d-flex flex-column align-items-center px-3 py-2">
-                                        <span class="h4 m-0">25</span> <small>MAR</small></div>
+                                        <span class="h4 m-0">25</span> <small>MAR</small>
+                                    </div>
                                 </div>
                                 <div class="pt-3 px-3">
                                     <h5><a class="text-reset" href="#">Make your Marketing website</a></h5>
