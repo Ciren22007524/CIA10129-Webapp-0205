@@ -67,10 +67,12 @@ public class AdministratorServiceImpl implements AdministratorService_interface 
             administrator = administratorRepository.save(administrator);
         }
         LoginState loginState = new LoginState();
+        loginState.setAdmNo(administrator.getAdmNo());
         loginState.setJsessionid(session.getId());
         loginState.setAdmLogin(administrator.getAdmLogin());
         loginState.setAdmLogout(administrator.getAdmLogout());
         loginState.setAdmActiveTime(administrator.getAdmActiveTime());
+        loginState.setTitleNo(administrator.getTitle().getTitleNo());
 
         return loginState;
     }
