@@ -10,6 +10,9 @@ public interface Constants {
     int FAILURE = 0;
     byte YES = 1;
     byte NO = 0;
+    int FIRST_ORDER = 1;
+    int SECOND_ORDER = 2;
+
 
     /**
      * 首頁路徑

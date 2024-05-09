@@ -1,5 +1,7 @@
 package com.ren.administrator.dto;
 
+import com.Entity.Title;
+
 import java.io.Serializable;
 import java.sql.Timestamp;
 
@@ -7,6 +9,8 @@ public class LoginState implements Serializable {
 
     // 管理員登入狀態DTO，用於確認登入狀態
     // 將Service查詢單項資料封包進這個DTO內
+    private Integer admNo;
+
     private String jsessionid;
 
     private Byte admLogin;
@@ -15,24 +19,41 @@ public class LoginState implements Serializable {
 
     private Timestamp admActiveTime;
 
+    private Integer titleNo;
+
     public LoginState() {
+    }
+
+    public LoginState(Integer admNo) {
+        this.admNo = admNo;
     }
 
     public LoginState(String jsessionid) {
         this.jsessionid = jsessionid;
     }
 
-    public LoginState(Byte admLogin, Byte admLogout, Timestamp admActiveTime) {
-        this.admLogin = admLogin;
-        this.admLogout = admLogout;
-        this.admActiveTime = admActiveTime;
-    }
-
-    public LoginState(String jsessionid, Byte admLogin, Byte admLogout, Timestamp admActiveTime) {
+    public LoginState(Integer admNo, String jsessionid, Byte admLogin, Byte admLogout, Timestamp admActiveTime, Integer titleNo) {
+        this.admNo = admNo;
         this.jsessionid = jsessionid;
         this.admLogin = admLogin;
         this.admLogout = admLogout;
         this.admActiveTime = admActiveTime;
+        this.titleNo = titleNo;
+    }
+
+    public LoginState(Byte admLogin, Byte admLogout, Timestamp admActiveTime, Integer titleNo) {
+        this.admLogin = admLogin;
+        this.admLogout = admLogout;
+        this.admActiveTime = admActiveTime;
+        this.titleNo = titleNo;
+    }
+
+    public LoginState(String jsessionid, Byte admLogin, Byte admLogout, Timestamp admActiveTime, Integer titleNo) {
+        this.jsessionid = jsessionid;
+        this.admLogin = admLogin;
+        this.admLogout = admLogout;
+        this.admActiveTime = admActiveTime;
+        this.titleNo = titleNo;
     }
 
     public String getJsessionid() {
@@ -65,5 +86,21 @@ public class LoginState implements Serializable {
 
     public void setAdmActiveTime(Timestamp admActiveTime) {
         this.admActiveTime = admActiveTime;
+    }
+
+    public Integer getTitleNo() {
+        return titleNo;
+    }
+
+    public void setTitleNo(Integer titleNo) {
+        this.titleNo = titleNo;
+    }
+
+    public Integer getAdmNo() {
+        return admNo;
+    }
+
+    public void setAdmNo(Integer admNo) {
+        this.admNo = admNo;
     }
 }

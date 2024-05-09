@@ -4,17 +4,18 @@ import com.Entity.Administrator;
 import com.ren.administrator.dto.LoginState;
 import com.ren.administrator.service.AdministratorServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -28,7 +29,12 @@ import static com.ren.util.Validator.validateEmail;
 public class BackendIndexController {
 
     @Autowired
-    private RedisTemplate redisTemplate;
+    @Qualifier("integerLoginState")
+    private RedisTemplate<Integer, LoginState> itlRedisTemplate;
+
+    @Autowired
+    @Qualifier("stringInteger")
+    private RedisTemplate<String, Integer> stiRedisTemplate;
 
     @Autowired
     private AdministratorServiceImpl administratorSvc;
@@ -78,6 +84,7 @@ public class BackendIndexController {
                         @RequestParam Byte autoLogin,
                         HttpSession session,
                         HttpServletResponse res,
+                        HttpServletRequest req,
                         ModelMap model) {
 
         // 宣告管理員與管理員編號，於後續參數驗證後賦值
@@ -87,7 +94,10 @@ public class BackendIndexController {
         // 確認是否為信箱格式，true則透過信箱搜尋使用者資訊，false則透過管理員編號搜尋使用者資訊
         if (validateEmail(userId)) {
             administrator = administratorSvc.getOneAdministrator(userId);
+            // 獲得管理員編號，之後存入Redis資料庫使用
+            admNo = administrator.getAdmNo();
         } else {
+            // 將管理員編號轉成 Integer，供Service方法使用
             admNo = Integer.valueOf(userId);
             administrator = administratorSvc.getOneAdministrator(admNo);
         }
@@ -113,24 +123,23 @@ public class BackendIndexController {
         }
 
         // 使用Service的登入方法，更改administrator的登入狀態，並傳回登入狀態DTO，
-        // 於後續在LoginStateFilter內做登入狀態驗證
+        // 於後續存入Session做權限、登入狀態驗證
         LoginState loginState = administratorSvc.login(administrator, session);
 
         // 確認密碼正確後，回傳登入成功訊息，並將administrator存入session
         model.addAttribute("message", "登入成功!");
 
-        // 將使用者資訊放入session，供後續權限驗證使用
-        session.setAttribute("administrator", administrator);
-
         // 確認使用者是否要自動登入
         if (autoLogin == YES) {
             // 生成名為autoLogin的cookie，其值設置為一個亂數生成的字符串，分別存入給使用者與redis資料庫，做身分核對
-            String random = generateRandomString(16);
+            String random = generateRandomString(40);
             Cookie cookie = new Cookie("autoLogin", random);
             // 設置存活7天
             cookie.setMaxAge(604800);
-            ((HttpServletResponse) res).addCookie(cookie);
-            redisTemplate.opsForValue().set(random, "autoLogin");
+            cookie.setPath("/backend");
+            res.addCookie(cookie);
+            stiRedisTemplate.opsForValue().set(random, admNo);
+            System.out.println("cookie存入");
         }
 
         // 將登入狀態放入Redis資料庫，供LoginStateFilter於每次發出請求時做登入狀態驗證
@@ -178,19 +187,17 @@ public class BackendIndexController {
      * @return 返回登入狀態DTO
      */
     private LoginState getFromRedis(Integer key) {
-        String redisKey = key.toString();
-        return (LoginState) redisTemplate.opsForValue().get(redisKey);
+        return itlRedisTemplate.opsForValue().get(key);
     }
 
     /**
      * 新增或修改Redis資料庫內的資料
      *
      * @param key 傳入管理員編號
-     * @param loginState
+     * @param loginState 傳入登入狀態
      */
     private void storeLoginstateInRedis(Integer key, LoginState loginState) {
-        String redisKey = key.toString();
-        redisTemplate.opsForValue().set(redisKey, loginState);
+        itlRedisTemplate.opsForValue().set(key, loginState);
     }
 
     /**
@@ -199,9 +206,8 @@ public class BackendIndexController {
      * @param key 傳入管理員編號
      */
     private void deleteRedisData(Integer key) {
-        String redisKey = key.toString();
-        if (redisTemplate.hasKey(redisKey)) {
-            redisTemplate.delete(redisKey);
+        if (itlRedisTemplate.hasKey(key)) {
+            itlRedisTemplate.delete(key);
         }
     }
 
