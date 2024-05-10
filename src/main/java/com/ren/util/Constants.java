@@ -2,6 +2,9 @@ package com.ren.util;
 
 import java.util.regex.Pattern;
 
+/**
+ * 於interface內宣告常數、類別會自動加入public static final
+ */
 public interface Constants {
 
     int PAGE_MAX_RESULT = 10;
@@ -17,21 +20,21 @@ public interface Constants {
     /**
      * 首頁路徑
      */
-    public static final String backendIndex = "/backend/index";
+    String backendIndex = "/backend/index";
 
     /**
      * 登入頁面路徑
      */
-    public static final String loginPage = "/backend/login";
+    String loginPage = "/backend/login";
 
     /**
      * 註冊頁面路徑
      */
-    public static final String registerPage = "/backend/register";
+    String registerPage = "/backend/register";
 
     /**
      * 忘記密碼頁面路徑
      */
-    public static final String forgotPasswordPage = "/backend/forgotPassword";
+    String forgotPasswordPage = "/backend/forgotPassword";
 
 }

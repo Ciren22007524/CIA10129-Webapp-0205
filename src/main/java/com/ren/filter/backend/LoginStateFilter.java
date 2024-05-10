@@ -19,6 +19,7 @@ import static com.ren.util.Constants.loginPage;
 import static com.ren.util.Validator.validateURL;
 
 /**
+ * 用Session與Redis實現單點登入系統
  * 檢視帳號登入狀態，以SessionID比對，如果SessionID與Redis資料庫內的不一樣，強制登出
  */
 @Component
