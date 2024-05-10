@@ -10,3 +10,32 @@
     <script th:src="@{/frontend/assets/js/theme.js}"></script>
     <script th:src="@{/frontend/assets/js/color-modes.js}"></script>
 </th:block>
+<th:block th:fragment="components">
+    <!-- Skippy & Prload -->
+    <th:block th:replace="frontend/component/skippypreload :: skippypreload"></th:block>
+    <!-- Edn Skippy & Prload -->
+    <!-- Ask Form -->
+    <div th:replace="frontend/component/askform :: askform"></div>
+    <!-- End Ask Form -->
+    <!-- Header Search -->
+    <div th:replace="frontend/component/headersearch :: headersearch"></div>
+    <!-- End Header Search -->
+    <!-- Header Side Search -->
+    <div th:replace="frontend/component/sidesearch :: sidesearch"></div>
+    <!-- End Header Side Search -->
+    <!-- Login Popup  -->
+    <div th:replace="frontend/component/loginpopup :: loginpopup"></div>
+    <!-- End Login Popup  -->
+    <!-- Mini Cart  -->
+    <div th:replace="frontend/component/minichart :: minichart"></div>
+    <!-- End Mini Cart  -->
+    <!-- Quick View  -->
+    <div th:replace="frontend/component/quickview :: quickview"></div>
+    <!-- End Quick View  -->
+    <!-- Sipping Popup  -->
+    <div th:replace="frontend/component/skippopup :: skippopup"></div>
+    <!-- End Sipping Popup  -->
+    <!-- Size Chart  -->
+    <div th:replace="frontend/component/sizechart :: sizechart"></div>
+    <!-- End Size Chart  -->
+</th:block>

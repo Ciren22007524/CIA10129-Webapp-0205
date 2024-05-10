@@ -73,18 +73,16 @@ public class BackendIndexController {
         return "backend/login";
     }
 
-    // SSO OATH 2.0 單點登入
+
     // 記錄登入活動，如嘗試登入、成功登入、登入失敗等
     // 確認帳號正確，但密碼不正確的情況 n + 1， 30分鐘內達5次鎖定登入
-    // 登入
-    // 前端輸入用戶名或Email
+
     @PostMapping("/login/login")
     public String login(@RequestParam String userId,
                         @RequestParam String admPwd,
                         @RequestParam Byte autoLogin,
                         HttpSession session,
                         HttpServletResponse res,
-                        HttpServletRequest req,
                         ModelMap model) {
 
         // 宣告管理員與管理員編號，於後續參數驗證後賦值
@@ -136,6 +134,7 @@ public class BackendIndexController {
             Cookie cookie = new Cookie("autoLogin", random);
             // 設置存活7天
             cookie.setMaxAge(604800);
+            // 設置cookie的路徑為/backend，當訪問所有後台網頁時都可以獲取這個cookie
             cookie.setPath("/backend");
             res.addCookie(cookie);
             stiRedisTemplate.opsForValue().set(random, admNo);
